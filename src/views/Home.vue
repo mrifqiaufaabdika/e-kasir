@@ -1,0 +1,64 @@
+<!--
+  - Copyright (c) 2020. dibuat Oleh Tama Asrory Ridhana, S.T, MTA.
+  - Lisensi ini hanya diberikan dan tidak dapat di perjual belikan kembali tanpa izin pembuat
+  -->
+
+<template>
+  <div class="home">
+    <v-app-bar flat>
+      <v-icon
+        color="#00a3ff"
+        class="ml-1 mr-5 d-md-none"
+        @click="$emit('toggle-drawer')"
+        v-text="'mdi-menu'"
+      />
+      <v-toolbar-title class="ml-md-2">
+        Dashboard
+      </v-toolbar-title>
+      <v-spacer />
+    </v-app-bar>
+    <v-container
+      fluid
+      style="padding: 0 1.5rem 0 1.5rem"
+    >
+      <div
+        class="default--text font-weight-medium d-flex align-center"
+        style="height: 100%"
+      >
+        <div class="pb-3 d-flex align-center">
+          <v-icon color="warning">
+            mdi-information
+          </v-icon>
+          <div class="ml-2">
+            Select period, date to show the report
+          </div>
+        </div>
+      </div>
+    </v-container>
+  </div>
+</template>
+
+<script>
+import { mapActions } from 'vuex'
+import { isEmpty } from '../plugins/supports'
+
+export default {
+  name: 'Home',
+  data: function () {
+    return {
+    }
+  },
+  computed: {
+  },
+  created () {
+  },
+  methods: {
+  }
+}
+</script>
+<style scoped>
+.lead {
+  font-size: 12pt !important;
+  color: #6c6b6b;
+}
+</style>
