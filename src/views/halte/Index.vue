@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Halte
+        Keuangan
       </v-toolbar-title>
       <v-spacer />
       <v-btn
         v-if="can(['halte-create'])"
-        title="Tambah Halte"
+        title="Tambah Keuangan"
         icon
         @click="_add()"
       >
@@ -336,7 +336,7 @@ export default {
         })
       } else {
         this.deleteId = value.id
-        this.dcMessages = `Hapus Halte <span class="pink--text">#${this.deleteId}</span> ?`
+        this.dcMessages = `Hapus Keuangan <span class="pink--text">#${this.deleteId}</span> ?`
         this.showDC = true
       }
     },

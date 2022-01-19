@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Tambah Bus
+        Tambah Transaksi
       </v-toolbar-title>
     </v-app-bar>
     <v-container

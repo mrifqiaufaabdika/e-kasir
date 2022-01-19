@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Edit Rute
+        Edit Laporan
         <div
           v-if="!loadingData"
           style="font-size: 11pt"
@@ -45,10 +45,10 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.kode_rute" label="Kode Rute" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.nama_rute" label="Nama Rute" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.id_halte_awal" label="Id Halte Awal" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.id_halte_akhir" label="Id Halte Akhir" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.kode_rute" label="Kode Laporan" outlined :rules="[rules.required]" />
+          <v-text-field v-model="datas.nama_rute" label="Nama Laporan" outlined :rules="[rules.required]" />
+          <v-text-field v-model="datas.id_halte_awal" label="Id Keuangan Awal" outlined :rules="[rules.required]" />
+          <v-text-field v-model="datas.id_halte_akhir" label="Id Keuangan Akhir" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.jalur" label="Jalur" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.status" label="Status" outlined :rules="[rules.required]" />
               <v-btn

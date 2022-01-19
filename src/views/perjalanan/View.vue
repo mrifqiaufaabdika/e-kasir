@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Perjalanan
+        Kasbon
       </v-toolbar-title>
       <v-spacer />
       <v-btn

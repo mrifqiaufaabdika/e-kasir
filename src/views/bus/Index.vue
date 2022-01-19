@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Bus
+        Transaksi
       </v-toolbar-title>
       <v-spacer />
       <v-btn
         v-if="can(['bus-create'])"
-        title="Tambah Bus"
+        title="Tambah Transaksi"
         icon
         @click="_add()"
       >
@@ -335,7 +335,7 @@ export default {
         })
       } else {
         this.deleteId = value.id
-        this.dcMessages = `Hapus Bus <span class="pink--text">#${this.deleteId}</span> ?`
+        this.dcMessages = `Hapus Transaksi <span class="pink--text">#${this.deleteId}</span> ?`
         this.showDC = true
       }
     },

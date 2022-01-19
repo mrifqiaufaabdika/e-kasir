@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Tambah Pramudi
+        Tambah Inventaris
       </v-toolbar-title>
     </v-app-bar>
     <v-container
@@ -33,7 +33,7 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.nama_pramudi" label="Nama Pramudi" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.nama_pramudi" label="Nama Inventaris" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.alamat" label="Alamat" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.ktp" label="Ktp" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.jenis_kelamin" label="Jenis Kelamin" outlined :rules="[rules.required]" />

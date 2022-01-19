@@ -1,16 +1,16 @@
-const path = '/perjalanan'
-const permission = 'perjalanan-'
-const routeName = 'perjalanan'
-const folder = 'perjalanan'
-const title = 'Perjalanan'
-const Perjalanan = [
+const path = '/rute'
+const permission = 'rute-'
+const routeName = 'rute'
+const folder = 'rute'
+const title = 'Laporan'
+const Laporan = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-car-traction-control',
+      icon: 'mdi-chart-tree',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Perjalanan = [
   }
 ]
 
-export default Perjalanan
+export default Laporan

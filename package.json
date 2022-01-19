@@ -1,10 +1,10 @@
 {
-  "name": "tmp-monitoring",
+  "name": "e-kasir",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start-backend": "cd ./api && php artisan serve --port 8001",
-    "serve": "vue-cli-service serve --port 8090",
+    "serve": "vue-cli-service serve --port 8000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --port 9001",

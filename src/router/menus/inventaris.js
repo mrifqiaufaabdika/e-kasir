@@ -1,16 +1,16 @@
-const path = '/halte'
-const permission = 'halte-'
-const routeName = 'halte'
-const folder = 'halte'
-const title = 'Halte'
-const Halte = [
+const path = '/pramudi'
+const permission = 'pramudi-'
+const routeName = 'pramudi'
+const folder = 'pramudi'
+const title = 'Inventaris'
+const Inventaris = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-hail',
+      icon: 'mdi-warehouse',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Halte = [
   }
 ]
 
-export default Halte
+export default Inventaris

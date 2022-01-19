@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Pramudi
+        Inventaris
       </v-toolbar-title>
       <v-spacer />
       <v-btn
         v-if="can(['pramudi-create'])"
-        title="Tambah Pramudi"
+        title="Tambah Inventaris"
         icon
         @click="_add()"
       >
@@ -336,7 +336,7 @@ export default {
         })
       } else {
         this.deleteId = value.id
-        this.dcMessages = `Hapus Pramudi <span class="pink--text">#${this.deleteId}</span> ?`
+        this.dcMessages = `Hapus Inventaris <span class="pink--text">#${this.deleteId}</span> ?`
         this.showDC = true
       }
     },

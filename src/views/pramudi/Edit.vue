@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Edit Pramudi
+        Edit Inventaris
         <div
           v-if="!loadingData"
           style="font-size: 11pt"
@@ -45,7 +45,7 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.nama_pramudi" label="Nama Pramudi" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.nama_pramudi" label="Nama Inventaris" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.alamat" label="Alamat" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.ktp" label="Ktp" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.jenis_kelamin" label="Jenis Kelamin" outlined :rules="[rules.required]" />

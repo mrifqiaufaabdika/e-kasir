@@ -1,6 +1,6 @@
-# tmp-web-panel
+# e-Kasir-web-app
 
-Trans Metro Pekanbaru Web Panel Monitoring
+e-Kasir Web App
 
 ## Development
 

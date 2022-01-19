@@ -1,16 +1,16 @@
-const path = '/bus'
-const permission = 'bus-'
-const routeName = 'bus'
-const folder = 'bus'
-const title = 'Bus'
-const Bus = [
+const path = '/halte'
+const permission = 'halte-'
+const routeName = 'halte'
+const folder = 'halte'
+const title = 'Keuangan'
+const Keuangan = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-bus',
+      icon: 'mdi-cash',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Bus = [
   }
 ]
 
-export default Bus
+export default Keuangan

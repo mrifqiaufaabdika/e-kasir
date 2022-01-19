@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Edit Perjalanan
+        Edit Kasbon
         <div
           v-if="!loadingData"
           style="font-size: 11pt"
@@ -45,9 +45,9 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.id_pramudi" label="Id Pramudi" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.id_bus" label="Id Bus" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.id_rute" label="Id Rute" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.id_pramudi" label="Id Inventaris" outlined :rules="[rules.required]" />
+          <v-text-field v-model="datas.id_bus" label="Id Transaksi" outlined :rules="[rules.required]" />
+          <v-text-field v-model="datas.id_rute" label="Id Laporan" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.waktu_mulai" label="Waktu Mulai" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.waktu_selesai" label="Waktu Selesai" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.koordinat" label="Koordinat" outlined :rules="[rules.required]" />

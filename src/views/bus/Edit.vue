@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Edit Bus
+        Edit Transaksi
         <div
           v-if="!loadingData"
           style="font-size: 11pt"

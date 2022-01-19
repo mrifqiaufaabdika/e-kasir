@@ -4,11 +4,11 @@
  */
 import User from './menus/base/user'
 import Roles from './menus/base/roles'
-import Bus from '@/router/menus/bus.js'
-import Halte from '@/router/menus/halte.js'
-import Perjalanan from '@/router/menus/perjalanan.js'
-import Pramudi from '@/router/menus/pramudi.js'
-import Rute from '@/router/menus/rute.js'
+import Transaksi from '@/router/menus/transaksi.js'
+import Keuangan from '@/router/menus/keuangan.js'
+import Kasbon from '@/router/menus/kasbon.js'
+import Inventaris from '@/router/menus/inventaris.js'
+import Laporan from '@/router/menus/Laporan.js'
 import Permissions from '@/router/menus/permissions.js'
 // {{next_import}}
 
@@ -46,9 +46,9 @@ export default menus.concat(
   User,
   Roles,
   Permissions,
-  Bus,
-  Halte,
-  Perjalanan,
-  Pramudi,
-  Rute// {{next_use}}
+  Transaksi,
+  Keuangan,
+  Kasbon,
+  Inventaris,
+  Laporan// {{next_use}}
 )

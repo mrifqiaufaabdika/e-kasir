@@ -1,16 +1,16 @@
-const path = '/rute'
-const permission = 'rute-'
-const routeName = 'rute'
-const folder = 'rute'
-const title = 'Rute'
-const Rute = [
+const path = '/perjalanan'
+const permission = 'perjalanan-'
+const routeName = 'perjalanan'
+const folder = 'perjalanan'
+const title = 'Kasbon'
+const Kasbon = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-routes',
+      icon: 'mdi-chart-donut-variant',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Rute = [
   }
 ]
 
-export default Rute
+export default Kasbon

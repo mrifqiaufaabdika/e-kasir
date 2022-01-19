@@ -23,7 +23,7 @@ module.exports = {
     }
   },
   pwa: {
-    name: 'Tajriy App',
+    name: 'e-Kasir App',
     themeColor: '#0288D1',
     msTileColor: '#FFFFFF',
     appleMobileWebAppCapable: 'yes',

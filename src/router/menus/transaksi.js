@@ -1,16 +1,16 @@
-const path = '/pramudi'
-const permission = 'pramudi-'
-const routeName = 'pramudi'
-const folder = 'pramudi'
-const title = 'Pramudi'
-const Pramudi = [
+const path = '/bus'
+const permission = 'bus-'
+const routeName = 'transaksi'
+const folder = 'bus'
+const title = 'Transaksi'
+const Transaksi = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-steering',
+      icon: 'mdi-cash-register',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Pramudi = [
   }
 ]
 
-export default Pramudi
+export default Transaksi
