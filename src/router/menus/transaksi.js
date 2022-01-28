@@ -10,7 +10,7 @@ const Transaksi = [
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-cash-register',
+      icon: 'mdi-swap-vertical-bold',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'

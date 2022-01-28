@@ -27,7 +27,7 @@
               color="white"
               style="background: #4D77FF;border-radius:50px;padding:5px;margin-left:-5px"
             >
-              mdi-bus
+              mdi-cash-register
             </v-icon>
           </v-list-item-action>
           <v-list-item-content>
@@ -35,7 +35,7 @@
               class="font-weight-bold text-uppercase text-left text-wrap"
               style="color: #4D77FF;font-size:12px"
             >
-              Trans Metro Pekanbaru
+              e-Kasir Cofee & Auto Wash
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-action class="d-none d-md-block">
