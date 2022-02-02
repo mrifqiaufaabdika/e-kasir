@@ -9,6 +9,9 @@ import Keuangan from '@/router/menus/keuangan.js'
 import Kasbon from '@/router/menus/kasbon.js'
 import Inventaris from '@/router/menus/inventaris.js'
 import Laporan from '@/router/menus/Laporan.js'
+import Coffeshop from '@/router/menus/coffeshop.js'
+import AutoWash from '@/router/menus/autowash.js'
+import Barang from '@/router/menus/barang.js'
 import Permissions from '@/router/menus/permissions.js'
 // {{next_import}}
 
@@ -21,7 +24,7 @@ const menus = [
       title: 'Dashboard',
       icon: 'mdi-view-dashboard-outline',
       requirePermission: 'home',
-      requiresAuth: true
+      requiresAuth: true,
     }
   },
   {
@@ -46,9 +49,12 @@ export default menus.concat(
   User,
   Roles,
   Permissions,
+  Coffeshop,
+  AutoWash,
   Transaksi,
   Keuangan,
   Kasbon,
+  Barang,
   Inventaris,
   Laporan// {{next_use}}
 )

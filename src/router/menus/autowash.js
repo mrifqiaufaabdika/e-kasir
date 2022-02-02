@@ -1,17 +1,17 @@
-const path = '/perjalanan'
-const permission = 'perjalanan-'
-const routeName = 'perjalanan'
-const folder = 'perjalanan'
-const title = 'Kasbon'
-const Kasbon = [
+const path = '/autowash'
+const permission = 'bus-'
+const routeName = 'bus'
+const folder = 'autowash'
+const title = 'AutoWash'
+const Autowash = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-chart-donut-variant',
-      //subheader: '-',
+      icon: 'mdi-chart-bubble',
+      // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
     }
@@ -50,4 +50,4 @@ const Kasbon = [
   }
 ]
 
-export default Kasbon
+export default Autowash

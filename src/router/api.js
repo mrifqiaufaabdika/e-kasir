@@ -13,6 +13,7 @@ import Perjalanan from './apis/perjalanan.js'
 import Pramudi from './apis/pramudi.js'
 import Rute from './apis/rute.js'
 import Permissions from './apis/permissions.js'
+import autowash from '@/router/apis/autowash'
 // {{next_import}}
 
 const $api = {
@@ -22,6 +23,7 @@ const $api = {
   ...app,
   ...Permissions,
   ...Bus,
+  ...autowash,
   ...Halte,
   ...Perjalanan,
   ...Pramudi,

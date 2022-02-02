@@ -169,7 +169,7 @@ export default {
     'dialog-logout': Dialog
   },
   data: () => ({
-    drawer: true,
+    drawer: false, // set default expanded
     openNav: true,
     mouseNow: true,
     selectedItem: 1,

@@ -1,17 +1,17 @@
-const path = '/perjalanan'
-const permission = 'perjalanan-'
-const routeName = 'perjalanan'
-const folder = 'perjalanan'
-const title = 'Kasbon'
-const Kasbon = [
+const path = '/coffeshop'
+const permission = 'bus-'
+const routeName = 'coffeshop'
+const folder = 'coffeshop'
+const title = 'Coffe Shop'
+const Transaksi = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-chart-donut-variant',
-      //subheader: '-',
+      icon: 'mdi-coffee',
+      // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
     }
@@ -50,4 +50,4 @@ const Kasbon = [
   }
 ]
 
-export default Kasbon
+export default Transaksi
