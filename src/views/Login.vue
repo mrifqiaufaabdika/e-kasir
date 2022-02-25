@@ -4,6 +4,10 @@
   -->
 
 <template>
+  <div
+  style=" background-size: cover;height: 105%;width: 100%"
+  :style="`background-image: url(${require('../assets/bg-login.png')});`"
+>
   <v-container
     fluid
     fill-height
@@ -23,13 +27,13 @@
           style="font-size: 22pt;"
           class="pt-5"
         >
-          Account Login
+          Login ke akun Anda
         </div>
         <div
           class="lead pb-5"
           style="color: #9e9fb4 !important;"
         >
-          Sign in to your account using email and password provided during registration.
+          Masuk ke akun anda mengunakan email dan password anda
         </div>
         <v-form>
           <v-text-field
@@ -86,6 +90,7 @@
       </v-flex>
     </v-layout>
   </v-container>
+</div>
 </template>
 
 <script>
