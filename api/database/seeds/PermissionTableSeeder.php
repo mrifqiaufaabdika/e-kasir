@@ -19,11 +19,17 @@ class PermissionTableSeeder extends Seeder
         $models = [
             'user',
             'role',
-            'bus',
-            'perjalanan',
-            'pramudi',
-            'rute',
-            'halte',
+            'pegawai',
+            'kategori-pegawai',
+            'produk',
+            'satuan_produk',
+            'transaksi',
+            'keuangan',
+            'keterangan',
+            'kasbon',
+            'inventaris',
+            'barang',
+            'satuan_barang',
         ];
         $actions = [
             'list',

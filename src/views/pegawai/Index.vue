@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <div class="perjalanan">
+  <div class="user">
     <v-app-bar flat>
       <v-icon
         color="#00a3ff"
@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Kasbon
+        User
       </v-toolbar-title>
+
       <v-spacer />
       <v-btn
-        v-if="can(['perjalanan-create'])"
-        title="Tambah Kasbon"
+        title="Tambah User"
         icon
         @click="_add()"
       >
@@ -26,7 +26,7 @@
       </v-btn>
       <v-btn
         icon
-        @click="booltmp.fp = !booltmp.fp"
+        @click="toggleFp = !toggleFp"
       >
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -43,9 +43,9 @@
       style="padding: 0 1.5rem 0 1.5rem;"
     >
       <v-data-table
-        :loading="booltmp.loading"
+        :loading="isLoading"
         :headers="headerData"
-        :search="filterQuery.search"
+        :search="searchQuery"
         :items="datas"
         :sort-by.sync="config.table.sortBy"
         :sort-desc.sync="config.table.sortDesc"
@@ -65,11 +65,22 @@
         <template #item.updated_at="{item}">
           {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
         </template>
-        <template #item.aksi="{item}">
-          <v-tooltip
-            v-if="can(['perjalanan-edit'])"
-            bottom
+        <template #item.role="{item}">
+          <span
+            v-for="(role,i) in item.role"
+            :key="i"
+            class="d-inline-block"
+            style="margin-right: 3px;margin-top: 3px"
           >
+            <v-chip
+              color="green"
+              outlined
+              v-text="role"
+            />
+          </span>
+        </template>
+        <template #item.aksi="{item}">
+          <v-tooltip bottom>
             <template #activator="{ on, attrs }">
               <v-btn
                 icon
@@ -86,10 +97,7 @@
             </template>
             <span>Ubah</span>
           </v-tooltip>
-          <v-tooltip
-            v-if="can(['perjalanan-delete'])"
-            bottom
-          >
+          <v-tooltip bottom>
             <template #activator="{ on, attrs }">
               <v-btn
                 v-bind="attrs"
@@ -104,19 +112,18 @@
             </template>
             <span>Hapus</span>
           </v-tooltip>
-          <v-tooltip
-            v-if="can(['perjalanan-list'])"
-            bottom
-          >
+          <v-tooltip bottom>
             <template #activator="{ on, attrs }">
-              <v-icon
-                color="green"
+              <v-btn
                 v-bind="attrs"
+                icon
                 @click="_detail(item)"
                 v-on="on"
               >
-                mdi-eye
-              </v-icon>
+                <v-icon color="green">
+                  mdi-file-find
+                </v-icon>
+              </v-btn>
             </template>
             <span>Detail</span>
           </v-tooltip>
@@ -147,7 +154,7 @@
         </div>
       </div>
     </v-container>
-    <delete-dialog
+    <delete-dialog-confirm
       :show-dialog="showDC"
       :negative-button="dcNegativeBtn"
       :positive-button="dcPositiveBtn"
@@ -158,22 +165,22 @@
       :message="dcMessages"
     />
     <v-navigation-drawer
-      v-model="booltmp.fp"
+      v-model="toggleFp"
       fixed
       width="350"
       temporary
       right
     >
-      <v-list-item class="grey lighten-4">
+      <v-list-item>
         <v-list-item-content>
           <v-list-item-title>
-            <v-icon>mdi-magnify</v-icon> Pencarian
+            <v-icon>mdi-filter-outline</v-icon> Pencarian
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-icon>
           <v-btn
             icon
-            @click="booltmp.fp=!booltmp.fp"
+            @click="toggleFp=!toggleFp"
           >
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
@@ -185,10 +192,9 @@
           cols="12"
         >
           <v-text-field
-            v-model="filterQuery.search"
-            placeholder="ketikkan sesuatu"
+            v-model="searchQuery"
+            placeholder="ketikkan sesuatu untuk mencari"
             label="Pencarian"
-            light
             clearable
             hide-details
             outlined
@@ -201,9 +207,9 @@
         style="position: absolute;bottom: 0;right: 0"
       >
         <v-btn
-          v-show="isClearSearch"
+          v-show="searchQuery"
           text
-          color="primary"
+          color="#00a3ff"
           @click="_clearFilter()"
         >
           Bersihkan filter
@@ -220,26 +226,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Dialog from '@/components/Dialog'
-import { can, isEmpty } from '@/plugins/supports'
 
 export default {
-  name: 'Perjalanan',
+  name: 'User',
   components: {
-    'delete-dialog': Dialog
+    'delete-dialog-confirm': Dialog
   },
   data () {
     return {
       searchQuery: '',
-      filterQuery: {
-        search: null
-      },
-      booltmp: {
-        fp: false,
-        ft: false,
-        loading: true
-      },
+      toggleFp: false,
+      isLoading: true,
       datas: [],
 
       options: {},
@@ -269,26 +268,17 @@ export default {
   computed: {
     headerData () {
       return [
-        { text: 'Id', value: 'id' },
-        { text: 'Id Pramudi', value: 'id_pramudi' },
-        { text: 'Id Bus', value: 'id_bus' },
-        { text: 'Id Rute', value: 'id_rute' },
-        { text: 'Waktu Mulai', value: 'waktu_mulai' },
-        { text: 'Waktu Selesai', value: 'waktu_selesai' },
-        { text: 'Koordinat', value: 'koordinat' },
-        { text: 'Status', value: 'status' },
-        { text: 'Created At', value: 'created_at' },
-        { text: 'Updated At', value: 'updated_at' },
+        {
+          text: 'ID',
+          align: 'left',
+          value: 'id'
+        },
+        { text: 'Nama', value: 'name' },
+        // { text: 'Email', value: 'email' },
+        { text: 'Roles', value: 'role' },
+        { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
-    },
-    isClearSearch () {
-      for (const key in this.filterQuery) {
-        if (!isEmpty(this.filterQuery[key])) {
-          return true
-        }
-      }
-      return false
     }
   },
   watch: {
@@ -300,27 +290,26 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getPerjalanan', 'deletePerjalanan']),
-    can,
+    ...mapActions(['getUser', 'deleteUser']),
     _detail (value) {
-      this.$router.push({ name: 'perjalanan_view', params: { id: value.id } })
+      this.$router.push({ name: 'user_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'perjalanan_add' })
+      this.$router.push({ name: 'user_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'perjalanan_edit', params: { id: value.id } })
+      this.$router.push({ name: 'user_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {
         this.dcProgress = true
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
-        this.dcMessages = 'Sedang Menghapus Perjalanan'
-        this.deletePerjalanan(this.deleteId).then(res => {
+        this.dcMessages = 'Sedang menghapus user'
+        this.deleteUser(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
-          this.dcMessages = res.msg
+          this.dcMessages = 'Berhasil Menghapus User'
           setTimeout(() => {
             this.deleteId = ''
             this.showDC = false
@@ -329,36 +318,36 @@ export default {
           }, 1500)
         }).catch(err => {
           console.log(err)
-          this.dcMessages = err.msg
           this.dcdisabledNegativeBtn = false
           this.dcdisabledPositiveBtn = false
         })
       } else {
         this.deleteId = value.id
-        this.dcMessages = `Hapus Kasbon <span class="pink--text">#${this.deleteId}</span> ?`
+        this.dcMessages = `Hapus user <span class="pink--text">#${this.deleteId}</span> ?`
         this.showDC = true
       }
     },
     _clearFilter () {
+      this.searchQuery = null
       this._loadData(true)
     },
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
-        this.booltmp.loading = true
-        this.getPerjalanan({ ...this.options })
+        this.isLoading = true
+        this.getUser({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0
-            this.booltmp.loading = false
+            this.isLoading = false
           })
       } else {
-        this.booltmp.loading = false
+        this.isLoading = false
       }
     }
   }
 }
 </script>
-<style v-slot:scoped>
+<style>
 .v-data-footer__icons-before,.v-data-footer__icons-after{
   display: none !important;
 }

@@ -14,10 +14,12 @@ import Pramudi from './apis/pramudi.js'
 import Rute from './apis/rute.js'
 import Permissions from './apis/permissions.js'
 import autowash from '@/router/apis/autowash'
+import pegawai from './apis/pegawai'
 // {{next_import}}
 
 const $api = {
   ...auth,
+  ...pegawai,
   ...roles,
   ...user,
   ...app,

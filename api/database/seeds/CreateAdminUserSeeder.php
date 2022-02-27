@@ -15,7 +15,7 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $domain = 'bpp.pekanbaru.go.id';
+        $domain = 'carwashandcoffeshop.com';
         /**
          * BUAT ROLE SUPER ADMIN
          */
@@ -23,7 +23,7 @@ class CreateAdminUserSeeder extends Seeder
             'id' => KeyGen::randomKey(),
             'name' => 'Super Admin',
             'email' => 'superadmin@'.$domain,
-            'password' => password_hash('sadm@123', PASSWORD_BCRYPT)
+            'password' => password_hash('adm@123', PASSWORD_BCRYPT)
         ]);
 
         /** @var User $user */

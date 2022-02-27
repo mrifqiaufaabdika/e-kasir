@@ -6,6 +6,7 @@
 
 namespace App\Models\Base;
 
+use App\Models\pegawai;
 use App\Traits\Searchable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -46,6 +47,7 @@ class User extends SelfModel implements AuthenticatableContract, AuthorizableCon
      */
     protected $fillable = [
         'id',
+        'nip',
         'name',
         'email',
         'password',
@@ -59,6 +61,7 @@ class User extends SelfModel implements AuthenticatableContract, AuthorizableCon
      */
     public $searchable = [
         'id',
+        'nip',
         'name',
         'email',
         'email_verified_at',
@@ -86,6 +89,7 @@ class User extends SelfModel implements AuthenticatableContract, AuthorizableCon
     public $appends = [
         'role',
         'perm',
+        'pegawai'
     ];
 
     public function getRoleAttribute()
@@ -96,5 +100,12 @@ class User extends SelfModel implements AuthenticatableContract, AuthorizableCon
     public function getPermAttribute()
     {
         return $this->getPermissionsViaRoles()->pluck('name');
+    }
+
+    public function getPegawaiAttribute()
+    {
+        return $this->belongsTo(pegawai::class,
+            'nip',
+            'nip')->first();
     }
 }
