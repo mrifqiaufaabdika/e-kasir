@@ -1,16 +1,16 @@
-const path = '/transaksi'
-const permission = 'transaksi-'
-const routeName = 'transaksi'
-const folder = 'transaksi'
-const title = 'Transaksi'
-const Transaksi = [
+const path = '/kategori-pegawai'
+const permission = 'kategori-pegawai-'
+const routeName = 'kategori-pegawai'
+const folder = 'kategori-pegawai'
+const title = 'Kategori Pegawai'
+const KategoriPegawai = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-swap-vertical-bold',
+      icon: 'mdi-key-outline',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Transaksi = [
   }
 ]
 
-export default Transaksi
+export default KategoriPegawai

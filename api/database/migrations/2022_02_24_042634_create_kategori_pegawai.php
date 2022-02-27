@@ -14,7 +14,7 @@ class CreateKategoriPegawai extends Migration
     public function up()
     {
         Schema::create('kategori_pegawai', function (Blueprint $table) {
-            $table->id();
+            $table->string("id")->primary();
             $table->string("nama_kategori",120);
             $table->timestamps();
         });

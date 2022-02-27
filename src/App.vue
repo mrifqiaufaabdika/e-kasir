@@ -84,20 +84,10 @@
 <!--            </v-list-item>-->
 <!--          </v-list-item-group>-->
 <!--        </v-list>-->
-        <v-divider />
-        <v-list
-                expand
-                shaped
-                class="pb-16"
-        >
-          <dynamic-menu
-                  :menus="items"
-                  :is-mini="minivar"
-          />
-        </v-list>
+
         <v-list-item
           class="pr-0 vertical-nav-menu-list"
-          style="height: 68px !important;padding-left: 13px !important;margin-top: 0 !important; padding-right: 10px !important;bottom: 0 !important;position: absolute;"
+          style="height: 68px !important;padding-left: 13px !important;margin-top: 0 !important; padding-right: 10px !important;bottom: 0 !important;position: static;"
         >
           <v-list-item-icon class="mr-3">
             <v-avatar
@@ -154,6 +144,18 @@
             </v-menu>
           </v-list-item-action>
         </v-list-item>
+
+        <v-divider />
+        <v-list
+                expand
+                shaped
+                class="pb-16"
+        >
+          <dynamic-menu
+                  :menus="items"
+                  :is-mini="minivar"
+          />
+        </v-list>
 
 
       </v-navigation-drawer>

@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title style="line-height: 1.3">
-        Detail User
+        Detail Pegawai
         <div
           v-if="!loadingData"
           style="font-size: 11pt"
@@ -156,7 +156,7 @@ export default {
     }
   },
   created () {
-    this.getUserById({ id: this.id })
+    this.getPegawaiById({ id: this.id })
       .then(data => {
         this.user = data || {}
         this.loadingData = false
@@ -167,7 +167,7 @@ export default {
       })
   },
   methods: {
-    ...mapActions(['getUserById']),
+    ...mapActions(['getPegawaiById']),
     backButton () {
       this.$router.push({ name: 'user' })
     }

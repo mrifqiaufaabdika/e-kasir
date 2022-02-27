@@ -8,11 +8,8 @@
  */
 
 use App\Http\Controllers\PermissionsController;
-use App\Http\Controllers\BusController;
-use App\Http\Controllers\HalteController;
-use App\Http\Controllers\PerjalananController;
-use App\Http\Controllers\PramudiController;
-use App\Http\Controllers\RuteController;
+use App\Http\Controllers\KategoriPegawaiController;
+use App\Http\Controllers\PegawaiController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -25,49 +22,23 @@ $router->group(['prefix' => 'permissions'], function () use ($router) {
     $router->delete('delete/{id}', [PermissionsController::class, 'destroy']);
 });
 
-$router->group(['prefix' => 'bus'], function () use ($router) {
-    $router->get('all', [BusController::class, 'index']);
-    $router->get('detail/{id}', [BusController::class, 'show']);
-    $router->get('edit/{id}', [BusController::class, 'edit']);
-    $router->get('create', [BusController::class, 'create']);
-    $router->post('baru', [BusController::class, 'store']);
-    $router->post('update', [BusController::class, 'update']);
-    $router->delete('delete/{id}', [BusController::class, 'destroy']);
+$router->group(['prefix' => 'kategori-pegawai'], function () use ($router) {
+    $router->get('all', [KategoriPegawaiController::class, 'index']);
+    $router->get('detail/{id}', [KategoriPegawaiController::class, 'show']);
+    $router->get('edit/{id}', [KategoriPegawaiController::class, 'edit']);
+    $router->get('create', [KategoriPegawaiController::class, 'create']);
+    $router->post('baru', [KategoriPegawaiController::class, 'store']);
+    $router->post('update', [KategoriPegawaiController::class, 'update']);
+    $router->delete('delete/{id}', [KategoriPegawaiController::class, 'destroy']);
 });
-$router->group(['prefix' => 'halte'], function () use ($router) {
-    $router->get('all', [HalteController::class, 'index']);
-    $router->get('detail/{id}', [HalteController::class, 'show']);
-    $router->get('edit/{id}', [HalteController::class, 'edit']);
-    $router->get('create', [HalteController::class, 'create']);
-    $router->post('baru', [HalteController::class, 'store']);
-    $router->post('update', [HalteController::class, 'update']);
-    $router->delete('delete/{id}', [HalteController::class, 'destroy']);
-});
-$router->group(['prefix' => 'perjalanan'], function () use ($router) {
-    $router->get('all', [PerjalananController::class, 'index']);
-    $router->get('detail/{id}', [PerjalananController::class, 'show']);
-    $router->get('edit/{id}', [PerjalananController::class, 'edit']);
-    $router->get('create', [PerjalananController::class, 'create']);
-    $router->post('baru', [PerjalananController::class, 'store']);
-    $router->post('update', [PerjalananController::class, 'update']);
-    $router->delete('delete/{id}', [PerjalananController::class, 'destroy']);
-});
-$router->group(['prefix' => 'pramudi'], function () use ($router) {
-    $router->get('all', [PramudiController::class, 'index']);
-    $router->get('detail/{id}', [PramudiController::class, 'show']);
-    $router->get('edit/{id}', [PramudiController::class, 'edit']);
-    $router->get('create', [PramudiController::class, 'create']);
-    $router->post('baru', [PramudiController::class, 'store']);
-    $router->post('update', [PramudiController::class, 'update']);
-    $router->delete('delete/{id}', [PramudiController::class, 'destroy']);
-});
-$router->group(['prefix' => 'rute'], function () use ($router) {
-    $router->get('all', [RuteController::class, 'index']);
-    $router->get('detail/{id}', [RuteController::class, 'show']);
-    $router->get('edit/{id}', [RuteController::class, 'edit']);
-    $router->get('create', [RuteController::class, 'create']);
-    $router->post('baru', [RuteController::class, 'store']);
-    $router->post('update', [RuteController::class, 'update']);
-    $router->delete('delete/{id}', [RuteController::class, 'destroy']);
+
+$router->group(['prefix' => 'pegawai'], function () use ($router) {
+    $router->get('all', [PegawaiController::class, 'index']);
+    $router->get('detail/{id}', [PegawaiController::class, 'show']);
+    $router->get('edit/{id}', [PegawaiController::class, 'edit']);
+    $router->get('create', [PegawaiController::class, 'create']);
+    $router->post('baru', [PegawaiController::class, 'store']);
+    $router->post('update', [PegawaiController::class, 'update']);
+    $router->delete('delete/{id}', [PegawaiController::class, 'destroy']);
 });
 #next_route

@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         // $this->call('UsersTableSeeder');
         $this->call('PermissionTableSeeder');
         $this->call('CreateAdminUserSeeder');
+        $this->call(\Database\Seeders\KategoriPegawaiSeeder::class);
+        $this->call(\Database\Seeders\PegawaiSeeder::class);
+
         Model::reguard();
     }
 }

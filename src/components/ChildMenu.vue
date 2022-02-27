@@ -6,7 +6,8 @@
     link
   >
     <v-list-item-icon>
-      <v-icon class="v-list-item-icon-custome">
+      <v-icon
+              class="v-list-item-icon-custome">
         {{ data.icon }}
       </v-icon>
     </v-list-item-icon>

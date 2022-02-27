@@ -1,7 +1,7 @@
-const path = '/perjalanan'
-const permission = 'perjalanan-'
-const routeName = 'perjalanan'
-const folder = 'perjalanan'
+const path = '/kasbon'
+const permission = 'kasbon-'
+const routeName = 'kasbon'
+const folder = 'kasbon'
 const title = 'Kasbon'
 const Kasbon = [
   {

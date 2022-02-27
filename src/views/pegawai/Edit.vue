@@ -23,7 +23,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title style="line-height: 1.3">
-        Edit User
+        Edit Pegawai
         <div
           v-if="!loadingData"
           style="font-size: 10pt"
@@ -195,7 +195,7 @@ export default {
     }
   },
   created () {
-    this.getUserEdit({ id: this.id })
+    this.getPegawaiById({ id: this.id })
       .then(data => {
         this.user.id = this.id
         this.user.detail = isEmpty(data.user.detail, (r, v) => (r ? {} : v))
@@ -220,7 +220,7 @@ export default {
       })
   },
   methods: {
-    ...mapActions(['getUserEdit', 'updateUser']),
+    ...mapActions(['getPegawaiById', 'updatePegawai']),
     backButton () {
       this.$router.push({ name: 'user' })
     },
@@ -230,7 +230,7 @@ export default {
       this.dcdisabledPositiveBtn = true
       this.dcMessages = 'Sedang Menyimpan User...'
 
-      this.updateUser(this.user).then((res) => {
+      this.updatePegawai(this.user).then((res) => {
         this.dcMessages = 'Berhasil Memperbarui User'
         this.dcProgress = false
         setTimeout(() => {

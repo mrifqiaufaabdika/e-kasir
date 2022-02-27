@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title style="line-height: 1.3">
-        Tambah User
+        Tambah Pegawai
       </v-toolbar-title>
     </v-app-bar>
     <v-container>
@@ -178,7 +178,7 @@ export default {
     }
   },
   created () {
-    this.getUserCreate({ id: this.id })
+    this.getPegawaiCreate({ id: this.id })
       .then(data => {
         this.roles = isEmpty(data, (r, v) => (r ? [] : v))
         this.loadingData = false
@@ -188,7 +188,7 @@ export default {
       })
   },
   methods: {
-    ...mapActions(['getUserCreate', 'addUser']),
+    ...mapActions(['getPegawaiCreate', 'addPegawai']),
     backButton () {
       this.$router.push({ name: 'user' })
     },
@@ -198,7 +198,7 @@ export default {
       this.dcdisabledPositiveBtn = true
       this.dcMessages = 'Sedang Menyimpan User...'
 
-      this.addUser(this.user).then((res) => {
+      this.addPegawai(this.user).then((res) => {
         this.dcMessages = 'Berhasil Memperbarui User'
         this.dcProgress = false
         setTimeout(() => {

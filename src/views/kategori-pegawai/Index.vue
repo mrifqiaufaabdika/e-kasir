@@ -4,7 +4,7 @@
   -->
 
 <template>
-  <div class="user">
+  <div class="roles">
     <v-app-bar flat>
       <v-icon
         color="#00a3ff"
@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Pegawai
+        Roles
       </v-toolbar-title>
 
       <v-spacer />
       <v-btn
-        title="Tambah Pegawai"
+        title="Tambah Roles"
         icon
         @click="_add()"
       >
@@ -62,6 +62,25 @@
         @page-count="config.table.pageCount = $event"
         @pagination="pagination=$event"
       >
+        <template #item.updated_at="{item}">
+          {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
+        </template>
+        <template #item.permission="{item}">
+          <div style="padding: 5px">
+            <span
+              v-for="(izin,i) in item.permission"
+              :key="i"
+              class="d-inline-block"
+              style="padding-right: 3px;padding-top: 3px"
+            >
+              <v-chip
+                color="green"
+                outlined
+                v-text="izin"
+              />
+            </span>
+          </div>
+        </template>
         <template #item.aksi="{item}">
           <v-tooltip bottom>
             <template #activator="{ on, attrs }">
@@ -80,7 +99,10 @@
             </template>
             <span>Ubah</span>
           </v-tooltip>
-          <v-tooltip bottom>
+          <v-tooltip
+            v-if="can(['admin'])"
+            bottom
+          >
             <template #activator="{ on, attrs }">
               <v-btn
                 v-bind="attrs"
@@ -95,21 +117,22 @@
             </template>
             <span>Hapus</span>
           </v-tooltip>
-          <v-tooltip bottom>
-            <template #activator="{ on, attrs }">
-              <v-btn
+          <!--          <v-tooltip
+            v-if="can(['admin'])"
+            bottom
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+                color="green"
                 v-bind="attrs"
-                icon
                 @click="_detail(item)"
                 v-on="on"
               >
-                <v-icon color="green">
-                  mdi-file-find
-                </v-icon>
-              </v-btn>
+                mdi-eye
+              </v-icon>
             </template>
             <span>Detail</span>
-          </v-tooltip>
+          </v-tooltip>-->
         </template>
       </v-data-table>
       <div
@@ -154,10 +177,10 @@
       temporary
       right
     >
-      <v-list-item>
+      <v-list-item class="grey lighten-4">
         <v-list-item-content>
           <v-list-item-title>
-            <v-icon>mdi-filter-outline</v-icon> Pencarian
+            <v-icon>mdi-filter-outline</v-icon> Filter
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-icon>
@@ -178,6 +201,7 @@
             v-model="searchQuery"
             placeholder="ketikkan sesuatu untuk mencari"
             label="Pencarian"
+            light
             clearable
             hide-details
             outlined
@@ -209,11 +233,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import Dialog from '@/components/Dialog'
+import { can } from '@/plugins/supports'
 
 export default {
-  name: 'Pegawai',
+  name: 'Roles',
   components: {
     'delete-dialog-confirm': Dialog
   },
@@ -231,7 +256,7 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['nip'],
+          sortBy: ['id'],
           sortDesc: [true],
           itemsPerPage: 10,
           itemKey: 'id'
@@ -252,15 +277,12 @@ export default {
     headerData () {
       return [
         {
-          text: 'NIP',
+          text: 'ID',
           align: 'left',
-          value: 'nip'
+          value: 'id'
         },
-        { text: 'Nama', value: 'nama' },
-         { text: 'Kontak', value: 'email' },
-        { text: 'JK', value: 'jenis_kelamin' },
-        { text: 'Jabatan', value: 'kategori_pegawai.nama_kategori' },
-        { text: 'status', value: 'status' },
+        { text: 'Nama Kategori', value: 'nama_kategori' },
+        { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
     }
@@ -274,26 +296,27 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getPegawai', 'deletePegawai']),
+    ...mapActions(['getKategoriPegawai', 'deleteKategoriPegawai']),
+    can,
     _detail (value) {
-      this.$router.push({ name: 'user_view', params: { id: value.id } })
+      this.$router.push({ name: 'roles_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'user_add' })
+      this.$router.push({ name: 'roles_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'user_edit', params: { id: value.id } })
+      this.$router.push({ name: 'roles_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {
         this.dcProgress = true
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
-        this.dcMessages = 'Sedang menghapus user'
-        this.deletePegawai(this.deleteId).then(res => {
+        this.dcMessages = 'Sedang menghapus roles'
+        this.deleteKategoriPegawai(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
-          this.dcMessages = 'Berhasil Menghapus User'
+          this.dcMessages = 'Berhasil Menghapus Roles'
           setTimeout(() => {
             this.deleteId = ''
             this.showDC = false
@@ -307,7 +330,7 @@ export default {
         })
       } else {
         this.deleteId = value.id
-        this.dcMessages = `Hapus user <span class="pink--text">#${this.deleteId}</span> ?`
+        this.dcMessages = `Hapus roles <span class="pink--text">#${this.deleteId}</span> ?`
         this.showDC = true
       }
     },
@@ -318,7 +341,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getPegawai({ search: this.searchQuery, ...this.options })
+        this.getKategoriPegawai({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0
@@ -331,7 +354,7 @@ export default {
   }
 }
 </script>
-<style>
+<style v-slot:scoped>
 .v-data-footer__icons-before,.v-data-footer__icons-after{
   display: none !important;
 }

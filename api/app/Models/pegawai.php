@@ -36,6 +36,9 @@ class pegawai extends SelfModel
      * @var string
      */
     protected $table = 'pegawai';
+    protected $primaryKey = 'nip';
+    public $incrementing = false;
+
 
     /**
      * The attributes that are mass assignable.
@@ -51,4 +54,13 @@ class pegawai extends SelfModel
      */
     public $searchable = ['nik', 'nama', 'jenis_kelamain', 'tempat_lahir', 'telpon', 'agama', 'status_nikah', 'alamat', 'email', 'id_kategori_pegawai', 'gaji_pokok', 'tanggal_lahir', 'tanggal_terima', 'tanggal_keluar', 'foto', 'status', 'created_at', 'updated_at'];
 
+    public $appends = [
+      'kategori_pegawai'
+    ];
+
+    public function getKategoriPegawaiAttribute(){
+        return $this->belongsTo(kategori_pegawai::class,
+            'id_kategori_pegawai',
+            'id')->first();
+    }
 }

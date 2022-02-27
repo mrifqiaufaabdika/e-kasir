@@ -21,6 +21,9 @@ class kategori_pegawai extends SelfModel
      * @var string
      */
     protected $table = 'kategori_pegawai';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
 
     /**
      * The attributes that are mass assignable.

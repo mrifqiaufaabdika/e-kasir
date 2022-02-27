@@ -1,5 +1,5 @@
 const path = '/barang'
-const permission = 'pramudi-'
+const permission = 'barang-'
 const routeName = 'barang'
 const folder = 'barang'
 const title = 'Barang'

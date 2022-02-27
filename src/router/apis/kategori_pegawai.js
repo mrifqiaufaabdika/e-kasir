@@ -2,7 +2,7 @@ import $axios from '@/router/server'
 
 export default {
   // START Roles API
-  getPegawai ({ commit }, payload) {
+  getKategoriPegawai ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       const { page, itemsPerPage, sortBy, sortDesc, search } = payload
       let query = {
@@ -13,7 +13,7 @@ export default {
         sortDesc: sortDesc.length ? JSON.stringify(sortDesc) : ''
       }
       query = new URLSearchParams(query).toString()
-      $axios.get(`/pegawai/all?${query}`)
+      $axios.get(`/kategori-pegawai/all?${query}`)
         .then((response) => {
           if (response.status === 200) {
             const items = response.data.value.data
@@ -29,25 +29,9 @@ export default {
         })
     })
   },
-  getPegawaiCreate ({ commit }, payload) {
+  getKategoriPegawaiById ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.get(`/pegawai/create`)
-          .then((response) => {
-            if (response.status === 200) {
-              resolve(response.data.value)
-            } else {
-              resolve({})
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-            resolve([])
-          })
-    })
-  },
-  getPegawaiById ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      $axios.get(`/pegawai/detail/${payload.id}`)
+      $axios.get(`/kategori-pegawai/detail/${payload.id}`)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -61,9 +45,9 @@ export default {
         })
     })
   },
-  deletePegawai ({ commit }, payload) {
+  deleteKategoriPegawai ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.delete(`/pegawai/delete/${payload}`)
+      $axios.delete(`/kategori-pegawai/delete/${payload}`)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -77,9 +61,9 @@ export default {
         })
     })
   },
-  addPegawai ({ commit }, payload) {
+  addKategoriPegawai ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.post('/pegawai/baru', payload)
+      $axios.post('/kategori-pegawai/baru', payload)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -93,9 +77,9 @@ export default {
         })
     })
   },
-  updatePegawai ({ commit }, payload) {
+  updateKategoriPegawai ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.put(`/pegawai/update/${payload.id}`, payload)
+      $axios.put(`/kategori-pegawai/update/${payload.id}`, payload)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data)
