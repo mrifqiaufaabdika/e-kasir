@@ -6,8 +6,8 @@
 <template>
   <v-app>
     <div
-      @mouseover="mouseNow=true"
-      @mouseleave="mouseNow=false"
+      @mouseover="mouseNow = true"
+      @mouseleave="mouseNow = false"
     >
       <v-navigation-drawer
         v-if="isAuth"
@@ -174,7 +174,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
 import Dialog from './components/Dialog'
-import menus from './router/menus'
+import  menus  from './router/menus'
 import { isEmpty } from '@/plugins/supports'
 import DynamicMenuVue from './components/DynamicMenu.vue'
 
