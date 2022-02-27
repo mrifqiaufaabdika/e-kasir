@@ -1,5 +1,5 @@
 const path = '/coffeshop'
-const permission = 'bus-'
+const permission = 'coffeshop-'
 const routeName = 'coffeshop'
 const folder = 'coffeshop'
 const title = 'Coffe Shop'
@@ -46,7 +46,7 @@ const Transaksi = [
       title: 'Edit' + title,
       requiresAuth: true,
       requirePermission: permission + 'edit'
-    }
+    },
   }
 ]
 

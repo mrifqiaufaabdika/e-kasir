@@ -3,8 +3,8 @@
  * Lisensi ini hanya diberikan dan tidak dapat di perjual belikan kembali tanpa izin pembuat
  */
 import User from './menus/base/user'
-import Roles from './menus/base/roles'
-import Transaksi from '@/router/menus/transaksi.js'
+import Pegawai from './menus/pegawai'
+import Transaksi from './menus/transaksi.js'
 import Keuangan from '@/router/menus/keuangan.js'
 import Kasbon from '@/router/menus/kasbon.js'
 import Inventaris from '@/router/menus/inventaris.js'
@@ -47,7 +47,9 @@ const menus = [
 
 export default menus.concat(
   User,
-  Roles,
+  Pegawai,
+  // KategoriPegawai,
+  // Roles,
   Permissions,
   Coffeshop,
   AutoWash,

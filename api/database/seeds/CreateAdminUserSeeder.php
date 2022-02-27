@@ -15,7 +15,7 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $domain = 'bpp.pekanbaru.go.id';
+        $domain = 'carwashandcoffeshop.com';
         /**
          * BUAT ROLE SUPER ADMIN
          */
@@ -23,19 +23,45 @@ class CreateAdminUserSeeder extends Seeder
             'id' => KeyGen::randomKey(),
             'name' => 'Super Admin',
             'email' => 'superadmin@'.$domain,
-            'password' => password_hash('sadm@123', PASSWORD_BCRYPT)
+            'password' => password_hash('adm@123', PASSWORD_BCRYPT)
         ]);
 
         /** @var User $user */
         $user = User::where('email', 'superadmin@'.$domain)->first();
 
-        /** @var Role $role */
-        $role = Role::create(['name' => 'Super Admin']);
+        /** @var Role $superadmin */
+        $superadmin = Role::create(['name' => 'Super Admin']);
         // atur permission yang akan diberikan
         $permissions = Permission::pluck('id', 'id')->all();
         // sinkronisasi role + permission
-        $role->syncPermissions($permissions);
+        $superadmin->syncPermissions($permissions);
         // berikan akses ke user
-        $user->assignRole([$role->id]);
+        $user->assignRole([$superadmin->id]);
+
+        //create role supervisior
+        /** @var Role $supervisior */
+        $supervisior = Role::create(['name' => 'Supervisior']);
+
+        $permissions_supervisior = Permission::whereIn('name',[
+                "home"
+            ]
+        )->pluck('id','id')->all();
+        $supervisior->syncPermissions($permissions_supervisior);
+
+
+
+
+
+        //create role kasir
+        /** @var Role $supervisior */
+        $kasir = Role::create(['name' => 'Kasir']);
+
+        $permissions_kasir = Permission::whereIn('name',[
+                "home"
+            ]
+        )->pluck('id','id')->all();
+        $kasir->syncPermissions($permissions_kasir);
+
+
     }
 }

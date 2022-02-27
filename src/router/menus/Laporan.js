@@ -1,7 +1,7 @@
-const path = '/rute'
-const permission = 'rute-'
-const routeName = 'rute'
-const folder = 'rute'
+const path = '/laporan'
+const permission = 'laporan-'
+const routeName = 'laporan'
+const folder = 'laporan'
 const title = 'Laporan'
 const Laporan = [
   {

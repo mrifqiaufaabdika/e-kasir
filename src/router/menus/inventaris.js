@@ -1,7 +1,7 @@
-const path = '/pramudi'
-const permission = 'pramudi-'
-const routeName = 'pramudi'
-const folder = 'pramudi'
+const path = '/inventaris'
+const permission = 'inventaris-'
+const routeName = 'inventaris'
+const folder = 'inventaris'
 const title = 'Inventaris'
 const Inventaris = [
   {
