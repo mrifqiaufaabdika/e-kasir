@@ -10,12 +10,14 @@ import app from './apis/base/app'
 import Permissions from './apis/permissions.js'
 import autowash from '@/router/apis/autowash.js'
 import pegawai from './apis/pegawai'
+import barang from './apis/barang'
 import kategori_pegawai from './apis/kategori_pegawai'
 // {{next_import}}
 
 const $api = {
   ...auth,
   ...pegawai,
+  ...barang,
   ...kategori_pegawai,
   ...roles,
   ...user,

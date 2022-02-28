@@ -2,7 +2,7 @@ const path = '/kasbon'
 const permission = 'kasbon-'
 const routeName = 'kasbon'
 const folder = 'kasbon'
-const title = 'Kasbon'
+const title = 'Kasir'
 const Kasbon = [
   {
     path: path,
