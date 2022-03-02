@@ -2,7 +2,7 @@ const path = '/database'
 const permission = 'user-'
 const routeName = 'barang'
 const folder = 'barang'
-const title = 'Database'
+const title = 'Satuan Produk/Jasa/Barang'
 
 const pathRole = 'roles'
 const permissionRole = 'role-'

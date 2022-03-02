@@ -15,7 +15,7 @@ import Barang from '@/router/menus/database/barang.js'
 import Permissions from '@/router/menus/permissions.js'
 // {{next_import}}
 
-const menus = [
+const baseMenu = [
   {
     path: '/',
     name: 'home',
@@ -45,9 +45,11 @@ const menus = [
   }
 ]
 
-export default menus.concat(
+export default baseMenu.concat(
+  //[{ subheader: 'Data Master' }],
   User,
   Pegawai,
+  //[{ subheader: 'Data Master' }],
   Kasbon,
   Barang,
   Transaksi,
