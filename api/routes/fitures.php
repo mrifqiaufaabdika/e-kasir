@@ -14,6 +14,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\InventarisBarangController;
 use App\Http\Controllers\InventarisBarangControllerController;
+use App\Http\Controllers\ProdukController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -73,5 +74,14 @@ $router->group(['prefix' => 'inventaris'], function () use ($router) {
     $router->post('baru', [InventarisBarangController::class, 'store']);
     $router->post('update', [InventarisBarangController::class, 'update']);
     $router->delete('delete/{id}', [InventarisBarangController::class, 'destroy']);
+});
+$router->group(['prefix' => 'Produk'], function () use ($router) {
+    $router->get('all', [ProdukController::class, 'index']);
+    $router->get('detail/{id}', [ProdukController::class, 'show']);
+    $router->get('edit/{id}', [ProdukController::class, 'edit']);
+    $router->get('create', [ProdukController::class, 'create']);
+    $router->post('baru', [ProdukController::class, 'store']);
+    $router->post('update', [ProdukController::class, 'update']);
+    $router->delete('delete/{id}', [ProdukController::class, 'destroy']);
 });
 #next_route
