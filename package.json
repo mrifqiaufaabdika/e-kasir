@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start-backend": "cd ./api && php artisan serve --port 8001",
-    "serve": "vue-cli-service serve --port 8000",
+    "start-backend": "cd ./api && php artisan serve --port 7001",
+    "serve": "vue-cli-service serve --port 7000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "vue-cli-service serve --port 9001",
-    "secure-serve": "vue-cli-service serve --port 8080 --https true",
+    "dev": "vue-cli-service serve --port 7000",
+    "secure-serve": "vue-cli-service serve --port 7070 --https true",
     "vueui": "vue ui"
   },
   "dependencies": {

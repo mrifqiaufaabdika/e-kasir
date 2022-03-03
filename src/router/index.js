@@ -5,11 +5,9 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import menus from './menus'
+import { routes } from './menus'
 
 Vue.use(VueRouter)
-
-const routes = menus
 
 const router = new VueRouter({
   // mode: 'history',
