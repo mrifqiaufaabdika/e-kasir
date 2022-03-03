@@ -248,10 +248,10 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['id_barang'],
+          sortBy: ['id_inventaris_barang'],
           sortDesc: [true],
           itemsPerPage: 10,
-          itemKey: 'id_barang'
+          itemKey: 'id_inventaris_barang'
         }
       },
 
@@ -271,6 +271,9 @@ export default {
         /*{ text: 'ID', align: 'left', value: 'id_barang' },*/
         { text: 'Nama Barang', value: 'nama_barang' },
         { text: 'Kategori', value: 'satuan_barang.nama_satuan' },
+        { text: 'Nama Pencatat', value: 'satuan_barang.nama_satuan' },
+        { text: 'Jumlah', value: 'jumlah' },
+        { text: 'Keterangan', value: 'keterangan' },
         { text: 'Created At', value: 'created_at' },
         { text: 'Updated At', value: 'updated_at' },
         { text: '', value: 'aksi' }
@@ -294,13 +297,13 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getBarang', 'deleteBarang']),
+    ...mapActions(['getInventaris', 'deleteInventaris']),
     can,
     _detail (value) {
       this.$router.push({ name: 'satuan_barang_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'barangv1_add' })
+      this.$router.push({ name: 'inventaris_add' })
     },
     _edit (value) {
       this.$router.push({ name: 'satuan_barang_edit', params: { id: value.id } })
@@ -311,7 +314,7 @@ export default {
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
         this.dcMessages = 'Sedang Menghapus Data'
-        this.deleteBus(this.deleteId).then(res => {
+        this.deleteInventaris(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
           this.dcMessages = res.msg
@@ -339,7 +342,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.booltmp.loading = true
-        this.getBarang({ ...this.options })
+        this.getInventaris({ ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0
