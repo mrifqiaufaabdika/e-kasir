@@ -45,21 +45,25 @@ const baseMenu = [
   }
 ]
 
+export const routes = baseMenu.concat(
+    User,
+    Pegawai,
+    Permissions,
+    Kasbon,
+    Barang,
+    Transaksi,
+    Laporan// {{next_use}}
+)
+
 export default baseMenu.concat(
-  //[{ subheader: 'Data Master' }],
+  [{ subheader: 'Data Master' }],
   User,
   Pegawai,
-  //[{ subheader: 'Data Master' }],
+  Permissions,
+  [{ subheader: 'Pengelolaan' }],
   Kasbon,
   Barang,
   Transaksi,
-  Laporan,
-  // KategoriPegawai,
-  // Roles,
-  Permissions,
-  //Coffeshop,
-  //AutoWash,
-  //Keuangan,
-  //Inventaris,
+  Laporan
   // {{next_use}}
 )
