@@ -269,9 +269,9 @@ export default {
     headerData () {
       return [
         /*{ text: 'ID', align: 'left', value: 'id_barang' },*/
-        { text: 'Nama Barang', value: 'nama_barang' },
-        { text: 'Kategori', value: 'satuan_barang.nama_satuan' },
-        { text: 'Nama Pencatat', value: 'satuan_barang.nama_satuan' },
+        { text: 'Nama Barang', value: 'barang.nama_barang' },
+        { text: 'Kategori', value: 'barang.satuan_barang.nama_satuan' },
+        { text: 'Nama Pencatat', value: 'pegawai.nama' },
         { text: 'Jumlah', value: 'jumlah' },
         { text: 'Keterangan', value: 'keterangan' },
         { text: 'Created At', value: 'created_at' },

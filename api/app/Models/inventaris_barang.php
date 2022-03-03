@@ -43,13 +43,19 @@ class inventaris_barang extends SelfModel
      */
     public $searchable = ['id_inventaris_barang','id_barang','id_pencatat','jumlah','jenis_inventaris','keterangan', 'created_at', 'updated_at'];
 
-    /*public $appends = [
-        'satuan_barang'
+    public $appends = [
+        'barang','pegawai'
     ];
 
-    public function getSatuanBarangAttribute(){
-        return $this->belongsTo(satuan_barang::class,
-        'id_satuan',
-            'id')->first();
-    }*/
+    public function getBarangAttribute(){
+        return $this->belongsTo(barang::class,
+        'id_barang',
+            'id_barang')->first();
+    }
+
+    public function getPegawaiAttribute(){
+        return $this->belongsTo(pegawai::class,
+            'id_pencatat',
+            'nip')->first();
+    }
 }
