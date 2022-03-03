@@ -68,7 +68,7 @@
             "@php artisan jwt:secret"
         ],
         "serve": [
-            "@php artisan serve --port=8001"
+            "@php artisan serve --port=7001"
         ],
         "dbwipe": [
             "composer dump-autoload && php artisan migrate:fresh && php artisan db:seed"
