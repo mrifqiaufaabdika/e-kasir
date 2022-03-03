@@ -16,7 +16,7 @@ const Satuan = [
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-account-multiple',
+      icon: 'mdi-notebook-multiple',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'

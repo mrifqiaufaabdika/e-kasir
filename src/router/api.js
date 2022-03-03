@@ -13,6 +13,7 @@ import pegawai from './apis/pegawai'
 import barang from './apis/barang'
 import kategori_pegawai from './apis/kategori_pegawai'
 import satuan_barang from '@/router/apis/satuan_barang'
+import barangv1 from '@/router/apis/barangv1'
 // {{next_import}}
 
 const $api = {
@@ -21,6 +22,7 @@ const $api = {
   ...barang,
   ...kategori_pegawai,
   ...satuan_barang,
+  ...barangv1,
   ...roles,
   ...user,
   ...app,

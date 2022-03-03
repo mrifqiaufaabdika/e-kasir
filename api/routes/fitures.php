@@ -10,6 +10,7 @@
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\KategoriPegawaiController;
 use App\Http\Controllers\SatuanBarang;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PegawaiController;
 #next_use
 
@@ -51,5 +52,15 @@ $router->group(['prefix' => 'satuan-barang'], function () use ($router) {
     $router->post('baru', [SatuanBarang::class, 'store']);
     $router->post('update', [SatuanBarang::class, 'update']);
     $router->delete('delete/{id}', [SatuanBarang::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'barang'], function () use ($router) {
+    $router->get('all', [BarangController::class, 'index']);
+    $router->get('detail/{id}', [BarangController::class, 'show']);
+    $router->get('edit/{id}', [BarangController::class, 'edit']);
+    $router->get('create', [BarangController::class, 'create']);
+    $router->post('baru', [BarangController::class, 'store']);
+    $router->post('update', [BarangController::class, 'update']);
+    $router->delete('delete/{id}', [BarangController::class, 'destroy']);
 });
 #next_route
