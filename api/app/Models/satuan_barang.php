@@ -21,6 +21,8 @@ class satuan_barang extends SelfModel
      * @var string
      */
     protected $table = 'satuan_barang';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.

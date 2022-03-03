@@ -12,6 +12,7 @@ import autowash from '@/router/apis/autowash.js'
 import pegawai from './apis/pegawai'
 import barang from './apis/barang'
 import kategori_pegawai from './apis/kategori_pegawai'
+import satuan_barang from '@/router/apis/satuan_barang'
 // {{next_import}}
 
 const $api = {
@@ -19,6 +20,7 @@ const $api = {
   ...pegawai,
   ...barang,
   ...kategori_pegawai,
+  ...satuan_barang,
   ...roles,
   ...user,
   ...app,

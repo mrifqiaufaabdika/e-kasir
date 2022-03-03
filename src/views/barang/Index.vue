@@ -13,12 +13,11 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Barang
+        Barang Satuan
       </v-toolbar-title>
       <v-spacer />
       <v-btn
-        v-if="can(['bus-create'])"
-        title="Tambah Transaksi"
+        title="Tambah Satuan Barang"
         icon
         @click="_add()"
       >
@@ -269,14 +268,8 @@ export default {
   computed: {
     headerData () {
       return [
-        { text: 'Id', value: 'id' },
-        { text: 'Nomor Polisi', value: 'nomor_polisi' },
-        { text: 'Merek', value: 'merek' },
-        { text: 'Jumlah Roda', value: 'jumlah_roda' },
-        { text: 'Warna', value: 'warna' },
-        { text: 'Kapasitas Duduk', value: 'kapasitas_duduk' },
-        { text: 'Kapasitas Berdiri', value: 'kapasitas_berdiri' },
-        { text: 'Status', value: 'status' },
+        { text: 'ID', align: 'left', value: 'id' },
+        { text: 'Nama Satuan', value: 'nama_satuan' },
         { text: 'Created At', value: 'created_at' },
         { text: 'Updated At', value: 'updated_at' },
         { text: '', value: 'aksi' }
@@ -300,23 +293,23 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getBus', 'deleteBus']),
+    ...mapActions(['getSatuanBarang', 'deleteSatuanBarang']),
     can,
     _detail (value) {
-      this.$router.push({ name: 'bus_view', params: { id: value.id } })
+      this.$router.push({ name: 'satuan_barang_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'bus_add' })
+      this.$router.push({ name: 'barang_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'bus_edit', params: { id: value.id } })
+      this.$router.push({ name: 'satuan_barang_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {
         this.dcProgress = true
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
-        this.dcMessages = 'Sedang Menghapus Bus'
+        this.dcMessages = 'Sedang Menghapus Data'
         this.deleteBus(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
@@ -345,7 +338,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.booltmp.loading = true
-        this.getBus({ ...this.options })
+        this.getSatuanBarang({ ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0
