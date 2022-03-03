@@ -6,13 +6,16 @@ use App\Models\Base\SelfModel;
 use App\Traits\Searchable;
 
 /**
- * @property integer $id_barang
- * @property string $nama_barang
- * @property int $id_satuan
+ * @property integer $id_invetaris_barang
+ * @property string $id_barang
+ * @property string $id_pencatat
+ * @property string $jumlah
+ * @property string $jenis_inventaris
+ * @property string $keterangan
  * @property string $created_at
  * @property string $updated_at
  */
-class barang extends SelfModel
+class inventaris_barang extends SelfModel
 {
     use Searchable;
 
@@ -21,8 +24,8 @@ class barang extends SelfModel
      *
      * @var string
      */
-    protected $table = 'barang';
-    protected $primaryKey = 'id_barang';
+    protected $table = 'inventaris_barang';
+    protected $primaryKey = 'id';
     public $incrementing = false;
 
 
@@ -31,16 +34,16 @@ class barang extends SelfModel
      *
      * @var array
      */
-    protected $fillable = ['id_barang','nama_barang','id_satuan', 'created_at', 'updated_at'];
+    protected $fillable = ['id_inventaris_barang','id_barang','id_pencatat','jumlah','jenis_inventaris','keterangan', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      *
      * @var array
      */
-    public $searchable = ['id_barang','nama_barang','id_satuan','created_at', 'updated_at'];
+    public $searchable = ['id_inventaris_barang','id_barang','id_pencatat','jumlah','jenis_inventaris','keterangan', 'created_at', 'updated_at'];
 
-    public $appends = [
+    /*public $appends = [
         'satuan_barang'
     ];
 
@@ -48,5 +51,5 @@ class barang extends SelfModel
         return $this->belongsTo(satuan_barang::class,
         'id_satuan',
             'id')->first();
-    }
+    }*/
 }

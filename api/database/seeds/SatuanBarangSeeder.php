@@ -19,6 +19,9 @@ class SatuanBarangSeeder extends Seeder
           ['id' => 'SB01', 'nama_satuan'=>'Meja'],
           ['id' => 'SB02', 'nama_satuan'=>'Alat Tulis']
         ];
+
+
+
         foreach ($satuan_barang_collection as $item){
             satuan_barang::create($item);
         }
