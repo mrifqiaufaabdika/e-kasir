@@ -14,8 +14,8 @@ class CreateSatuanProduk extends Migration
     public function up()
     {
         Schema::create('satuan_produk', function (Blueprint $table) {
-            $table->id();
-            $table->string("nama_satuan",200);
+            $table->string('id_satuan_produk')->primary();
+            $table->string("nama_satuan_produk",200);
             $table->timestamps();
         });
     }
