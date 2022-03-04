@@ -13,8 +13,9 @@ use App\Http\Controllers\SatuanBarang;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\InventarisBarangController;
-use App\Http\Controllers\InventarisBarangControllerController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KategoriProdukController;
+use App\Http\Controllers\SatuanProdukController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -83,5 +84,23 @@ $router->group(['prefix' => 'Produk'], function () use ($router) {
     $router->post('baru', [ProdukController::class, 'store']);
     $router->post('update', [ProdukController::class, 'update']);
     $router->delete('delete/{id}', [ProdukController::class, 'destroy']);
+});
+$router->group(['prefix' => 'KategoriProduk'], function () use ($router) {
+    $router->get('all', [KategoriProdukController::class, 'index']);
+    $router->get('detail/{id}', [KategoriProdukController::class, 'show']);
+    $router->get('edit/{id}', [KategoriProdukController::class, 'edit']);
+    $router->get('create', [KategoriProdukController::class, 'create']);
+    $router->post('baru', [KategoriProdukController::class, 'store']);
+    $router->post('update', [KategoriProdukController::class, 'update']);
+    $router->delete('delete/{id}', [KategoriProdukController::class, 'destroy']);
+});
+$router->group(['prefix' => 'SatuanProduk'], function () use ($router) {
+    $router->get('all', [SatuanProdukController::class, 'index']);
+    $router->get('detail/{id}', [SatuanProdukController::class, 'show']);
+    $router->get('edit/{id}', [SatuanProdukController::class, 'edit']);
+    $router->get('create', [SatuanProdukController::class, 'create']);
+    $router->post('baru', [SatuanProdukController::class, 'store']);
+    $router->post('update', [SatuanProdukController::class, 'update']);
+    $router->delete('delete/{id}', [SatuanProdukController::class, 'destroy']);
 });
 #next_route
