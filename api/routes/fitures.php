@@ -76,7 +76,7 @@ $router->group(['prefix' => 'inventaris'], function () use ($router) {
     $router->post('update', [InventarisBarangController::class, 'update']);
     $router->delete('delete/{id}', [InventarisBarangController::class, 'destroy']);
 });
-$router->group(['prefix' => 'Produk'], function () use ($router) {
+$router->group(['prefix' => 'produk'], function () use ($router) {
     $router->get('all', [ProdukController::class, 'index']);
     $router->get('detail/{id}', [ProdukController::class, 'show']);
     $router->get('edit/{id}', [ProdukController::class, 'edit']);
@@ -85,7 +85,7 @@ $router->group(['prefix' => 'Produk'], function () use ($router) {
     $router->post('update', [ProdukController::class, 'update']);
     $router->delete('delete/{id}', [ProdukController::class, 'destroy']);
 });
-$router->group(['prefix' => 'KategoriProduk'], function () use ($router) {
+$router->group(['prefix' => 'kategori-produk'], function () use ($router) {
     $router->get('all', [KategoriProdukController::class, 'index']);
     $router->get('detail/{id}', [KategoriProdukController::class, 'show']);
     $router->get('edit/{id}', [KategoriProdukController::class, 'edit']);
