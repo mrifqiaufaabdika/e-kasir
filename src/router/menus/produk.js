@@ -4,11 +4,17 @@ const routeName = 'produk'
 const folder = 'produk'
 const title = 'Produk'
 
-/*const pathKategoriProduk = 'kategori-produk'
+const pathKategoriProduk = 'kategori-produk'
 const permissionKategoriProduk = 'kategori-pegawai-'
 const routeNameKategoriProduk = 'kategori-produk'
 const folderKategoriProduk = 'kategori-produk'
-const titleKategoriProduk = 'Kategori Produk'*/
+const titleKategoriProduk = 'Kategori Produk'
+
+/*const pathKategoriPegawai = 'kategori-pegawai'
+const permissionKategoriPegawai = 'kategori-pegawai-'
+const routeNameKategoriPegawai = 'kategori-pegawai'
+const folderKategoriPegawai = 'kategori-pegawai'
+const titleKategoriPegawai = 'Kategori Pegawai'*/
 
 const Produk = [
   {
@@ -70,17 +76,17 @@ const Produk = [
         }
       },
 
-    /*  // Child Kategori Produk
+      // Child Kategori Produk
       {
         path: pathKategoriProduk,
         name: routeNameKategoriProduk,
-        component: () => import(/!* webpackChunkName: "[request].chunk" *!/ `@/views/${folderKategoriProduk}/Index`),
+        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folderKategoriProduk}/Index`),
         meta: {
           title: titleKategoriProduk,
           icon: 'mdi-minus',
           // subheader: '-',
           requiresAuth: true,
-          requirePermission: permissionKategoriPegawai + 'list'
+          requirePermission: permissionKategoriProduk + 'list'
         }
       },
       {
@@ -103,7 +109,7 @@ const Produk = [
           requiresAuth: true,
           requirePermission: permissionKategoriProduk + 'edit'
         }
-      }*/
+      }
     ]
   }
 ]
