@@ -16,6 +16,7 @@ import Barangv1 from '@/router/menus/barangv1.js'
 import Satuan from '@/router/menus/satuan.js'
 import Permissions from '@/router/menus/permissions.js'
 import SatuanBarang from '@/router/menus/database/satuan-barang';
+import Produk from '@/router/menus/produk.js';
 // {{next_import}}
 
 const baseMenu = [
@@ -55,6 +56,7 @@ export const routes = baseMenu.concat(
    // SatuanBarang,
     Satuan,
     Barangv1,
+    Produk,
     Inventaris,
     Kasbon,
     Barang,
@@ -70,6 +72,7 @@ export default baseMenu.concat(
   //Barang,
   Satuan,
   Barangv1,
+  Produk,
   //SatuanBarang,
   [{ subheader: 'Pengelolaan' }],
   Inventaris,
