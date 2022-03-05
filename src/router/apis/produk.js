@@ -2,7 +2,7 @@ import $axios from '@/router/server'
 
 export default {
   // START Roles API
-  getBarangv1 ({ commit }, payload) {
+  getProduk ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       const { page, itemsPerPage, sortBy, sortDesc, search } = payload
       let query = {
@@ -13,7 +13,7 @@ export default {
         sortDesc: sortDesc.length ? JSON.stringify(sortDesc) : ''
       }
       query = new URLSearchParams(query).toString()
-      $axios.get(`/barang/all?${query}`)
+      $axios.get(`/produk/all?${query}`)
         .then((response) => {
           if (response.status === 200) {
             const items = response.data.value.data
@@ -29,9 +29,9 @@ export default {
         })
     })
   },
-  getBarangv1Create ({ commit }, payload) {
+  getProdukCreate ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.get(`/barang/create`)
+      $axios.get(`/produk/create`)
           .then((response) => {
             if (response.status === 200) {
               resolve(response.data.value)
@@ -45,9 +45,9 @@ export default {
           })
     })
   },
-  getBarangv1ById ({ commit }, payload) {
+  getProdukById ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.get(`/barang/detail/${payload.id}`)
+      $axios.get(`/produk/detail/${payload.id}`)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -61,9 +61,9 @@ export default {
         })
     })
   },
-  deleteBarangv1 ({ commit }, payload) {
+  deleteProduk ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.delete(`/barang/delete/${payload}`)
+      $axios.delete(`/produk/delete/${payload}`)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -77,9 +77,9 @@ export default {
         })
     })
   },
-  addBarangv1 ({ commit }, payload) {
+  addProduk ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.post('/barang/baru', payload)
+      $axios.post('/produk/baru', payload)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -93,9 +93,9 @@ export default {
         })
     })
   },
-  updateBarangv1 ({ commit }, payload) {
+  updateProduk ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.put(`/barang/update/${payload.id}`, payload)
+      $axios.put(`/produk/update/${payload.id}`, payload)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data)
