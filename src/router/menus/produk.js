@@ -4,11 +4,11 @@ const routeName = 'produk'
 const folder = 'produk'
 const title = 'Produk'
 
-const pathKategoriPegawai = 'kategori-produk'
-const permissionKategoriPegawai = 'kategori-pegawai-'
-const routeNameKategoriPegawai = 'kategori-produk'
-const folderKategoriPegawai = 'kategori-produk'
-const titleKategoriPegawai = 'Kategori Produk'
+/*const pathKategoriProduk = 'kategori-produk'
+const permissionKategoriProduk = 'kategori-pegawai-'
+const routeNameKategoriProduk = 'kategori-produk'
+const folderKategoriProduk = 'kategori-produk'
+const titleKategoriProduk = 'Kategori Produk'*/
 
 const Produk = [
   {
@@ -70,13 +70,13 @@ const Produk = [
         }
       },
 
-      // Child Kategori Pegawai
+    /*  // Child Kategori Produk
       {
-        path: pathKategoriPegawai,
-        name: routeNameKategoriPegawai,
-        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folderKategoriPegawai}/Index`),
+        path: pathKategoriProduk,
+        name: routeNameKategoriProduk,
+        component: () => import(/!* webpackChunkName: "[request].chunk" *!/ `@/views/${folderKategoriProduk}/Index`),
         meta: {
-          title: titleKategoriPegawai,
+          title: titleKategoriProduk,
           icon: 'mdi-minus',
           // subheader: '-',
           requiresAuth: true,
@@ -84,26 +84,26 @@ const Produk = [
         }
       },
       {
-        path: pathKategoriPegawai + '/baru',
-        name: routeNameKategoriPegawai + '_add',
-        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folderKategoriPegawai}/Add`),
+        path: pathKategoriProduk + '/baru',
+        name: routeNameKategoriProduk + '_add',
+        component: () => import(/!* webpackChunkName: "[request].chunk" *!/ `@/views/${folderKategoriProduk}/Add`),
         meta: {
-          title: 'Tambah' + titleKategoriPegawai,
+          title: 'Tambah' + titleKategoriProduk,
           requiresAuth: true,
-          requirePermission: permissionKategoriPegawai + 'create'
+          requirePermission: permissionKategoriProduk + 'create'
         }
       },
       {
-        path: pathKategoriPegawai + '/edit/:id',
-        name: routeNameKategoriPegawai + '_edit',
-        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folderKategoriPegawai}/Edit`),
+        path: pathKategoriProduk + '/edit/:id',
+        name: routeNameKategoriProduk + '_edit',
+        component: () => import(/!* webpackChunkName: "[request].chunk" *!/ `@/views/${folderKategoriProduk}/Edit`),
         props: true,
         meta: {
-          title: 'Edit' + titleKategoriPegawai,
+          title: 'Edit' + titleKategoriProduk,
           requiresAuth: true,
-          requirePermission: permissionKategoriPegawai + 'edit'
+          requirePermission: permissionKategoriProduk + 'edit'
         }
-      }
+      }*/
     ]
   }
 ]
