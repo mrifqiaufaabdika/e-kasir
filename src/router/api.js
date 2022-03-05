@@ -15,6 +15,7 @@ import kategori_pegawai from './apis/kategori_pegawai'
 import satuan_barang from '@/router/apis/satuan_barang'
 import barangv1 from '@/router/apis/barangv1'
 import inventaris from '@/router/apis/inventaris'
+import kategori_produk from '@/router/apis/kategori-produk'
 // {{next_import}}
 
 const $api = {
@@ -24,6 +25,7 @@ const $api = {
   ...kategori_pegawai,
   ...satuan_barang,
   ...barangv1,
+  ...kategori_produk,
   ...inventaris,
   ...roles,
   ...user,
