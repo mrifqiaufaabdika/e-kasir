@@ -13,7 +13,7 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Barang Satuan
+        Satuan Barang
       </v-toolbar-title>
       <v-spacer />
       <v-btn
