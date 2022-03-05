@@ -13,7 +13,7 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Roles
+        Kategori Produk
       </v-toolbar-title>
 
       <v-spacer />
@@ -238,7 +238,7 @@ import Dialog from '@/components/Dialog'
 import { can } from '@/plugins/supports'
 
 export default {
-  name: 'Roles',
+  name: 'KategoriProduk',
   components: {
     'delete-dialog-confirm': Dialog
   },
@@ -256,10 +256,10 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['id'],
+          sortBy: ['id_kategori_produk'],
           sortDesc: [true],
           itemsPerPage: 10,
-          itemKey: 'id'
+          itemKey: 'id_kategori_produk'
         }
       },
 
@@ -279,9 +279,10 @@ export default {
         {
           text: 'ID',
           align: 'left',
-          value: 'id'
+          value: 'id_kategori_produk'
         },
-        { text: 'Nama Kategori', value: 'nama_kategori' },
+        { text: 'Nama Kategori', value: 'nama_kategori_produk' },
+        /*{ text: 'Satuan', value: 'satuan_barang.nama_satuan' },*/
         { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
@@ -296,13 +297,13 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getKategoriPegawai', 'deleteKategoriPegawai']),
+    ...mapActions(['getKategoriProduk', 'deleteKategoriProduk']),
     can,
     _detail (value) {
       this.$router.push({ name: 'roles_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'roles_add' })
+      this.$router.push({ name: 'kategori_produk_add' })
     },
     _edit (value) {
       this.$router.push({ name: 'roles_edit', params: { id: value.id } })
@@ -313,7 +314,7 @@ export default {
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
         this.dcMessages = 'Sedang menghapus roles'
-        this.deleteKategoriPegawai(this.deleteId).then(res => {
+        this.deleteKategoriProduk(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
           this.dcMessages = 'Berhasil Menghapus Roles'
@@ -341,7 +342,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getKategoriPegawai({ search: this.searchQuery, ...this.options })
+        this.getKategoriProduk({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0
