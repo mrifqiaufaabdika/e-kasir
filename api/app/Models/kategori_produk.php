@@ -40,13 +40,13 @@ class kategori_produk extends SelfModel
      */
     public $searchable = ['id_kategori_produk','nama_kategori','id_satuan_produk', 'created_at', 'updated_at'];
 
-   /* public $appends = [
+    public $appends = [
         'satuan_barang'
     ];
 
     public function getSatuanBarangAttribute(){
         return $this->belongsTo(satuan_barang::class,
-        'id_satuan',
+        'id_satuan_produk',
             'id')->first();
-    }*/
+    }
 }
