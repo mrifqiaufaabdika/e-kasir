@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(\Database\Seeders\SatuanBarangSeeder::class);
         $this->call(\Database\Seeders\BarangSeeder::class);
         $this->call(\Database\Seeders\ProdukSeeder::class);
+        $this->call(\Database\Seeders\VoucherSeeder::class);
 
 
         Model::reguard();
