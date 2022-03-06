@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
+use App\Models\kategori_pegawai;
 use App\Models\pegawai;
 use Illuminate\Http\Request;
 
@@ -47,8 +48,10 @@ class PegawaiController extends Controller {
      */
     public function create()
     {
+        $kategori_pegawai = kategori_pegawai::selectRaw(implode(',',["id as value", 'nama_kategori as text']))->orderBy('id')->get();
         return [
-            'value' => [],
+            'value' => compact(
+                'kategori_pegawai'),
             'msg' => "Data for create {$this->title}"
         ];
     }
