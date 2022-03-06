@@ -23,6 +23,7 @@ use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\DetailCuciController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\VoucherController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -183,4 +184,13 @@ $router->group(['prefix' => 'kendaraan'], function () use ($router) {
 
 
 
+$router->group(['prefix' => 'voucher'], function () use ($router) {
+    $router->get('all', [VoucherController::class, 'index']);
+    $router->get('detail/{id}', [VoucherController::class, 'show']);
+    $router->get('edit/{id}', [VoucherController::class, 'edit']);
+    $router->get('create', [VoucherController::class, 'create']);
+    $router->post('baru', [VoucherController::class, 'store']);
+    $router->post('update', [VoucherController::class, 'update']);
+    $router->delete('delete/{id}', [VoucherController::class, 'destroy']);
+});
 #next_route

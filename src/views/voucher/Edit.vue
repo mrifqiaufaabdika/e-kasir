@@ -16,7 +16,19 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Tambah Daftar Satuan Barang
+        Edit Transaksi
+        <div
+          v-if="!loadingData"
+          style="font-size: 11pt"
+        >
+          {{ datas.id }}
+        </div>
+        <v-skeleton-loader
+          v-else
+          ref="skeleton"
+          type="text"
+          max-width="100%"
+        />
       </v-toolbar-title>
     </v-app-bar>
     <v-container
@@ -33,7 +45,7 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.nomor_polisi" label="Format Satuan" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.nomor_polisi" label="Nomor Polisi" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.merek" label="Merek" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.jumlah_roda" label="Jumlah Roda" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.warna" label="Warna" outlined :rules="[rules.required]" />
@@ -57,15 +69,15 @@
         </v-col>
       </v-row>
     </v-container>
-    <dialog-confirm
+    <update-dialog
       :show-dialog="showDC"
       :negative-button="dcNegativeBtn"
       :positive-button="dcPositiveBtn"
       :disabled-negative-btn="dcdisabledNegativeBtn"
       :disabled-positive-btn="dcdisabledPositiveBtn"
-      :progress="dcProgress"
-      :title="'Simpan'"
+      :title="'Perbarui'"
       :message="dcMessages"
+      :progress="dcProgress"
     />
   </div>
 </template>
@@ -77,10 +89,14 @@ import { inputValidator, isEmpty } from '@/plugins/supports'
 
 export default {
   components: {
-    'dialog-confirm': Dialog
+    'update-dialog': Dialog
+  },
+  props: {
+    id: { type: [String, Number], required: true }
   },
   data () {
     return {
+      loadingData: true,
       datas: {
         nomor_polisi: null,
         merek: null,
@@ -117,14 +133,13 @@ export default {
           return !v || 'Tidak Boleh Kosong'
         }
       },
-
       showDC: false,
-      dcMessages: 'Simpan Bus Sekarang?',
+      dcMessages: 'Simpan Perubahan Sekarang?',
       dcProgress: false,
       dcdisabledNegativeBtn: false,
       dcdisabledPositiveBtn: false,
       dcNegativeBtn: () => { this.showDC = false },
-      dcPositiveBtn: () => this.postAdd()
+      dcPositiveBtn: () => this.postUpdate()
     }
   },
   computed: {
@@ -133,14 +148,24 @@ export default {
     }
   },
   created () {
-    this.createBus().then(data => {
-      // this.items = isEmpty(data.items, {})
-    })
+    this.editBus({ id: this.id })
+      .then(data => {
+        this.datas = isEmpty(data, {})
+        this.datas.detail = isEmpty(data.detail, {})
+        this.loadingData = false
+      })
+      .catch((error) => {
+        this.datas = {}
+        this.loadingData = false
+        console.log('Error : ' + error)
+      })
   },
   methods: {
-    ...mapActions(['addBus', 'createBus']),
-    backButton () { this.$router.push({ name: 'bus' }) },
-    postAdd () {
+    ...mapActions(['editBus', 'updateBus']),
+    backButton () {
+      this.$router.push({ name: 'bus' })
+    },
+    postUpdate () {
       /* Initialize the form data */
       const formData = new FormData()
 
@@ -150,36 +175,34 @@ export default {
         if (this.dataTypes[d] !== 'json') {
           formData.append(d, tmp)
         } else {
-          formData.append(d,
-            new Blob([JSON.stringify(tmp)],
-              { type: 'application/json' })
-          )
+            formData.append(d,
+                new Blob([JSON.stringify(tmp)],
+                {type: 'application/json'})
+            )
         }
       })
 
       this.dcProgress = true
       this.dcdisabledNegativeBtn = true
       this.dcdisabledPositiveBtn = true
-      this.dcMessages = 'Tunggu Sebentar, Sedang Menyimpan Bus...'
-      this.addBus(formData).then((res) => {
-        this.dcProgress = false
+      this.dcMessages = 'Sedang Menyimpan Bus...'
+
+      this.updateBus(formData).then((res) => {
         this.dcMessages = res.msg
+        this.dcProgress = false
         setTimeout(() => {
           this.showDC = false
+          this.dcdisabledNegativeBtn = false
+          this.dcdisabledPositiveBtn = false
           this.$router.push({ name: 'bus' })
-          this.dcMessages = 'Simpan Bus Sekarang?'
-        }, 2000)
+          this.dcMessages = 'Simpan Perubahan Sekarang?'
+        }, 1500)
       })
     }
   }
 }
 </script>
 
-<style>
-.fs-14 > label{
-    font-size: 14px !important;
-}
-.theme--light.v-data-table.v-data-table--fixed-header thead th {
-    background-color: #eee !important;
-}
+<style scoped>
+
 </style>

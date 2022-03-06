@@ -15,6 +15,7 @@ import Satuan from '@/router/menus/satuan.js'
 import Permissions from '@/router/menus/permissions.js'
 import SatuanBarang from '@/router/menus/database/satuan-barang';
 import Produk from '@/router/menus/produk.js';
+import Voucher from '@/router/menus/voucher.js';
 import Komisi from "./menus/komisi";
 import Pelanggan from "./menus/pelanggan";
 // {{next_import}}
@@ -62,6 +63,7 @@ export const routes = baseMenu.concat(
     Keuangan,
     Komisi,
     Kasbon,
+    Voucher,
     Inventaris,
     Barang,
     Laporan// {{next_use}}
@@ -77,6 +79,7 @@ export default baseMenu.concat(
   Barangv1,
   Produk,
   Pelanggan,
+  Voucher,
   //SatuanBarang,
   [{ subheader: 'Pengelolaan' }],
   Transaksi,

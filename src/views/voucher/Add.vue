@@ -16,7 +16,7 @@
         </v-icon>
       </v-btn>
       <v-toolbar-title class="ml-md-2">
-        Tambah Daftar Satuan Barang
+        Tambah Transaksi
       </v-toolbar-title>
     </v-app-bar>
     <v-container
@@ -33,7 +33,7 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.nomor_polisi" label="Format Satuan" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.nomor_polisi" label="Nomor Polisi" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.merek" label="Merek" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.jumlah_roda" label="Jumlah Roda" outlined :rules="[rules.required]" />
           <v-text-field v-model="datas.warna" label="Warna" outlined :rules="[rules.required]" />

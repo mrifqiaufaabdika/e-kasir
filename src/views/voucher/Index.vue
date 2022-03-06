@@ -13,7 +13,7 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Satuan Barang
+        Daftar Voucher
       </v-toolbar-title>
       <v-spacer />
       <v-btn
@@ -215,51 +215,6 @@
         </v-btn>
       </div>
     </v-navigation-drawer>
-
-    <v-dialog
-      v-model="addObid.dialog"
-      width="500"
-    >
-      <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          Tambah Unit Organisasi
-        </v-card-title>
-
-        <v-text-field
-          v-model="unitOrganisasi.nama_jabatan"
-          label="Nama Jabatan"
-          prepend-icon=""
-          outlined
-          class="bpp-input-md bpp-rounded-12 pt-5 px-5"
-        />
-
-        <v-text-field
-          v-model="unitOrganisasi.nama_unit_organisasi"
-          label="Unit Organisasi"
-          prepend-icon=""
-          outlined
-          class="bpp-input-md bpp-rounded-12 px-5"
-        />
-
-        <v-divider />
-
-        <v-card-actions>
-          <span :style="`color: ${addObid.msgColor}`">{{ addObid.msg }}</span>
-          <v-spacer />
-          <v-btn
-            color="#2d62ed"
-            :loading="addObid.progress"
-            :dark="!addObid.progress"
-            :disabled="addObid.progress"
-            min-height="50"
-            class="bpp-rounded-12 px-5"
-            @click="postAdd()"
-          >
-            SIMPAN
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 
@@ -269,7 +224,7 @@ import Dialog from '@/components/Dialog'
 import { can, isEmpty } from '@/plugins/supports'
 
 export default {
-  name: 'Autowash',
+  name: 'Voucher',
   components: {
     'delete-dialog': Dialog
   },
@@ -293,10 +248,10 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['id'],
+          sortBy: ['id_voucher'],
           sortDesc: [true],
           itemsPerPage: 10,
-          itemKey: 'id'
+          itemKey: 'id_voucher'
         }
       },
 
@@ -313,8 +268,12 @@ export default {
   computed: {
     headerData () {
       return [
-        { text: 'ID', align: 'left', value: 'id' },
-        { text: 'Nama Satuan', value: 'nama_satuan' },
+        /*{ text: 'ID', align: 'left', value: 'id_barang' },*/
+        { text: 'Nama Voucher', value: 'nama_voucher' },
+        { text: 'Kode Voucher', value: 'kode_voucher' },
+        { text: 'Potongan', value: 'potongan' },
+        { text: 'Masa Berlaku', value: 'masa_berlaku' },
+        { text: 'Kuota', value: 'kuota' },
         { text: 'Created At', value: 'created_at' },
         { text: 'Updated At', value: 'updated_at' },
         { text: '', value: 'aksi' }
@@ -338,13 +297,13 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getSatuanBarang', 'deleteSatuanBarang']),
+    ...mapActions(['getVoucher', 'deleteVoucher']),
     can,
     _detail (value) {
       this.$router.push({ name: 'satuan_barang_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'barang_add' })
+      this.$router.push({ name: 'voucher_add' })
     },
     _edit (value) {
       this.$router.push({ name: 'satuan_barang_edit', params: { id: value.id } })
@@ -355,7 +314,7 @@ export default {
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
         this.dcMessages = 'Sedang Menghapus Data'
-        this.deleteBus(this.deleteId).then(res => {
+        this.deleteVoucher(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
           this.dcMessages = res.msg
@@ -383,7 +342,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.booltmp.loading = true
-        this.getSatuanBarang({ ...this.options })
+        this.getVoucher({ ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0

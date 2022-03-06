@@ -16,6 +16,7 @@ import barangv1 from '@/router/apis/barangv1'
 import inventaris from '@/router/apis/inventaris'
 import kategori_produk from '@/router/apis/kategori-produk'
 import produk from '@/router/apis/produk'
+import voucher from '@/router/apis/voucher.js'
 import transaksi from '@/router/apis/transaksi'
 // {{next_import}}
 
@@ -29,6 +30,7 @@ const $api = {
   ...barangv1,
   ...kategori_produk,
   ...transaksi,
+  ...voucher,
   ...inventaris,
   ...roles,
   ...user,
