@@ -17,6 +17,7 @@ import Satuan from '@/router/menus/satuan.js'
 import Permissions from '@/router/menus/permissions.js'
 import SatuanBarang from '@/router/menus/database/satuan-barang';
 import Produk from '@/router/menus/produk.js';
+import Voucher from '@/router/menus/voucher.js';
 // {{next_import}}
 
 const baseMenu = [
@@ -57,6 +58,7 @@ export const routes = baseMenu.concat(
     Satuan,
     Barangv1,
     Produk,
+    Voucher,
     Inventaris,
     Kasbon,
     Barang,
@@ -73,6 +75,7 @@ export default baseMenu.concat(
   Satuan,
   Barangv1,
   Produk,
+  Voucher,
   //SatuanBarang,
   [{ subheader: 'Pengelolaan' }],
   Inventaris,
