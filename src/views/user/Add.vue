@@ -31,56 +31,69 @@
               cols="12"
               md="6"
             >
+              <v-select
+                v-model="pegawai"
+                label="Pilih Pegawai"
+                outlined
+                :rules="[rules.required]"
+                :items="items.pegawai"
+                @change="onChange($event)"/>
+
               <v-text-field
                 v-model="user.name"
                 label="Nama"
                 outlined
+                :disabled="true"
                 :rules="[rules.required]"
               />
               <v-text-field
                 v-model="user.email"
                 label="Email"
                 outlined
+                :disabled="true"
                 :rules="[rules.required,rules.email]"
               />
               <v-text-field
-                v-model="user.password"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="showPassword ? 'text' : 'password'"
-                label="Password"
-                outlined
-                :rules="[rules.required]"
-                @click:append="showPassword = !showPassword"
+                      v-model="user.no_hp"
+                      label="No. HP"
+                      :disabled="true"
+                      outlined
               />
-              <v-text-field
-                v-model="user.confirmPassword"
-                :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="showConfirmPassword ? 'text' : 'password'"
-                label="Confirm Password"
-                outlined
-                :rules="[rules.required,rules.confirmPassword]"
-                @click:append="showConfirmPassword = !showConfirmPassword"
+              <v-autocomplete
+                      v-model="user.roles"
+                      :items="roles"
+                      outlined
+                      chips
+                      deletable-chips
+                      label="Hak Akses"
+                      multiple
+                      :rules="[rules.required]"
               />
+
             </v-col>
             <v-col
               cols="12"
               md="6"
             >
               <v-text-field
-                v-model="user.detail.no_hp"
-                label="No. HP"
-                outlined
+                      v-model="user.password"
+                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      :type="showPassword ? 'text' : 'password'"
+                      label="Password"
+                      outlined
+                      :rules="[rules.required]"
+                      @click:append="showPassword = !showPassword"
               />
-              <v-autocomplete
-                v-model="user.roles"
-                :items="roles"
-                outlined
-                chips
-                deletable-chips
-                label="Izin"
-                multiple
-                :rules="[rules.required]"
+              <v-text-field
+                      v-model="user.confirmPassword"
+                      :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      :type="showConfirmPassword ? 'text' : 'password'"
+                      label="Confirm Password"
+                      outlined
+                      :rules="[rules.required,rules.confirmPassword]"
+                      @click:append="showConfirmPassword = !showConfirmPassword"
               />
+
               <v-btn
                 color="green"
                 large
@@ -128,10 +141,19 @@ export default {
       showConfirmPassword: false,
 
       roles: [],
+      items: {
+        pegawai: []
+      },
+      pegawai: {
+        nip: null,
+        nama: null,
+        email: null,
+        telepon: null,
+      },
       user: {
-        detail: {
-          no_hp: null
-        },
+        nip: null,
+        value: null,
+        no_hp: null,
         email: null,
         name: null,
         password: null,
@@ -180,7 +202,8 @@ export default {
   created () {
     this.getUserCreate({ id: this.id })
       .then(data => {
-        this.roles = isEmpty(data, (r, v) => (r ? [] : v))
+        this.roles = isEmpty(data.roles, {})
+        this.items.pegawai = isEmpty(data.pegawai, {})
         this.loadingData = false
       })
       .catch(() => {
@@ -191,6 +214,15 @@ export default {
     ...mapActions(['getUserCreate', 'addUser']),
     backButton () {
       this.$router.push({ name: 'user' })
+    },
+    onChange (event) {
+
+      var a = this.items.pegawai.filter(d => d.value === event);
+
+      this.user.nip =  a[0].value
+      this.user.name =  a[0].nama
+      this.user.email =  a[0].email
+      this.user.no_hp =  a[0].telepon
     },
     postSave () {
       this.dcProgress = true

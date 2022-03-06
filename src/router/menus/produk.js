@@ -1,5 +1,5 @@
 const path = '/produk'
-const permission = 'pegawai-'
+const permission = 'produk-'
 const routeName = 'produk'
 const folder = 'produk'
 const title = 'Produk'
@@ -22,7 +22,7 @@ const Produk = [
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Main`),
     meta: {
       title: title,
-      icon: 'mdi-account-multiple',
+      icon: 'mdi-barcode',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'

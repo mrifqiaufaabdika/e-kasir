@@ -4,13 +4,11 @@
  */
 import User from './menus/base/user'
 import Pegawai from './menus/pegawai'
-import Transaksi from './menus/Transaksi/transaksi.js'
+import Transaksi from './menus/transaksi.js'
 import Keuangan from '@/router/menus/keuangan.js'
 import Kasbon from '@/router/menus/kasbon.js'
 import Inventaris from '@/router/menus/database/inventaris.js'
 import Laporan from '@/router/menus/Laporan/Laporan.js'
-import Coffeshop from '@/router/menus/coffeshop.js'
-import AutoWash from '@/router/menus/autowash.js'
 import Barang from '@/router/menus/database/barang.js'
 import Barangv1 from '@/router/menus/barangv1.js'
 import Satuan from '@/router/menus/satuan.js'
@@ -18,6 +16,8 @@ import Permissions from '@/router/menus/permissions.js'
 import SatuanBarang from '@/router/menus/database/satuan-barang';
 import Produk from '@/router/menus/produk.js';
 import Voucher from '@/router/menus/voucher.js';
+import Komisi from "./menus/komisi";
+import Pelanggan from "./menus/pelanggan";
 // {{next_import}}
 
 const baseMenu = [
@@ -58,11 +58,14 @@ export const routes = baseMenu.concat(
     Satuan,
     Barangv1,
     Produk,
+    Pelanggan,
+    Transaksi,
+    Keuangan,
+    Komisi,
+    Kasbon,
     Voucher,
     Inventaris,
-    Kasbon,
     Barang,
-    Transaksi,
     Laporan// {{next_use}}
 )
 
@@ -75,13 +78,15 @@ export default baseMenu.concat(
   Satuan,
   Barangv1,
   Produk,
+  Pelanggan,
   Voucher,
   //SatuanBarang,
   [{ subheader: 'Pengelolaan' }],
-  Inventaris,
-  Kasbon,
-  //Barang,
   Transaksi,
+  Keuangan,
+  Komisi,
+  Kasbon,
+  Inventaris,
   Laporan
   // {{next_use}}
 )

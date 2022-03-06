@@ -2,19 +2,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
-use App\Models\Rute;
+use App\Models\Keuangan;
 use Illuminate\Http\Request;
 
-class RuteController extends Controller {
+class KeuanganController extends Controller {
 
-    public $title = 'Rute';
+    public $title = 'keuangan';
 
     public function __construct()
     {
-        $this->middleware('permission:rute-list|rute-create|rute-edit|rute-delete', ['only' => 'index', 'show']);
-        $this->middleware('permission:rute-create', ['only' => 'create', 'store']);
-        $this->middleware('permission:rute-edit', ['only' => 'edit', 'update']);
-        $this->middleware('permission:rute-delete', ['only' => 'destroy']);
+        $this->middleware('permission:keuangan-list|keuangan-create|keuangan-edit|keuangan-delete', ['only' => 'index', 'show']);
+        $this->middleware('permission:keuangan-create', ['only' => 'create', 'store']);
+        $this->middleware('permission:keuangan-edit', ['only' => 'edit', 'update']);
+        $this->middleware('permission:keuangan-delete', ['only' => 'destroy']);
     }
 
     /**
@@ -25,7 +25,7 @@ class RuteController extends Controller {
      */
     public function index(Request $request)
     {
-        $data = Rute::search($request,new Rute());
+        $data = Keuangan::search($request,new Keuangan());
 
         if ($data) {
             return [
@@ -60,14 +60,9 @@ class RuteController extends Controller {
      */
     public function store(Request $request)
     {
-        $data = new Rute();
+        $data = new Keuangan();
 
-        $data->kode_rute = $request->input('kode_rute');
-        $data->nama_rute = $request->input('nama_rute');
-        $data->id_halte_awal = $request->input('id_halte_awal');
-        $data->id_halte_akhir = $request->input('id_halte_akhir');
-        $data->jalur = $request->input('jalur');
-        $data->status = $request->input('status');
+        
 
         if ($data->save()) {
             return [
@@ -90,8 +85,8 @@ class RuteController extends Controller {
      */
     public function show($id)
     {
-        /** @var Rute $data */
-        $data = Rute::find($id);
+        /** @var Keuangan $data */
+        $data = Keuangan::find($id);
 
         if ($data) {
             return [
@@ -114,8 +109,8 @@ class RuteController extends Controller {
      */
     public function edit($id)
     {
-        /** @var Rute $data */
-        $data = Rute::find($id);
+        /** @var Keuangan $data */
+        $data = Keuangan::find($id);
 
         if ($data) {
             return [
@@ -138,16 +133,11 @@ class RuteController extends Controller {
      */
     public function update(Request $request)
     {
-        $id = $request->input('id');
-        /** @var Rute $data */
-        $data = Rute::find($id);
+        $id = $request->input('_id');
+        /** @var Keuangan $data */
+        $data = Keuangan::find($id);
 
-        $data->kode_rute = $request->input('kode_rute');
-        $data->nama_rute = $request->input('nama_rute');
-        $data->id_halte_awal = $request->input('id_halte_awal');
-        $data->id_halte_akhir = $request->input('id_halte_akhir');
-        $data->jalur = $request->input('jalur');
-        $data->status = $request->input('status');
+        
 
         if ($data->save()) {
             return [
@@ -170,8 +160,8 @@ class RuteController extends Controller {
      */
     public function destroy($id)
     {
-        /** @var Rute $data */
-        $data = Rute::find($id);
+        /** @var Keuangan $data */
+        $data = Keuangan::find($id);
 
         if ($data->delete()) {
             return [

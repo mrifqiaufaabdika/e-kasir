@@ -16,7 +16,7 @@ const Pegawai = [
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Main`),
     meta: {
       title: title,
-      icon: 'mdi-account-multiple',
+      icon: 'mdi-account-network',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'

@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Pegawai
+        Transaksi Produk
       </v-toolbar-title>
 
       <v-spacer />
       <v-btn
-        title="Tambah Pegawai"
+        title="Tambah User"
         icon
         @click="_add()"
       >
@@ -62,6 +62,23 @@
         @page-count="config.table.pageCount = $event"
         @pagination="pagination=$event"
       >
+        <template #item.updated_at="{item}">
+          {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
+        </template>
+        <template #item.role="{item}">
+          <span
+            v-for="(role,i) in item.role"
+            :key="i"
+            class="d-inline-block"
+            style="margin-right: 3px;margin-top: 3px"
+          >
+            <v-chip
+              color="green"
+              outlined
+              v-text="role"
+            />
+          </span>
+        </template>
         <template #item.aksi="{item}">
           <v-tooltip bottom>
             <template #activator="{ on, attrs }">
@@ -213,7 +230,7 @@ import { mapActions, mapState } from 'vuex'
 import Dialog from '@/components/Dialog'
 
 export default {
-  name: 'Pegawai',
+  name: 'User',
   components: {
     'delete-dialog-confirm': Dialog
   },
@@ -231,7 +248,7 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['nip'],
+          sortBy: ['id'],
           sortDesc: [true],
           itemsPerPage: 10,
           itemKey: 'id'
@@ -252,15 +269,14 @@ export default {
     headerData () {
       return [
         {
-          text: 'NIP',
+          text: 'ID',
           align: 'left',
-          value: 'nip'
+          value: 'id'
         },
-        { text: 'Nama', value: 'nama' },
-         { text: 'Kontak', value: 'email' },
-        { text: 'JK', value: 'jenis_kelamin' },
-        { text: 'Jabatan', value: 'kategori_pegawai.nama_kategori' },
-        { text: 'status', value: 'status' },
+        { text: 'Nama', value: 'name' },
+        // { text: 'Email', value: 'email' },
+        { text: 'Roles', value: 'role' },
+        { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
     }
@@ -274,15 +290,15 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getPegawai', 'deletePegawai']),
+    ...mapActions(['getUser', 'deleteUser']),
     _detail (value) {
-      this.$router.push({ name: 'pegawai_view', params: { id: value.id } })
+      this.$router.push({ name: 'user_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'pegawai_add' })
+      this.$router.push({ name: 'user_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'pegawai_edit', params: { id: value.id } })
+      this.$router.push({ name: 'user_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {
@@ -290,7 +306,7 @@ export default {
         this.dcdisabledNegativeBtn = true
         this.dcdisabledPositiveBtn = true
         this.dcMessages = 'Sedang menghapus user'
-        this.deletePegawai(this.deleteId).then(res => {
+        this.deleteUser(this.deleteId).then(res => {
           this._loadData(true)
           this.dcProgress = false
           this.dcMessages = 'Berhasil Menghapus User'
@@ -318,7 +334,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getPegawai({ search: this.searchQuery, ...this.options })
+        this.getUser({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0

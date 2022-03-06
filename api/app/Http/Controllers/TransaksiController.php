@@ -2,20 +2,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
-use App\Models\kategori_pegawai;
-use App\Models\pegawai;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
-class PegawaiController extends Controller {
+class TransaksiController extends Controller {
 
-    public $title = '';
+    public $title = 'Transaksi';
 
     public function __construct()
     {
-        $this->middleware('permission:pegawai-list|pegawai-create|pegawai-edit|pegawai-delete', ['only' => 'index', 'show']);
-        $this->middleware('permission:pegawai-create', ['only' => 'create', 'store']);
-        $this->middleware('permission:pegawai-edit', ['only' => 'edit', 'update']);
-        $this->middleware('permission:pegawai-delete', ['only' => 'destroy']);
+        $this->middleware('permission:transaksi-list|transaksi-create|transaksi-edit|transaksi-delete', ['only' => 'index', 'show']);
+        $this->middleware('permission:transaksi-create', ['only' => 'create', 'store']);
+        $this->middleware('permission:transaksi-edit', ['only' => 'edit', 'update']);
+        $this->middleware('permission:transaksi-delete', ['only' => 'destroy']);
     }
 
     /**
@@ -26,7 +25,7 @@ class PegawaiController extends Controller {
      */
     public function index(Request $request)
     {
-        $data = pegawai::search($request,new pegawai());
+        $data = Transaksi::search($request,new Transaksi());
 
         if ($data) {
             return [
@@ -48,10 +47,8 @@ class PegawaiController extends Controller {
      */
     public function create()
     {
-        $kategori_pegawai = kategori_pegawai::selectRaw(implode(',',["id as value", 'nama_kategori as text']))->orderBy('id')->get();
         return [
-            'value' => compact(
-                'kategori_pegawai'),
+            'value' => [],
             'msg' => "Data for create {$this->title}"
         ];
     }
@@ -63,7 +60,7 @@ class PegawaiController extends Controller {
      */
     public function store(Request $request)
     {
-        $data = new pegawai();
+        $data = new Transaksi();
 
         
 
@@ -88,8 +85,8 @@ class PegawaiController extends Controller {
      */
     public function show($id)
     {
-        /** @var pegawai $data */
-        $data = pegawai::find($id);
+        /** @var Transaksi $data */
+        $data = Transaksi::find($id);
 
         if ($data) {
             return [
@@ -112,8 +109,8 @@ class PegawaiController extends Controller {
      */
     public function edit($id)
     {
-        /** @var pegawai $data */
-        $data = pegawai::find($id);
+        /** @var Transaksi $data */
+        $data = Transaksi::find($id);
 
         if ($data) {
             return [
@@ -137,8 +134,8 @@ class PegawaiController extends Controller {
     public function update(Request $request)
     {
         $id = $request->input('_id');
-        /** @var pegawai $data */
-        $data = pegawai::find($id);
+        /** @var Transaksi $data */
+        $data = Transaksi::find($id);
 
         
 
@@ -163,8 +160,8 @@ class PegawaiController extends Controller {
      */
     public function destroy($id)
     {
-        /** @var pegawai $data */
-        $data = pegawai::find($id);
+        /** @var Transaksi $data */
+        $data = Transaksi::find($id);
 
         if ($data->delete()) {
             return [

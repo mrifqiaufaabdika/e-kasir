@@ -3,7 +3,7 @@
   - Lisensi ini hanya diberikan dan tidak dapat di perjual belikan kembali tanpa izin pembuat
   -->
 
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-app-bar flat>
       <v-btn
@@ -19,83 +19,104 @@
         Tambah Pegawai
       </v-toolbar-title>
     </v-app-bar>
-    <v-container>
-      <v-row class="py-0 py-md-3">
+    <v-container
+            fluid
+            style="padding: 0 1.5rem 0 1.5rem;"
+    >
+      <v-row>
         <v-col
-          cols="12"
-          md="10"
-          class="mx-auto"
+                cols="12"
+                md="6"
         >
-          <v-row>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                v-model="user.name"
-                label="Nama"
-                outlined
-                :rules="[rules.required]"
-              />
-              <v-text-field
-                v-model="user.email"
-                label="Email"
-                outlined
-                :rules="[rules.required,rules.email]"
-              />
-              <v-text-field
-                v-model="user.password"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="showPassword ? 'text' : 'password'"
-                label="Password"
-                outlined
-                :rules="[rules.required]"
-                @click:append="showPassword = !showPassword"
-              />
-              <v-text-field
-                v-model="user.confirmPassword"
-                :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :type="showConfirmPassword ? 'text' : 'password'"
-                label="Confirm Password"
-                outlined
-                :rules="[rules.required,rules.confirmPassword]"
-                @click:append="showConfirmPassword = !showConfirmPassword"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                v-model="user.detail.no_hp"
-                label="No. HP"
-                outlined
-              />
-              <v-autocomplete
-                v-model="user.roles"
-                :items="roles"
-                outlined
-                chips
-                deletable-chips
-                label="Izin"
-                multiple
-                :rules="[rules.required]"
-              />
+          <v-card
+                  class="py-4 px-4 rounded-lg"
+                  elevation="3"
+          >
+            <div>
+              <v-text-field v-model="datas.nik" label="NIK" outlined :rules="[rules.required]" type="number" />
+              <v-text-field v-model="datas.nama" label="Nama" outlined :rules="[rules.required]" />
+              <v-select v-model="datas.jenis_kelamin" label="Jenis Kelamin" :items="items.jenis_kelamin" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.tempat_lahir" label="Tempat Lahir" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.telpon" label="Telepon" outlined :rules="[rules.required]" />
+              <v-select v-model="datas.agama" label="Agama" outlined :items="items.agama" :rules="[rules.required]" type="number" min="0"/>
+              <v-select v-model="datas.status_nikah" label="Status Nikah" :items="items.status_nikah" outlined :rules="[rules.required]" />
+              <v-textarea v-model="datas.alamat" label="Alamat" outlined  :rules="[rules.required]"/>
+              <v-text-field v-model="datas.email" label="Email" outlined  :rules="[rules.required,rules.email]"/>
+              <v-select v-model="datas.id_kategori_pegawai" label="Kategori Pegawai" :items="items.kategori_pegawai"outlined  :rules="[rules.required]"/>
+              <v-text-field v-model="datas.gaji_pokok" label="Gaji Pokok" outlined  :rules="[rules.required]"/>
+              <v-menu
+                      v-model="model_tgl_lahir"
+                      :close-on-content-click="false"
+                      max-width="290"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                          :value="computedTanggalLahirDateFormat"
+                          clearable
+                          readonly
+                          outlined
+                          label="Tanggal Lahir"
+                          :rules="[rules.required]"
+                          class="bpp-input-md bpp-rounded-12"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click:clear="datas.tanggal_lahir = null"
+                  />
+                </template>
+                <v-date-picker
+                        v-model="datas.tanggal_lahir"
+                        locale="id-id"
+                        @input="model_tgl_lahir = false"
+                />
+              </v-menu>
+              <v-menu
+                      v-model="model_tgl_terima"
+                      :close-on-content-click="false"
+                      max-width="290"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                          :value="computedTanggalMasukDateFormat"
+                          clearable
+                          readonly
+                          outlined
+                          label="Tanggal Terima"
+                          :rules="[rules.required]"
+                          class="bpp-input-md bpp-rounded-12"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click:clear="datas.tanggal_terima = null"
+                  />
+                </template>
+                <v-date-picker
+                        v-model="datas.tanggal_terima"
+                        locale="id-id"
+                        @input="model_tgl_terima = false"
+                />
+              </v-menu>
+              <v-text-field v-model="datas.tanggal_keluar" label="Tanggal Keluar" outlined  :rules="[rules.required]"/>
+              <v-file-input accept="image/*" counter show-size v-model="datas.foto" label="Foto" outlined :rules="[rules.required]"></v-file-input>
+              <v-select v-model="datas.status" label="Status" outlined :items="items.status" :rules="[rules.required]"/>
               <v-btn
-                color="green"
-                large
-                class="d-flex align-self-center"
-                :dark="!dataValidation"
-                :disabled="dataValidation"
-                @click="showDC = true"
+                      color="green"
+                      large
+                      :dark="!dataValidation"
+                      :disabled="dataValidation"
+                      @click="showDC = true"
               >
                 <v-icon color="white">
                   mdi-check
                 </v-icon>
                 SIMPAN
               </v-btn>
-            </v-col>
-          </v-row>
+            </div>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -105,7 +126,7 @@
       :positive-button="dcPositiveBtn"
       :disabled-negative-btn="dcdisabledNegativeBtn"
       :disabled-positive-btn="dcdisabledPositiveBtn"
-      :title="'Perbarui'"
+      :title="'Simpan'"
       :message="dcMessages"
       :progress="dcProgress"
     />
@@ -116,6 +137,7 @@
 import { mapActions } from 'vuex'
 import Dialog from '@/components/Dialog'
 import { inputValidator, isEmpty } from '@/plugins/supports'
+import moment from 'moment'
 
 export default {
   components: {
@@ -126,26 +148,68 @@ export default {
       loadingData: true,
       showPassword: false,
       showConfirmPassword: false,
+      datas: {
+        nik:null,
+        nama:null,
+        jenis_kelamin:null,
+        tempat_lahir:null,
+        telpon:null,
+        agama:null,
+        status_nikah:null,
+        alamat:null,
+        email:null,
+        id_kategori_pegawai:null,
+        gaji_pokok:null,
+        tanggal_lahir:null,
+        tanggal_terima:null,
+        tanggal_keluar:null,
+        foto:null,
+        status:null
+      },
+      items: {
+        // {{item_cols}}
+        status: ['Aktif','Nonaktif'],
+        status_nikah: ['Menikah','Belum Menikah'],
+        jenis_kelamin: ['Pria','Wanita'],
+        agama: ['Islam','Kristen','Hindu','Budha','Konghucu'],
+      },
+      dataTypes: {
+        nik:'string',
+        nama:'string',
+        jenis_kelamin:'string',
+        tempat_lahir:'string',
+        telpon:'string',
+        agama:'string',
+        status_nikah:'string',
+        alamat:'string',
+        email:'string',
+        id_kategori_pegawai:'string',
+        gaji_pokok:'double',
+        tanggal_lahir:'string',
+        tanggal_terima:'string',
+        tanggal_keluar:'string',
+        foto:'string',
+        status:'string'
+      },
 
-      roles: [],
-      user: {
-        detail: {
-          no_hp: null
-        },
-        email: null,
-        name: null,
-        password: null,
-        confirmPassword: null,
-        roles: []
-      },
       schema: {
-        email: 'required|email',
-        name: 'required',
-        password: 'required',
-        confirmPassword: 'required|confirmPassword',
-        roles: 'required'
+        nik:'required',
+        nama:'required',
+        jenis_kelamin:'required',
+        tempat_lahir:'required',
+        telpon:'required',
+        agama:'required',
+        status_nikah:'required',
+        alamat:'required',
+        email:'required',
+        id_kategori_pegawai:'required',
+        gaji_pokok:'required',
+        tanggal_lahir:'required',
+        tanggal_terima:'required',
+        tanggal_keluar:'required',
+        foto:'required',
+        status:'required'
       },
-      errors: {},
       rules: {
         required: v => {
           v = isEmpty(v)
@@ -155,10 +219,6 @@ export default {
           v = /.+@.+\..+/.test(v)
           return v || 'E-mail tidak valid'
         },
-        confirmPassword: (v) => {
-          v = (this.user.password === this.user.confirmPassword)
-          return v || 'Password tidak cocok'
-        }
       },
 
       showDC: false,
@@ -169,45 +229,63 @@ export default {
       dcNegativeBtn: () => {
         this.showDC = false
       },
-      dcPositiveBtn: () => this.postSave()
+      dcPositiveBtn: () => this.postSave(),
+
+      model_tgl_lahir: false,
+      model_tgl_terima: false,
+      model_tgl_keluar: false
     }
   },
   computed: {
+    computedTanggalLahirDateFormat () {
+      return this.datas.tanggal_lahir ? moment(this.datas.tanggal_lahir).format('dddd, Do MMMM YYYY') : ''
+    },
+    computedTanggalMasukDateFormat () {
+      return this.datas.tanggal_terima ? moment(this.datas.tanggal_terima).format('dddd, Do MMMM YYYY') : ''
+    },
     dataValidation () {
-      return inputValidator(this.schema, this.rules, this.user)
+      return inputValidator(this.schema, this.rules, this.datas)
     }
   },
   created () {
-    this.getPegawaiCreate({ id: this.id })
-      .then(data => {
-        this.roles = isEmpty(data, (r, v) => (r ? [] : v))
-        this.loadingData = false
-      })
-      .catch(() => {
-        this.roles = []
-      })
+    this.getPegawaiCreate().then(data => {
+      this.items.kategori_pegawai = isEmpty(data.kategori_pegawai, {})
+    })
   },
   methods: {
     ...mapActions(['getPegawaiCreate', 'addPegawai']),
     backButton () {
-      this.$router.push({ name: 'user' })
+      this.$router.push({ name: 'pegawai' })
     },
     postSave () {
+      /* Initialize the form data */
+      const formData = new FormData()
+
+      /* Add the form data we need to submit */
+      Object.keys(this.datas).forEach(d => {
+        const tmp = this.datas[d]
+        if (this.dataTypes[d] !== 'json') {
+          formData.append(d, tmp)
+        } else {
+          formData.append(d,
+            new Blob([JSON.stringify(tmp)],
+              { type: 'application/json' })
+          )
+        }
+      })
+
       this.dcProgress = true
       this.dcdisabledNegativeBtn = true
       this.dcdisabledPositiveBtn = true
-      this.dcMessages = 'Sedang Menyimpan User...'
-
-      this.addPegawai(this.user).then((res) => {
-        this.dcMessages = 'Berhasil Memperbarui User'
+      this.dcMessages = 'Tunggu Sebentar, Sedang Menyimpan Data Pegawai...'
+      this.addPerjalanan(formData).then((res) => {
         this.dcProgress = false
+        this.dcMessages = res.msg
         setTimeout(() => {
           this.showDC = false
-          this.dcdisabledNegativeBtn = false
-          this.dcdisabledPositiveBtn = false
-          this.$router.push({ name: 'user' })
-          this.dcMessages = 'Simpan Perubahan Sekarang?'
-        }, 1500)
+          this.$router.push({ name: 'pegawai' })
+          this.dcMessages = 'Simpan Pegawai Baru Sekarang?'
+        }, 2000)
       })
     }
   }
