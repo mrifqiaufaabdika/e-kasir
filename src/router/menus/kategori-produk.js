@@ -1,16 +1,16 @@
-const path = '/autowash'
-const permission = 'autowash-'
-const routeName = 'autowash'
-const folder = 'autowash'
-const title = 'AutoWash'
-const Autowash = [
+const path = '/kategori-produk'
+const permission = 'kategori-pegawai-'
+const routeName = 'kategori-produk'
+const folder = 'kategori-produk'
+const title = 'Kategori Produk'
+const KategoriProduk = [
   {
     path: path,
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
     meta: {
       title: title,
-      icon: 'mdi-chart-bubble',
+      icon: 'mdi-key-outline',
       // subheader: '-',
       requiresAuth: true,
       requirePermission: permission + 'list'
@@ -50,4 +50,4 @@ const Autowash = [
   }
 ]
 
-export default Autowash
+export default KategoriProduk

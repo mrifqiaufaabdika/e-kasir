@@ -17,7 +17,9 @@ class SatuanBarangSeeder extends Seeder
         //
         $satuan_barang_collection = [
           ['id' => 'SB01', 'nama_satuan'=>'Meja'],
-          ['id' => 'SB02', 'nama_satuan'=>'Alat Tulis']
+          ['id' => 'SB02', 'nama_satuan'=>'Alat Tulis'],
+            ['id' => 'SB03', 'nama_satuan'=>'Kopi'],
+            ['id' => 'SP04', 'nama_satuan'=>'Teh']
         ];
 
 

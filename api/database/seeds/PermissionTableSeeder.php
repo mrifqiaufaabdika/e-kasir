@@ -22,15 +22,15 @@ class PermissionTableSeeder extends Seeder
             'pegawai',
             'kategori-pegawai',
             'produk',
+            'pelanggan',
             'satuan_produk',
             'transaksi',
             'keuangan',
+            'komisi',
             'kasbon',
             'inventaris',
             'barang',
             'satuan_barang',
-            'autowash',
-            'coffeshop'
         ];
         $actions = [
             'list',

@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
         $this->call('CreateAdminUserSeeder');
         $this->call(\Database\Seeders\KategoriPegawaiSeeder::class);
         $this->call(\Database\Seeders\PegawaiSeeder::class);
+        $this->call(\Database\Seeders\InvetarisBarangSeeder::class);
+        $this->call(\Database\Seeders\KategoriProdukSeeder::class);
+        $this->call(\Database\Seeders\SatuanBarangSeeder::class);
+        $this->call(\Database\Seeders\BarangSeeder::class);
+        $this->call(\Database\Seeders\ProdukSeeder::class);
+
 
         Model::reguard();
     }

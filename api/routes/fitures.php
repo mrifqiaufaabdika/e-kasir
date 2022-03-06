@@ -13,8 +13,16 @@ use App\Http\Controllers\SatuanBarang;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\InventarisBarangController;
-use App\Http\Controllers\InventarisBarangControllerController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KategoriProdukController;
+use App\Http\Controllers\SatuanProdukController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\DetailTransaksiController;
+use App\Http\Controllers\KomisiController;
+use App\Http\Controllers\DetailCuciController;
+use App\Http\Controllers\KendaraanController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -75,7 +83,7 @@ $router->group(['prefix' => 'inventaris'], function () use ($router) {
     $router->post('update', [InventarisBarangController::class, 'update']);
     $router->delete('delete/{id}', [InventarisBarangController::class, 'destroy']);
 });
-$router->group(['prefix' => 'Produk'], function () use ($router) {
+$router->group(['prefix' => 'produk'], function () use ($router) {
     $router->get('all', [ProdukController::class, 'index']);
     $router->get('detail/{id}', [ProdukController::class, 'show']);
     $router->get('edit/{id}', [ProdukController::class, 'edit']);
@@ -84,4 +92,95 @@ $router->group(['prefix' => 'Produk'], function () use ($router) {
     $router->post('update', [ProdukController::class, 'update']);
     $router->delete('delete/{id}', [ProdukController::class, 'destroy']);
 });
+$router->group(['prefix' => 'kategori-produk'], function () use ($router) {
+    $router->get('all', [KategoriProdukController::class, 'index']);
+    $router->get('detail/{id}', [KategoriProdukController::class, 'show']);
+    $router->get('edit/{id}', [KategoriProdukController::class, 'edit']);
+    $router->get('create', [KategoriProdukController::class, 'create']);
+    $router->post('baru', [KategoriProdukController::class, 'store']);
+    $router->post('update', [KategoriProdukController::class, 'update']);
+    $router->delete('delete/{id}', [KategoriProdukController::class, 'destroy']);
+});
+$router->group(['prefix' => 'SatuanProduk'], function () use ($router) {
+    $router->get('all', [SatuanProdukController::class, 'index']);
+    $router->get('detail/{id}', [SatuanProdukController::class, 'show']);
+    $router->get('edit/{id}', [SatuanProdukController::class, 'edit']);
+    $router->get('create', [SatuanProdukController::class, 'create']);
+    $router->post('baru', [SatuanProdukController::class, 'store']);
+    $router->post('update', [SatuanProdukController::class, 'update']);
+    $router->delete('delete/{id}', [SatuanProdukController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'transaksi'], function () use ($router) {
+    $router->get('all', [TransaksiController::class, 'index']);
+    $router->get('detail/{id}', [TransaksiController::class, 'show']);
+    $router->get('edit/{id}', [TransaksiController::class, 'edit']);
+    $router->get('create', [TransaksiController::class, 'create']);
+    $router->post('baru', [TransaksiController::class, 'store']);
+    $router->post('update', [TransaksiController::class, 'update']);
+    $router->delete('delete/{id}', [TransaksiController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'keuangan'], function () use ($router) {
+    $router->get('all', [KeuanganController::class, 'index']);
+    $router->get('detail/{id}', [KeuanganController::class, 'show']);
+    $router->get('edit/{id}', [KeuanganController::class, 'edit']);
+    $router->get('create', [KeuanganController::class, 'create']);
+    $router->post('baru', [KeuanganController::class, 'store']);
+    $router->post('update', [KeuanganController::class, 'update']);
+    $router->delete('delete/{id}', [KeuanganController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'pelanggan'], function () use ($router) {
+    $router->get('all', [PelangganController::class, 'index']);
+    $router->get('detail/{id}', [PelangganController::class, 'show']);
+    $router->get('edit/{id}', [PelangganController::class, 'edit']);
+    $router->get('create', [PelangganController::class, 'create']);
+    $router->post('baru', [PelangganController::class, 'store']);
+    $router->post('update', [PelangganController::class, 'update']);
+    $router->delete('delete/{id}', [PelangganController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'detail_transaksi'], function () use ($router) {
+    $router->get('all', [DetailTransaksiController::class, 'index']);
+    $router->get('detail/{id}', [DetailTransaksiController::class, 'show']);
+    $router->get('edit/{id}', [DetailTransaksiController::class, 'edit']);
+    $router->get('create', [DetailTransaksiController::class, 'create']);
+    $router->post('baru', [DetailTransaksiController::class, 'store']);
+    $router->post('update', [DetailTransaksiController::class, 'update']);
+    $router->delete('delete/{id}', [DetailTransaksiController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'komisi'], function () use ($router) {
+    $router->get('all', [KomisiController::class, 'index']);
+    $router->get('detail/{id}', [KomisiController::class, 'show']);
+    $router->get('edit/{id}', [KomisiController::class, 'edit']);
+    $router->get('create', [KomisiController::class, 'create']);
+    $router->post('baru', [KomisiController::class, 'store']);
+    $router->post('update', [KomisiController::class, 'update']);
+    $router->delete('delete/{id}', [KomisiController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'detail_cuci'], function () use ($router) {
+    $router->get('all', [DetailCuciController::class, 'index']);
+    $router->get('detail/{id}', [DetailCuciController::class, 'show']);
+    $router->get('edit/{id}', [DetailCuciController::class, 'edit']);
+    $router->get('create', [DetailCuciController::class, 'create']);
+    $router->post('baru', [DetailCuciController::class, 'store']);
+    $router->post('update', [DetailCuciController::class, 'update']);
+    $router->delete('delete/{id}', [DetailCuciController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'kendaraan'], function () use ($router) {
+    $router->get('all', [KendaraanController::class, 'index']);
+    $router->get('detail/{id}', [KendaraanController::class, 'show']);
+    $router->get('edit/{id}', [KendaraanController::class, 'edit']);
+    $router->get('create', [KendaraanController::class, 'create']);
+    $router->post('baru', [KendaraanController::class, 'store']);
+    $router->post('update', [KendaraanController::class, 'update']);
+    $router->delete('delete/{id}', [KendaraanController::class, 'destroy']);
+});
+
+
+
 #next_route
