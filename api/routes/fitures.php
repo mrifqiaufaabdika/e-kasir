@@ -16,6 +16,7 @@ use App\Http\Controllers\InventarisBarangController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriProdukController;
 use App\Http\Controllers\SatuanProdukController;
+use App\Http\Controllers\VoucherController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -102,5 +103,14 @@ $router->group(['prefix' => 'SatuanProduk'], function () use ($router) {
     $router->post('baru', [SatuanProdukController::class, 'store']);
     $router->post('update', [SatuanProdukController::class, 'update']);
     $router->delete('delete/{id}', [SatuanProdukController::class, 'destroy']);
+});
+$router->group(['prefix' => 'voucher'], function () use ($router) {
+    $router->get('all', [VoucherController::class, 'index']);
+    $router->get('detail/{id}', [VoucherController::class, 'show']);
+    $router->get('edit/{id}', [VoucherController::class, 'edit']);
+    $router->get('create', [VoucherController::class, 'create']);
+    $router->post('baru', [VoucherController::class, 'store']);
+    $router->post('update', [VoucherController::class, 'update']);
+    $router->delete('delete/{id}', [VoucherController::class, 'destroy']);
 });
 #next_route
