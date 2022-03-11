@@ -32,13 +32,13 @@ class Komisi extends SelfModel
      * 
      * @var array
      */
-    protected $fillable = ['id_komisi', 'nama_grup', 'type', 'nominal_komisi', 'persen', 'pegawai', 'produk', 'created_at', 'updated_at'];
+    protected $fillable = ['id_komisi', 'nama_grup', 'type', 'nominal_komisi', 'persen', 'pegawai', 'produk','status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      * 
      * @var array
      */
-    public $searchable = ['id_komisi', 'nama_grup', 'type', 'nominal_komisi', 'persen', 'pegawai', 'produk', 'created_at', 'updated_at'];
+    public $searchable = ['id_komisi', 'nama_grup', 'type', 'nominal_komisi', 'persen', 'pegawai', 'produk','status', 'created_at', 'updated_at'];
 
 }

@@ -54,11 +54,11 @@ const Keuangan = [
         }
       },
       {
-        path: path + '/baru',
+        path: 'baru',
         name: routeName + '_add',
         component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Add`),
         meta: {
-          title: 'Tambah' + title,
+          title: 'Catat' + title,
           requiresAuth: true,
           requirePermission: permission + 'create'
         }

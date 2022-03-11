@@ -3,7 +3,7 @@
   - Lisensi ini hanya diberikan dan tidak dapat di perjual belikan kembali tanpa izin pembuat
   -->
 
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div class="user">
     <v-app-bar flat>
       <v-icon
@@ -17,19 +17,7 @@
       </v-toolbar-title>
 
       <v-spacer />
-      <v-btn
-        title="Tambah User"
-        icon
-        @click="_add()"
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click="toggleFp = !toggleFp"
-      >
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+
       <v-btn
         title="Perbarui Data"
         icon
@@ -42,186 +30,116 @@
       fluid
       style="padding: 0 1.5rem 0 1.5rem;"
     >
-      <v-data-table
-        :loading="isLoading"
-        :headers="headerData"
-        :search="searchQuery"
-        :items="datas"
-        :sort-by.sync="config.table.sortBy"
-        :sort-desc.sync="config.table.sortDesc"
-        :items-per-page="config.table.itemsPerPage"
-        :page.sync="config.table.page"
-        :server-items-length="serverLength"
-        :options.sync="options"
-        height="350pt"
-        item-key="id"
-        class="elevation-2"
-        multi-sort
-        hide-default-footer
-        fixed-header
-        @page-count="config.table.pageCount = $event"
-        @pagination="pagination=$event"
-      >
-        <template #item.updated_at="{item}">
-          {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
-        </template>
-        <template #item.role="{item}">
-          <span
-            v-for="(role,i) in item.role"
-            :key="i"
-            class="d-inline-block"
-            style="margin-right: 3px;margin-top: 3px"
-          >
-            <v-chip
-              color="green"
-              outlined
-              v-text="role"
-            />
-          </span>
-        </template>
-        <template #item.aksi="{item}">
-          <v-tooltip bottom>
-            <template #activator="{ on, attrs }">
-              <v-btn
-                icon
-                v-bind="attrs"
-                @click="_edit(item)"
-                v-on="on"
-              >
-                <v-icon
-                  color="blue"
-                >
-                  mdi-circle-edit-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>Ubah</span>
-          </v-tooltip>
-          <v-tooltip bottom>
-            <template #activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                icon
-                @click="_delete(item)"
-                v-on="on"
-              >
-                <v-icon color="pink">
-                  mdi-delete
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>Hapus</span>
-          </v-tooltip>
-          <v-tooltip bottom>
-            <template #activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                icon
-                @click="_detail(item)"
-                v-on="on"
-              >
-                <v-icon color="green">
-                  mdi-file-find
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>Detail</span>
-          </v-tooltip>
-        </template>
-      </v-data-table>
-      <div
-        class="row align-center pb-3"
-      >
-        <div class="col-md-6 col-12 order-md-0 order-1 pt-0 pt-md-4">
-          <v-data-footer
-            class="float-left"
-            :pagination="pagination"
-            :prev-icon="null"
-            :next-icon="null"
-            :first-icon="null"
-            :last-icon="null"
-            :items-per-page-options="[10,15,50,100,-1]"
-            :options.sync="options"
-          />
-        </div>
-        <div class="col-md-6 col-12 order-md-1 order-0 mt-4 pb-0 pb-md-4">
-          <v-pagination
-            v-model="config.table.page"
-            :length="config.table.pageCount"
-            total-visible="7"
-            circle
-          />
-        </div>
-      </div>
+      <template>
+        <v-simple-table>
+          <template v-slot:default>
+            <thead>
+            <tr>
+              <th class="text-left">
+                Nama
+              </th>
+              <th class="text-left">
+                Deskripsi
+              </th>
+              <th class="text-left">
+                Saldo
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                    v-for="item in datas"
+                    :key="item.id"
+            >
+              <td>{{ item.nama }}</td>
+              <td>{{ item.keterangan }}</td>
+              <td>{{ item.saldo }}</td>
+            </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </template>
+<!--      <v-data-table-->
+<!--        :loading="isLoading"-->
+<!--        :headers="headerData"-->
+<!--        :items="datas"-->
+<!--        :sort-by.sync="config.table.sortBy"-->
+<!--        :sort-desc.sync="config.table.sortDesc"-->
+<!--        :items-per-page="config.table.itemsPerPage"-->
+<!--        :page.sync="config.table.page"-->
+<!--        :options.sync="options"-->
+<!--        height="350pt"-->
+<!--        item-key="id"-->
+<!--        class="elevation-2"-->
+<!--        multi-sort-->
+<!--        hide-default-footer-->
+<!--        fixed-header-->
+<!--        @page-count="config.table.pageCount = $event"-->
+<!--        @pagination="pagination=$event"-->
+<!--      >-->
+<!--        <template #item.updated_at="{item}">-->
+<!--          {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}-->
+<!--        </template>-->
+<!--        <template #item.aksi="{item}">-->
+<!--          <v-tooltip bottom>-->
+<!--            <template #activator="{ on, attrs }">-->
+<!--              <v-btn-->
+<!--                icon-->
+<!--                v-bind="attrs"-->
+<!--                @click="_edit(item)"-->
+<!--                v-on="on"-->
+<!--              >-->
+<!--                <v-icon-->
+<!--                  color="blue"-->
+<!--                >-->
+<!--                  mdi-circle-edit-outline-->
+<!--                </v-icon>-->
+<!--              </v-btn>-->
+<!--            </template>-->
+<!--            <span>Ubah</span>-->
+<!--          </v-tooltip>-->
+<!--&lt;!&ndash;          <v-tooltip bottom>&ndash;&gt;-->
+<!--&lt;!&ndash;            <template #activator="{ on, attrs }">&ndash;&gt;-->
+<!--&lt;!&ndash;              <v-btn&ndash;&gt;-->
+<!--&lt;!&ndash;                v-bind="attrs"&ndash;&gt;-->
+<!--&lt;!&ndash;                icon&ndash;&gt;-->
+<!--&lt;!&ndash;                @click="_detail(item)"&ndash;&gt;-->
+<!--&lt;!&ndash;                v-on="on"&ndash;&gt;-->
+<!--&lt;!&ndash;              >&ndash;&gt;-->
+<!--&lt;!&ndash;                <v-icon color="green">&ndash;&gt;-->
+<!--&lt;!&ndash;                  mdi-file-find&ndash;&gt;-->
+<!--&lt;!&ndash;                </v-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;              </v-btn>&ndash;&gt;-->
+<!--&lt;!&ndash;            </template>&ndash;&gt;-->
+<!--&lt;!&ndash;            <span>Detail</span>&ndash;&gt;-->
+<!--&lt;!&ndash;          </v-tooltip>&ndash;&gt;-->
+<!--        </template>-->
+<!--      </v-data-table>-->
+<!--      <div-->
+<!--        class="row align-center pb-3"-->
+<!--      >-->
+<!--        <div class="col-md-6 col-12 order-md-0 order-1 pt-0 pt-md-4">-->
+<!--          <v-data-footer-->
+<!--            class="float-left"-->
+<!--            :pagination="pagination"-->
+<!--            :prev-icon="null"-->
+<!--            :next-icon="null"-->
+<!--            :first-icon="null"-->
+<!--            :last-icon="null"-->
+<!--            :items-per-page-options="[10,15,50,100,-1]"-->
+<!--            :options.sync="options"-->
+<!--          />-->
+<!--        </div>-->
+<!--        <div class="col-md-6 col-12 order-md-1 order-0 mt-4 pb-0 pb-md-4">-->
+<!--          <v-pagination-->
+<!--            v-model="config.table.page"-->
+<!--            :length="config.table.pageCount"-->
+<!--            total-visible="7"-->
+<!--            circle-->
+<!--          />-->
+<!--        </div>-->
+<!--      </div>-->
     </v-container>
-    <delete-dialog-confirm
-      :show-dialog="showDC"
-      :negative-button="dcNegativeBtn"
-      :positive-button="dcPositiveBtn"
-      :disabled-negative-btn="dcdisabledNegativeBtn"
-      :disabled-positive-btn="dcdisabledPositiveBtn"
-      :progress="dcProgress"
-      :title="'Hapus'"
-      :message="dcMessages"
-    />
-    <v-navigation-drawer
-      v-model="toggleFp"
-      fixed
-      width="350"
-      temporary
-      right
-    >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>
-            <v-icon>mdi-filter-outline</v-icon> Pencarian
-          </v-list-item-title>
-        </v-list-item-content>
-        <v-list-item-icon>
-          <v-btn
-            icon
-            @click="toggleFp=!toggleFp"
-          >
-            <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
-        </v-list-item-icon>
-      </v-list-item>
-
-      <v-row class="px-4 py-4">
-        <v-col
-          cols="12"
-        >
-          <v-text-field
-            v-model="searchQuery"
-            placeholder="ketikkan sesuatu untuk mencari"
-            label="Pencarian"
-            clearable
-            hide-details
-            outlined
-            class="mb-4"
-          />
-        </v-col>
-      </v-row>
-      <div
-        class="text-right px-4 py-4"
-        style="position: absolute;bottom: 0;right: 0"
-      >
-        <v-btn
-          v-show="searchQuery"
-          text
-          color="#00a3ff"
-          @click="_clearFilter()"
-        >
-          Bersihkan filter
-        </v-btn>
-        <v-btn
-          color="success"
-          @click="_loadData(true)"
-        >
-          Terapkan
-        </v-btn>
-      </div>
-    </v-navigation-drawer>
   </div>
 </template>
 
@@ -236,14 +154,12 @@ export default {
   },
   data () {
     return {
-      searchQuery: '',
-      toggleFp: false,
       isLoading: true,
       datas: [],
 
       options: {},
       pagination: {},
-      serverLength: 0,
+
       config: {
         table: {
           page: 1,
@@ -254,29 +170,21 @@ export default {
           itemKey: 'id'
         }
       },
-
-      showDC: false,
-      deleteId: '',
-      dcMessages: '',
-      dcProgress: false,
-      dcdisabledNegativeBtn: false,
-      dcdisabledPositiveBtn: false,
-      dcNegativeBtn: () => { this.showDC = false },
-      dcPositiveBtn: () => this._delete(true)
     }
   },
   computed: {
     headerData () {
       return [
-        {
-          text: 'ID',
-          align: 'left',
-          value: 'id'
-        },
-        { text: 'Nama', value: 'name' },
+        // {
+        //   text: 'ID',
+        //   align: 'left',
+        //   value: 'id'
+        // },
+        { text: 'Nama', value: 'nama' },
         // { text: 'Email', value: 'email' },
-        { text: 'Roles', value: 'role' },
-        { text: 'Updated', value: 'updated_at' },
+        { text: 'Deskripsi', value: 'keterangan' },
+        { text: 'Saldo', value: 'saldo' },
+        // { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
     }
@@ -290,54 +198,19 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getUser', 'deleteUser']),
+    ...mapActions(['getBisnis', 'deleteUser']),
     _detail (value) {
       this.$router.push({ name: 'user_view', params: { id: value.id } })
-    },
-    _add () {
-      this.$router.push({ name: 'user_add' })
     },
     _edit (value) {
       this.$router.push({ name: 'user_edit', params: { id: value.id } })
     },
-    _delete (value) {
-      if (value === true) {
-        this.dcProgress = true
-        this.dcdisabledNegativeBtn = true
-        this.dcdisabledPositiveBtn = true
-        this.dcMessages = 'Sedang menghapus user'
-        this.deleteUser(this.deleteId).then(res => {
-          this._loadData(true)
-          this.dcProgress = false
-          this.dcMessages = 'Berhasil Menghapus User'
-          setTimeout(() => {
-            this.deleteId = ''
-            this.showDC = false
-            this.dcdisabledNegativeBtn = false
-            this.dcdisabledPositiveBtn = false
-          }, 1500)
-        }).catch(err => {
-          console.log(err)
-          this.dcdisabledNegativeBtn = false
-          this.dcdisabledPositiveBtn = false
-        })
-      } else {
-        this.deleteId = value.id
-        this.dcMessages = `Hapus user <span class="pink--text">#${this.deleteId}</span> ?`
-        this.showDC = true
-      }
-    },
-    _clearFilter () {
-      this.searchQuery = null
-      this._loadData(true)
-    },
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getUser({ search: this.searchQuery, ...this.options })
+        this.getBisnis()
           .then((data) => {
             this.datas = data.items || []
-            this.serverLength = data.total || 0
             this.isLoading = false
           })
       } else {

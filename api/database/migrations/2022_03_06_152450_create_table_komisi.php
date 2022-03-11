@@ -21,6 +21,7 @@ class CreateTableKomisi extends Migration
             $table->double('persen')->nullable();
             $table->json('pegawai'); //value array of id pegawai
             $table->json('produk')->nullable(); //value array of id produk
+            $table->enum("status",["Aktif","Nonaktif"]);
             $table->timestamps();
         });
     }

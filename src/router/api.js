@@ -18,6 +18,9 @@ import kategori_produk from '@/router/apis/kategori-produk'
 import produk from '@/router/apis/produk'
 import voucher from '@/router/apis/voucher.js'
 import transaksi from '@/router/apis/transaksi'
+import bisnis from "./apis/bisnis";
+import Keuangan from "./apis/keuangan";
+import komisi from "./apis/komisi";
 // {{next_import}}
 
 const $api = {
@@ -36,6 +39,9 @@ const $api = {
   ...user,
   ...app,
   ...Permissions,
+  ...bisnis,
+  ...Keuangan,
+  ...komisi
   // {{next_use}}
 }
 

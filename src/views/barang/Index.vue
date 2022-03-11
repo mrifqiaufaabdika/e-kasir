@@ -216,50 +216,7 @@
       </div>
     </v-navigation-drawer>
 
-    <v-dialog
-      v-model="addObid.dialog"
-      width="500"
-    >
-      <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          Tambah Unit Organisasi
-        </v-card-title>
 
-        <v-text-field
-          v-model="unitOrganisasi.nama_jabatan"
-          label="Nama Jabatan"
-          prepend-icon=""
-          outlined
-          class="bpp-input-md bpp-rounded-12 pt-5 px-5"
-        />
-
-        <v-text-field
-          v-model="unitOrganisasi.nama_unit_organisasi"
-          label="Unit Organisasi"
-          prepend-icon=""
-          outlined
-          class="bpp-input-md bpp-rounded-12 px-5"
-        />
-
-        <v-divider />
-
-        <v-card-actions>
-          <span :style="`color: ${addObid.msgColor}`">{{ addObid.msg }}</span>
-          <v-spacer />
-          <v-btn
-            color="#2d62ed"
-            :loading="addObid.progress"
-            :dark="!addObid.progress"
-            :disabled="addObid.progress"
-            min-height="50"
-            class="bpp-rounded-12 px-5"
-            @click="postAdd()"
-          >
-            SIMPAN
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 

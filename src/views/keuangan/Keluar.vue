@@ -13,7 +13,7 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Transaksi Produk
+        Keuangan Keluar
       </v-toolbar-title>
 
       <v-spacer />
@@ -269,13 +269,16 @@ export default {
     headerData () {
       return [
         {
-          text: 'ID',
+          text: 'No Faktur',
           align: 'left',
-          value: 'id'
+          value: 'no_bukti_kas'
         },
-        { text: 'Nama', value: 'name' },
+        { text: 'Pencatat', value: 'pencatat' },
         // { text: 'Email', value: 'email' },
-        { text: 'Roles', value: 'role' },
+        { text: 'bisnis', value: 'bisnis' },
+        { text: 'keterangan', value: 'keterangan' },
+        { text: 'total', value: 'total' },
+        { text: 'saldo', value: 'saldo' },
         { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
@@ -290,7 +293,7 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getUser', 'deleteUser']),
+    ...mapActions(['getKeuangan', 'deleteUser']),
     _detail (value) {
       this.$router.push({ name: 'user_view', params: { id: value.id } })
     },
@@ -334,7 +337,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getUser({ search: this.searchQuery, ...this.options })
+        this.getKeuangan({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0

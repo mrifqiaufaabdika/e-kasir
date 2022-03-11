@@ -8,7 +8,7 @@ use App\Traits\Searchable;
 /**
  * @property integer $no_bukti_kas
  * @property integer $pencatat
- * @property int $binis
+ * @property int $bisnis
  * @property string $jenis
  * @property float $total
  * @property string $keterangan
@@ -32,13 +32,13 @@ class Keuangan extends SelfModel
      * 
      * @var array
      */
-    protected $fillable = ['pencatat', 'binis', 'jenis', 'total', 'keterangan', 'saldo', 'created_at', 'updated_at'];
+    protected $fillable = ['pencatat', 'bisnis', 'jenis', 'total', 'keterangan', 'saldo', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      * 
      * @var array
      */
-    public $searchable = ['pencatat', 'binis', 'jenis', 'total', 'keterangan', 'saldo', 'created_at', 'updated_at'];
+    public $searchable = ['pencatat', 'bisnis', 'jenis', 'total', 'keterangan', 'saldo', 'created_at', 'updated_at'];
 
 }
