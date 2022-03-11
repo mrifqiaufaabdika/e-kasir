@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
+use App\Models\Bisnis;
 use App\Models\Keuangan;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Param;
 
 class KeuanganController extends Controller {
 
@@ -47,8 +49,10 @@ class KeuanganController extends Controller {
      */
     public function create()
     {
+        $bisnis = Bisnis::selectRaw(implode(',',["id as value", 'nama as text']))->orderBy('id')->get();
         return [
-            'value' => [],
+            'value' => compact(
+                'bisnis'),
             'msg' => "Data for create {$this->title}"
         ];
     }
@@ -60,9 +64,28 @@ class KeuanganController extends Controller {
      */
     public function store(Request $request)
     {
+        /**
+         * @param Keuangan $data
+         */
         $data = new Keuangan();
+        $data->pencatat = $request->input("pencatat");
+        $data->bisnis = $request->input("bisnis");
+        $data->jenis = $request->input("jenis");
+        $data->total = $request->input("total");
+        $data->keterangan = $request->input("keterangan");
 
-        
+        /**
+         * @param Bisnis $bisnis
+         */
+        $bisnis = Bisnis::findOrFail($data->bisnis);
+        if ($data->jenis == "Debit"){
+            $bisnis->saldo = $bisnis->saldo + $data->total;
+        }else{
+            $bisnis->saldo = $bisnis->saldo - $data->total;
+        }
+
+        $bisnis->update();
+        $data->saldo =  $bisnis->saldo;
 
         if ($data->save()) {
             return [

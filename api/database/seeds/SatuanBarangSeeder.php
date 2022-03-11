@@ -19,7 +19,12 @@ class SatuanBarangSeeder extends Seeder
           ['id' => 'SB01', 'nama_satuan'=>'Meja'],
           ['id' => 'SB02', 'nama_satuan'=>'Alat Tulis'],
             ['id' => 'SB03', 'nama_satuan'=>'Kopi'],
-            ['id' => 'SP04', 'nama_satuan'=>'Teh']
+            ['id' => 'SP04', 'nama_satuan'=>'Teh'],
+
+
+            ['id' => 'SP05', 'nama_satuan'=>'Unit'],
+            ['id' => 'SP06', 'nama_satuan'=>'Meter'],
+            ['id' => 'SP07', 'nama_satuan'=>'Lembar'],
         ];
 
 

@@ -290,7 +290,7 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getUser', 'deleteUser']),
+    ...mapActions(['getTransaksi', 'deleteUser']),
     _detail (value) {
       this.$router.push({ name: 'user_view', params: { id: value.id } })
     },
@@ -334,7 +334,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getUser({ search: this.searchQuery, ...this.options })
+        this.getTransaksi({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0

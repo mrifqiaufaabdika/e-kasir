@@ -13,7 +13,7 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Transaksi Harian
+        Komisi Pegawai
       </v-toolbar-title>
 
       <v-spacer />
@@ -268,15 +268,17 @@ export default {
   computed: {
     headerData () {
       return [
-        {
-          text: 'ID',
-          align: 'left',
-          value: 'id'
-        },
-        { text: 'Nama', value: 'name' },
+        // {
+        //   text: 'ID',
+        //   align: 'left',
+        //   value: 'id'
+        // },
+        { text: 'Nama Group', value: 'nama_grup' },
         // { text: 'Email', value: 'email' },
-        { text: 'Roles', value: 'role' },
-        { text: 'Updated', value: 'updated_at' },
+        { text: 'Tipe Satuan', value: 'tipe' },
+        { text: 'Nilai', value: 'nominal' },
+        { text: 'Keterangan', value: 'keterangan' },
+        // { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
     }
@@ -290,7 +292,7 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getUser', 'deleteUser']),
+    ...mapActions(['getKomisi', 'deleteUser']),
     _detail (value) {
       this.$router.push({ name: 'user_view', params: { id: value.id } })
     },
@@ -334,7 +336,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.isLoading = true
-        this.getUser({ search: this.searchQuery, ...this.options })
+        this.getKomisi({ search: this.searchQuery, ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0

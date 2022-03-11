@@ -172,6 +172,7 @@ export default {
         status_nikah: ['Menikah','Belum Menikah'],
         jenis_kelamin: ['Pria','Wanita'],
         agama: ['Islam','Kristen','Hindu','Budha','Konghucu'],
+        kategori_pegawai:[]
       },
       dataTypes: {
         nik:'string',

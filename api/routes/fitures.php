@@ -24,6 +24,9 @@ use App\Http\Controllers\KomisiController;
 use App\Http\Controllers\DetailCuciController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\KasobController;
+use App\Http\Controllers\KasbonController;
+use App\Http\Controllers\BisnisController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -192,5 +195,24 @@ $router->group(['prefix' => 'voucher'], function () use ($router) {
     $router->post('baru', [VoucherController::class, 'store']);
     $router->post('update', [VoucherController::class, 'update']);
     $router->delete('delete/{id}', [VoucherController::class, 'destroy']);
+});
+
+$router->group(['prefix' => 'kasbon'], function () use ($router) {
+    $router->get('all', [KasbonController::class, 'index']);
+    $router->get('detail/{id}', [KasbonController::class, 'show']);
+    $router->get('edit/{id}', [KasbonController::class, 'edit']);
+    $router->get('create', [KasbonController::class, 'create']);
+    $router->post('baru', [KasbonController::class, 'store']);
+    $router->post('update', [KasbonController::class, 'update']);
+    $router->delete('delete/{id}', [KasbonController::class, 'destroy']);
+});
+$router->group(['prefix' => 'bisnis'], function () use ($router) {
+    $router->get('all', [BisnisController::class, 'index']);
+    $router->get('detail/{id}', [BisnisController::class, 'show']);
+    $router->get('edit/{id}', [BisnisController::class, 'edit']);
+    $router->get('create', [BisnisController::class, 'create']);
+    $router->post('baru', [BisnisController::class, 'store']);
+    $router->post('update', [BisnisController::class, 'update']);
+    $router->delete('delete/{id}', [BisnisController::class, 'destroy']);
 });
 #next_route

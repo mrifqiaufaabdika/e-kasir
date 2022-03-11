@@ -16,8 +16,8 @@ class CreateTableKeuangan extends Migration
         Schema::create('keuangan', function (Blueprint $table) {
             $table->id('no_bukti_kas');
             $table->bigInteger('pencatat');
-            $table->integer('binis');
-            $table->enum('jenis',['debit','kredit']);
+            $table->integer('bisnis');
+            $table->enum('jenis',['Debit','Kredit']);
             $table->double('total');
             $table->text('keterangan');
             $table->double('saldo');
