@@ -2,20 +2,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
-use App\Models\Base\KeyGen;
-use App\Models\kategori_pegawai;
+use App\Models\Bisnis;
 use Illuminate\Http\Request;
 
-class KategoriPegawaiController extends Controller {
+class BisnisController extends Controller {
 
-    public $title = 'Kategori Pegawai';
+    public $title = 'Bisnis';
 
     public function __construct()
     {
-        $this->middleware('permission:kategori-pegawai-list|kategori-pegawai-create|kategori-pegawai-edit|kategori-pegawai-delete', ['only' => 'index', 'show']);
-        $this->middleware('permission:kategori-pegawai-create', ['only' => 'create', 'store']);
-        $this->middleware('permission:kategori-pegawai-edit', ['only' => 'edit', 'update']);
-        $this->middleware('permission:kategori-pegawai-delete', ['only' => 'destroy']);
+        $this->middleware('permission:keuangan-list|keuangan-create|keuangan-edit|keuangan-delete', ['only' => 'index', 'show']);
+        $this->middleware('permission:keuangan-create', ['only' => 'create', 'store']);
+        $this->middleware('permission:keuangan-edit', ['only' => 'edit', 'update']);
+        $this->middleware('permission:keuangan-delete', ['only' => 'destroy']);
     }
 
     /**
@@ -26,7 +25,7 @@ class KategoriPegawaiController extends Controller {
      */
     public function index(Request $request)
     {
-        $data = kategori_pegawai::search($request,new kategori_pegawai());
+        $data = Bisnis::all();
 
         if ($data) {
             return [
@@ -61,13 +60,11 @@ class KategoriPegawaiController extends Controller {
      */
     public function store(Request $request)
     {
-        /**
-         * @param kategori_pegawai $data
-         */
-        $data = new kategori_pegawai();
-        $data->id = KeyGen::randomKey('KP','',true,2);
-        $data->nama_kategori =  $request->input('nama_kategori');
+        $data = new Bisnis();
 
+        $data->nama = $request->input('nama');
+        $data->saldo = $request->input('saldo');
+        $data->keterangan = $request->input('keterangan');
 
         if ($data->save()) {
             return [
@@ -90,8 +87,8 @@ class KategoriPegawaiController extends Controller {
      */
     public function show($id)
     {
-        /** @var kategori_pegawai $data */
-        $data = kategori_pegawai::find($id);
+        /** @var Bisnis $data */
+        $data = Bisnis::find($id);
 
         if ($data) {
             return [
@@ -114,8 +111,8 @@ class KategoriPegawaiController extends Controller {
      */
     public function edit($id)
     {
-        /** @var kategori_pegawai $data */
-        $data = kategori_pegawai::find($id);
+        /** @var Bisnis $data */
+        $data = Bisnis::find($id);
 
         if ($data) {
             return [
@@ -138,11 +135,13 @@ class KategoriPegawaiController extends Controller {
      */
     public function update(Request $request)
     {
-        $id = $request->input('_id');
-        /** @var kategori_pegawai $data */
-        $data = kategori_pegawai::find($id);
+        $id = $request->input('id');
+        /** @var Bisnis $data */
+        $data = Bisnis::find($id);
 
-        
+        $data->nama = $request->input('nama');
+        $data->saldo = $request->input('saldo');
+        $data->keterangan = $request->input('keterangan');
 
         if ($data->save()) {
             return [
@@ -165,8 +164,8 @@ class KategoriPegawaiController extends Controller {
      */
     public function destroy($id)
     {
-        /** @var kategori_pegawai $data */
-        $data = kategori_pegawai::find($id);
+        /** @var Bisnis $data */
+        $data = Bisnis::find($id);
 
         if ($data->delete()) {
             return [

@@ -13,6 +13,7 @@ use App\Traits\Searchable;
  * @property float $persen
  * @property string $pegawai
  * @property string $produk
+ * @property string $status
  * @property string $created_at
  * @property string $updated_at
  */

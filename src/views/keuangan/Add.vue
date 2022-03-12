@@ -126,11 +126,7 @@ export default {
       dcNegativeBtn: () => {
         this.showDC = false
       },
-      dcPositiveBtn: () => this.postSave(),
-
-      model_tgl_lahir: false,
-      model_tgl_terima: false,
-      model_tgl_keluar: false
+      dcPositiveBtn: () => this.postSave()
     }
   },
   computed: {

@@ -139,7 +139,7 @@ export default {
   },
   methods: {
     ...mapActions(['addBus', 'createBus']),
-    backButton () { this.$router.push({ name: 'bus' }) },
+    backButton () { this.$router.push({ name: 'satuan' }) },
     postAdd () {
       /* Initialize the form data */
       const formData = new FormData()
@@ -166,7 +166,7 @@ export default {
         this.dcMessages = res.msg
         setTimeout(() => {
           this.showDC = false
-          this.$router.push({ name: 'bus' })
+          this.$router.push({ name: 'satuan' })
           this.dcMessages = 'Simpan Bus Sekarang?'
         }, 2000)
       })

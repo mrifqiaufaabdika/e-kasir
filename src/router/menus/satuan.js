@@ -1,7 +1,7 @@
 const path = '/satuan'
-const permission = 'pegawai-'
-const routeName = 'barang'
-const folder = 'barang'
+const permission = 'satuan-'
+const routeName = 'satuan'
+const folder = 'satuan'
 const title = 'Satuan PBJ'
 
 const Satuan = [

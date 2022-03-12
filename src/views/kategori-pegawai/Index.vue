@@ -13,12 +13,12 @@
         v-text="'mdi-menu'"
       />
       <v-toolbar-title class="ml-md-2">
-        Roles
+        Kategori Pegawai
       </v-toolbar-title>
 
       <v-spacer />
       <v-btn
-        title="Tambah Roles"
+        title="Tambah Kategori Pegawai"
         icon
         @click="_add()"
       >
@@ -299,13 +299,13 @@ export default {
     ...mapActions(['getKategoriPegawai', 'deleteKategoriPegawai']),
     can,
     _detail (value) {
-      this.$router.push({ name: 'roles_view', params: { id: value.id } })
+      this.$router.push({ name: 'ketegori-pegawai_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'roles_add' })
+      this.$router.push({ name: 'kategori-pegawai_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'roles_edit', params: { id: value.id } })
+      this.$router.push({ name: 'ketegori-pegawai_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {

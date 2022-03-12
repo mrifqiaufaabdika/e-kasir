@@ -292,15 +292,15 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getKomisi', 'deleteUser']),
+    ...mapActions(['getKomisi', 'deleteKomisi']),
     _detail (value) {
-      this.$router.push({ name: 'user_view', params: { id: value.id } })
+      this.$router.push({ name: 'komisi_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'user_add' })
+      this.$router.push({ name: 'komisi_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'user_edit', params: { id: value.id } })
+      this.$router.push({ name: 'komisi_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {
