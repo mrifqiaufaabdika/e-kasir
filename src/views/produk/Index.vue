@@ -66,7 +66,7 @@
         </template>
         <template #item.aksi="{item}">
           <v-tooltip
-            v-if="can(['bus-edit'])"
+            v-if="can(['produk-edit'])"
             bottom
           >
             <template #activator="{ on, attrs }">
@@ -77,6 +77,7 @@
                 v-on="on"
               >
                 <v-icon
+                        small
                   color="blue"
                 >
                   mdi-circle-edit-outline
@@ -86,7 +87,7 @@
             <span>Ubah</span>
           </v-tooltip>
           <v-tooltip
-            v-if="can(['bus-delete'])"
+            v-if="can(['produk-delete'])"
             bottom
           >
             <template #activator="{ on, attrs }">
@@ -96,7 +97,9 @@
                 @click="_delete(item)"
                 v-on="on"
               >
-                <v-icon color="pink">
+                <v-icon
+                        small
+                        color="pink">
                   mdi-delete
                 </v-icon>
               </v-btn>
@@ -104,14 +107,16 @@
             <span>Hapus</span>
           </v-tooltip>
           <v-tooltip
-            v-if="can(['bus-list'])"
+            v-if="can(['produk-list'])"
             bottom
           >
             <template #activator="{ on, attrs }">
               <v-icon
+                small
                 color="green"
                 v-bind="attrs"
                 @click="_detail(item)"
+
                 v-on="on"
               >
                 mdi-eye
@@ -277,7 +282,7 @@ export default {
         { text: 'Deskripsi', value: 'deskripsi' },
         { text: 'Status', value: 'status' },
         { text: 'Stok', value: 'stok' },
-        { text: 'Tipe Bisnis', value: 'type_bisnis' },
+        { text: 'Tipe Bisnis', value: 'bisnis.nama' },
         { text: 'Created At', value: 'created_at' },
         { text: 'Updated At', value: 'updated_at' },
         { text: '', value: 'aksi' }

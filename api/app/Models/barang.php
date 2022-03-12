@@ -45,7 +45,7 @@ class barang extends SelfModel
     ];
 
     public function getSatuanBarangAttribute(){
-        return $this->belongsTo(satuan_barang::class,
+        return $this->belongsTo(Satuan::class,
         'id_satuan',
             'id')->first();
     }

@@ -132,13 +132,13 @@ export default {
     this._loadData()
   },
   methods: {
-    ...mapActions(['getBusById']),
+    ...mapActions(['getSatuanById']),
     backButton () {
       this.$router.push({ name: 'bus' })
     },
     _loadData () {
       this.loadingData = true
-      this.getBusById({ id: this.id })
+      this.getSatuanById({ id: this.id })
         .then(data => {
           this.datas = data || {}
           this.loadingData = false

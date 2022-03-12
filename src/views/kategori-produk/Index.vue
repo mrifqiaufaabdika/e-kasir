@@ -100,7 +100,7 @@
             <span>Ubah</span>
           </v-tooltip>
           <v-tooltip
-            v-if="can(['admin'])"
+            v-if="can(['kategori-produk-list'])"
             bottom
           >
             <template #activator="{ on, attrs }">
@@ -300,13 +300,13 @@ export default {
     ...mapActions(['getKategoriProduk', 'deleteKategoriProduk']),
     can,
     _detail (value) {
-      this.$router.push({ name: 'roles_view', params: { id: value.id } })
+      this.$router.push({ name: 'kategori-produk_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'kategori_produk_add' })
+      this.$router.push({ name: 'kategori-produk_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'roles_edit', params: { id: value.id } })
+      this.$router.push({ name: 'kategori-produk_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {

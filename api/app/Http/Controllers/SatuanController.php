@@ -1,19 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
-use App\Models\satuan_barang;
+use App\Models\Base\KeyGen;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 
-class SatuanBarang extends Controller
+class SatuanController extends Controller
 {
     public $title = 'Satuan Barang';
 
     public function __construct()
     {
-        $this->middleware('permission:kategori-pegawai-list|kategori-pegawai-create|kategori-pegawai-edit|kategori-pegawai-delete', ['only' => 'index', 'show']);
-        $this->middleware('permission:kategori-pegawai-create', ['only' => 'create', 'store']);
-        $this->middleware('permission:kategori-pegawai-edit', ['only' => 'edit', 'update']);
-        $this->middleware('permission:kategori-pegawai-delete', ['only' => 'destroy']);
+        $this->middleware('permission:satuan-list|satuan-create|satuan-edit|satuan-delete', ['only' => 'index', 'show']);
+        $this->middleware('permission:satuan-create', ['only' => 'create', 'store']);
+        $this->middleware('permission:satuan-edit', ['only' => 'edit', 'update']);
+        $this->middleware('permission:satuan-delete', ['only' => 'destroy']);
     }
 
     /**
@@ -25,7 +26,7 @@ class SatuanBarang extends Controller
 
     public function index(Request $request)
     {
-        $data = satuan_barang::search($request, new satuan_barang());
+        $data = Satuan::search($request, new Satuan());
 
         if ($data){
             return [
@@ -60,7 +61,14 @@ class SatuanBarang extends Controller
      */
     public function store(Request $request)
     {
-        $data = new satuan_barang();
+        /**
+         * @param Satuan $data
+         */
+        $data = new Satuan();
+
+        $data->id =  KeyGen::randomKey("S","",true,2);
+        $data->nama_satuan = $request->input("nama_satuan");
+
 
 
 
@@ -85,8 +93,8 @@ class SatuanBarang extends Controller
      */
     public function show($id)
     {
-        /** @var satuan_barang $data */
-        $data = satuan_barang::find($id);
+        /** @var Satuan $data */
+        $data = Satuan::find($id);
 
         if ($data) {
             return [
@@ -109,8 +117,8 @@ class SatuanBarang extends Controller
      */
     public function edit($id)
     {
-        /** @var satuan_barang $data */
-        $data = satuan_barang::find($id);
+        /** @var Satuan $data */
+        $data = Satuan::find($id);
 
         if ($data) {
             return [
@@ -134,8 +142,8 @@ class SatuanBarang extends Controller
     public function update(Request $request)
     {
         $id = $request->input('_id');
-        /** @var satuan_barang $data */
-        $data = satuan_barang::find($id);
+        /** @var Satuan $data */
+        $data = Satuan::find($id);
 
 
 
@@ -160,8 +168,8 @@ class SatuanBarang extends Controller
      */
     public function destroy($id)
     {
-        /** @var satuan_barang $data */
-        $data = satuan_barang::find($id);
+        /** @var Satuan $data */
+        $data = Satuan::find($id);
 
         if ($data->delete()) {
             return [

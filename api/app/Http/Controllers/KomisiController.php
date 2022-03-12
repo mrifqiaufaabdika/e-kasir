@@ -7,6 +7,7 @@ use App\Models\Komisi;
 use App\Models\pegawai;
 use App\Models\produk;
 use Illuminate\Http\Request;
+use function React\Promise\all;
 
 class KomisiController extends Controller {
 
@@ -29,6 +30,7 @@ class KomisiController extends Controller {
     public function index(Request $request)
     {
         $data = Komisi::search($request,new Komisi());
+
 
         if ($data) {
             return [
@@ -87,13 +89,13 @@ class KomisiController extends Controller {
         $data->id_komisi =  KeyGen::randomKey("KM","",true,5);
         $data->nama_grup =  $request->input("nama_grup");
         $data->type =  $request->input("type");
-        $data->pegawai =  $request->input("pegawai");
+        $data->pegawai = json_decode($request->file('pegawai')->get(),true);
         $data->status =  "Aktif";
 
         if ($data->type == "Transaksi"){
             $data->produk =  null;
         }else{
-            $data->produk =  $request->input("produk");
+            $data->produk =  json_decode($request->file('produk')->get(),true);
         }
 
         if ($request->input("tipe_nilai")=="Nominal"){
@@ -104,7 +106,6 @@ class KomisiController extends Controller {
             $data->nominal_komisi = null;
 
         }
-
 
         
 

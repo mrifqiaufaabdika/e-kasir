@@ -66,7 +66,7 @@
         </template>
         <template #item.aksi="{item}">
           <v-tooltip
-            v-if="can(['bus-edit'])"
+            v-if="can(['satuan-edit'])"
             bottom
           >
             <template #activator="{ on, attrs }">
@@ -86,7 +86,7 @@
             <span>Ubah</span>
           </v-tooltip>
           <v-tooltip
-            v-if="can(['bus-delete'])"
+            v-if="can(['satuan-delete'])"
             bottom
           >
             <template #activator="{ on, attrs }">
@@ -103,22 +103,22 @@
             </template>
             <span>Hapus</span>
           </v-tooltip>
-          <v-tooltip
-            v-if="can(['bus-list'])"
-            bottom
-          >
-            <template #activator="{ on, attrs }">
-              <v-icon
-                color="green"
-                v-bind="attrs"
-                @click="_detail(item)"
-                v-on="on"
-              >
-                mdi-eye
-              </v-icon>
-            </template>
-            <span>Detail</span>
-          </v-tooltip>
+<!--          <v-tooltip-->
+<!--            v-if="can(['satuan-list'])"-->
+<!--            bottom-->
+<!--          >-->
+<!--            <template #activator="{ on, attrs }">-->
+<!--              <v-icon-->
+<!--                color="green"-->
+<!--                v-bind="attrs"-->
+<!--                @click="_detail(item)"-->
+<!--                v-on="on"-->
+<!--              >-->
+<!--                mdi-eye-->
+<!--              </v-icon>-->
+<!--            </template>-->
+<!--            <span>Detail</span>-->
+<!--          </v-tooltip>-->
         </template>
       </v-data-table>
       <div
@@ -295,16 +295,16 @@ export default {
     this._loadData(false) // loading data form server
   },
   methods: {
-    ...mapActions(['getSatuanBarang', 'deleteSatuanBarang']),
+    ...mapActions(['getSatuan', 'deleteSatuan']),
     can,
     _detail (value) {
-      this.$router.push({ name: 'satuan_barang_view', params: { id: value.id } })
+      this.$router.push({ name: 'satuan_view', params: { id: value.id } })
     },
     _add () {
-      this.$router.push({ name: 'barang_add' })
+      this.$router.push({ name: 'satuan_add' })
     },
     _edit (value) {
-      this.$router.push({ name: 'satuan_barang_edit', params: { id: value.id } })
+      this.$router.push({ name: 'satuan_edit', params: { id: value.id } })
     },
     _delete (value) {
       if (value === true) {
@@ -340,7 +340,7 @@ export default {
     _loadData (abort) {
       if (this.datas.length === 0 || abort) {
         this.booltmp.loading = true
-        this.getSatuanBarang({ ...this.options })
+        this.getSatuan({ ...this.options })
           .then((data) => {
             this.datas = data.items || []
             this.serverLength = data.total || 0

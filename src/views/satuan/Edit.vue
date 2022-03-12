@@ -45,13 +45,7 @@
             elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.nomor_polisi" label="Nomor Polisi" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.merek" label="Merek" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.jumlah_roda" label="Jumlah Roda" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.warna" label="Warna" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.kapasitas_duduk" label="Kapasitas Duduk" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.kapasitas_berdiri" label="Kapasitas Berdiri" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.status" label="Status" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.nama_satuan" label="Nama Satuan" outlined :rules="[rules.required]" />
               <v-btn
                 color="green"
                 large
@@ -98,41 +92,29 @@ export default {
     return {
       loadingData: true,
       datas: {
-        nomor_polisi: null,
-        merek: null,
-        jumlah_roda: null,
-        warna: null,
-        kapasitas_duduk: null,
-        kapasitas_berdiri: null,
-        status: null
+        nama_satuan:null,
       },
       items: {
         // {{item_cols}}
       },
       dataTypes: {
-        nomor_polisi: 'string',
-        merek: 'string',
-        jumlah_roda: 'string',
-        warna: 'string',
-        kapasitas_duduk: 'string',
-        kapasitas_berdiri: 'string',
-        status: 'string'
+        nama_satuan:'string',
       },
+
       schema: {
-        nomor_polisi: 'required',
-        merek: 'required',
-        jumlah_roda: 'required',
-        warna: 'required',
-        kapasitas_duduk: 'required',
-        kapasitas_berdiri: 'required',
-        status: 'required'
+        nama_satuan:'required',
       },
       rules: {
         required: v => {
           v = isEmpty(v)
           return !v || 'Tidak Boleh Kosong'
-        }
+        },
+        email: v => {
+          v = /.+@.+\..+/.test(v)
+          return v || 'E-mail tidak valid'
+        },
       },
+
       showDC: false,
       dcMessages: 'Simpan Perubahan Sekarang?',
       dcProgress: false,
@@ -148,10 +130,10 @@ export default {
     }
   },
   created () {
-    this.editBus({ id: this.id })
+    this.editSatuan({ id: this.id })
       .then(data => {
         this.datas = isEmpty(data, {})
-        this.datas.detail = isEmpty(data.detail, {})
+        this.datas.nama_satuan = isEmpty(data.nama_satuan, {})
         this.loadingData = false
       })
       .catch((error) => {
@@ -161,9 +143,9 @@ export default {
       })
   },
   methods: {
-    ...mapActions(['editBus', 'updateBus']),
+    ...mapActions(['editSatuan', 'updateSatuan']),
     backButton () {
-      this.$router.push({ name: 'bus' })
+      this.$router.push({ name: 'satuan' })
     },
     postUpdate () {
       /* Initialize the form data */
@@ -187,7 +169,7 @@ export default {
       this.dcdisabledPositiveBtn = true
       this.dcMessages = 'Sedang Menyimpan Bus...'
 
-      this.updateBus(formData).then((res) => {
+      this.updateSatuan(formData).then((res) => {
         this.dcMessages = res.msg
         this.dcProgress = false
         setTimeout(() => {

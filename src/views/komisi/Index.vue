@@ -65,6 +65,14 @@
         <template #item.updated_at="{item}">
           {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
         </template>
+        <template #item.nominal="{item}">
+          <template v-if="item.nominal_komisi ===null">
+            {{item.persen}}
+          </template>
+          <template v-else>
+            {{item.nominal_komisi}}
+          </template>
+        </template>
         <template #item.role="{item}">
           <span
             v-for="(role,i) in item.role"
@@ -248,7 +256,7 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['id'],
+          sortBy: ['id_komisi'],
           sortDesc: [true],
           itemsPerPage: 10,
           itemKey: 'id'
@@ -275,8 +283,8 @@ export default {
         // },
         { text: 'Nama Group', value: 'nama_grup' },
         // { text: 'Email', value: 'email' },
-        { text: 'Tipe Satuan', value: 'tipe' },
-        { text: 'Nilai', value: 'nominal' },
+        { text: 'Tipe Komisi', value: 'type' },
+        { text: 'Nilai Komisi', value: 'nominal' },
         { text: 'Keterangan', value: 'keterangan' },
         // { text: 'Updated', value: 'updated_at' },
         { text: '', value: 'aksi' }
