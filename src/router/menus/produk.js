@@ -5,16 +5,10 @@ const folder = 'produk'
 const title = 'Produk'
 
 const pathKategoriProduk = 'kategori-produk'
-const permissionKategoriProduk = 'kategori-pegawai-'
+const permissionKategoriProduk = 'kategori-produk-'
 const routeNameKategoriProduk = 'kategori-produk'
 const folderKategoriProduk = 'kategori-produk'
 const titleKategoriProduk = 'Kategori Produk'
-
-/*const pathKategoriPegawai = 'kategori-pegawai'
-const permissionKategoriPegawai = 'kategori-pegawai-'
-const routeNameKategoriPegawai = 'kategori-pegawai'
-const folderKategoriPegawai = 'kategori-pegawai'
-const titleKategoriPegawai = 'Kategori Pegawai'*/
 
 const Produk = [
   {
@@ -92,7 +86,7 @@ const Produk = [
       {
         path: pathKategoriProduk + '/baru',
         name: routeNameKategoriProduk + '_add',
-        component: () => import(/!* webpackChunkName: "[request].chunk" *!/ `@/views/${folderKategoriProduk}/Add`),
+        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folderKategoriProduk}/Add`),
         meta: {
           title: 'Tambah' + titleKategoriProduk,
           requiresAuth: true,
@@ -102,7 +96,7 @@ const Produk = [
       {
         path: pathKategoriProduk + '/edit/:id',
         name: routeNameKategoriProduk + '_edit',
-        component: () => import(/!* webpackChunkName: "[request].chunk" *!/ `@/views/${folderKategoriProduk}/Edit`),
+        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folderKategoriProduk}/Edit`),
         props: true,
         meta: {
           title: 'Edit' + titleKategoriProduk,

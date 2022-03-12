@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
 use App\Models\inventaris_barang;
-use App\Models\satuan_barang;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 
 class InventarisBarangController extends Controller

@@ -2,6 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
+use App\Models\Base\KeyGen;
+use App\Models\Bisnis;
+use App\Models\pegawai;
+use App\Models\produk;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
@@ -47,8 +51,13 @@ class TransaksiController extends Controller {
      */
     public function create()
     {
+
+        $type_bisnis = Bisnis::selectRaw(implode(',',["id as value", "nama as text"]))->get();
+        $produk = produk::selectRaw(implode(',',["id_produk as value", "nama_produk as text", "harga","kesediaan","satuan","deskripsi","stok","type_bisnis","id_kategori_produk"]))->where("status","=","Aktif")->get();
+        $pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama']))->where('status','=','aktif')->get();
+
         return [
-            'value' => [],
+            'value' => compact('type_bisnis','produk','pegawai'),
             'msg' => "Data for create {$this->title}"
         ];
     }
@@ -60,7 +69,19 @@ class TransaksiController extends Controller {
      */
     public function store(Request $request)
     {
+
+        /** @var Transaksi $data */
         $data = new Transaksi();
+        $data->nomor_faktur =  KeyGen::randomKey("F","",false,8);
+        $data->kasir = $request->input("kasir");
+        $data->member = $request->input("member");
+        $data->nama = $request->input("nama");
+        $data->nomor_hp = $request->input("nomor_hp");
+        $data->jenis_kelamin = $request->input("jenis_kelamin");
+        $data->total = $request->input("total");
+        $data->bayar = $request->input("bayar");
+        $data->kembalian = $request->input("kembalian");
+        $data->status = $request->input("status");
 
         
 

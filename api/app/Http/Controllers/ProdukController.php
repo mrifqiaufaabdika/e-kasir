@@ -1,7 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
+use App\Models\Base\KeyGen;
+use App\Models\Bisnis;
+use App\Models\kategori_produk;
 use App\Models\produk;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
@@ -10,10 +14,10 @@ class ProdukController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:kategori-pegawai-list|kategori-pegawai-create|kategori-pegawai-edit|kategori-pegawai-delete', ['only' => 'index', 'show']);
-        $this->middleware('permission:kategori-pegawai-create', ['only' => 'create', 'store']);
-        $this->middleware('permission:kategori-pegawai-edit', ['only' => 'edit', 'update']);
-        $this->middleware('permission:kategori-pegawai-delete', ['only' => 'destroy']);
+        $this->middleware('permission:produk-list|produk-create|produk-edit|produk-delete', ['only' => 'index', 'show']);
+        $this->middleware('permission:produk-create', ['only' => 'create', 'store']);
+        $this->middleware('permission:produk-edit', ['only' => 'edit', 'update']);
+        $this->middleware('permission:produk-delete', ['only' => 'destroy']);
     }
 
     /**
@@ -47,8 +51,18 @@ class ProdukController extends Controller
      */
     public function create()
     {
+
+        $type_bisnis = Bisnis::selectRaw(implode(',',["id as value", "nama as text"]))->get();
+        $kategori_produk = kategori_produk::selectRaw(implode(',',["id_kategori_produk as value", "nama_kategori_produk as text"]))->get();
+        $satuan = Satuan::selectRaw(implode(',',["id as value", "nama_satuan as text"]))->get();
+        $kesediaan = json_decode('[{"value":1,"text":"Tersedia"},{"value":2,"text":"Tidak Tersedia"}]');
         return [
-            'value' => [],
+            'value' => compact(
+                'type_bisnis',
+                'kategori_produk',
+                'satuan',
+                'kesediaan'
+            ),
             'msg' => "Data for create {$this->title}"
         ];
     }
@@ -60,7 +74,19 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        /** @var produk $data */
         $data = new produk();
+        $data->id_produk =  KeyGen::randomKey("P","",false,"4");
+        $data->nama_produk =  $request->input("nama_produk");
+        $data->id_kategori_produk =  $request->input("id_kategori_produk");
+        $data->harga =  $request->input("harga");
+        $data->kesediaan =  $request->input("kesediaan");
+        $data->satuan =  $request->input("satuan");
+        $data->deskripsi =  $request->input("deskripsi");
+        $data->status =  $request->input("status");
+        $data->stok =  $request->input("stok");
+        $data->type_bisnis =  $request->input("type_bisnis");
+
 
 
 

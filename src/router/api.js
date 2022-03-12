@@ -11,7 +11,7 @@ import Permissions from './apis/permissions.js'
 import pegawai from './apis/pegawai'
 import barang from './apis/barang'
 import kategori_pegawai from './apis/kategori_pegawai'
-import satuan_barang from '@/router/apis/satuan_barang'
+import satuan from '@/router/apis/satuan'
 import barangv1 from '@/router/apis/barangv1'
 import inventaris from '@/router/apis/inventaris'
 import kategori_produk from '@/router/apis/kategori-produk'
@@ -28,7 +28,7 @@ const $api = {
   ...pegawai,
   ...barang,
   ...kategori_pegawai,
-  ...satuan_barang,
+  ...satuan,
   ...produk,
   ...barangv1,
   ...kategori_produk,

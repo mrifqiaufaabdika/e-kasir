@@ -79,7 +79,11 @@ export default {
   },
   addKomisi ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.post('/komisi/baru', payload)
+      $axios.post('/komisi/baru', payload, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      })
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)

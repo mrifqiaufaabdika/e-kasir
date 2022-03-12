@@ -7,9 +7,9 @@
   <div>
     <v-app-bar flat>
       <v-btn
-        icon
-        dark
-        @click="backButton"
+              icon
+              dark
+              @click="backButton"
       >
         <v-icon color="#00a3ff">
           mdi-arrow-left
@@ -20,56 +20,56 @@
       </v-toolbar-title>
       <v-spacer />
       <v-btn
-        title="Perbarui Data"
-        icon
-        @click="_loadData()"
+              title="Perbarui Data"
+              icon
+              @click="_loadData()"
       >
         <v-icon>mdi-reload</v-icon>
       </v-btn>
     </v-app-bar>
     <v-container
-      fluid
-      style="padding: 0 1.5rem 0 1.5rem;"
+            fluid
+            style="padding: 0 1.5rem 0 1.5rem;"
     >
       <v-row>
         <v-col
-          cols="12"
-          md="6"
+                cols="12"
+                md="6"
         >
           <v-card
-            class="py-4 px-4 rounded-lg"
-            elevation="3"
+                  class="py-4 px-4 rounded-lg"
+                  elevation="3"
           >
             <div>
               <v-row
-                v-for="(data, key) in datas"
-                :key="key"
-                class="px-1"
+                      v-for="(data, key) in datas"
+                      :key="key"
+                      class="px-1"
               >
                 <template
-                  v-if="(typeof data==='object')"
+                        v-if="(typeof data==='object')"
                 >
                   <template v-for="(d,i) in data">
                     <v-col
-                      :key="`t_${i}`"
-                      cols="4"
-                      md="3"
+                            :key="`t_${i}`"
+                            cols="4"
+                            md="3"
                     >
                       <strong class="text-capitalize">{{ i.replace('_',' ').toLowerCase() }}</strong>
                     </v-col>
                     <v-col
-                      :key="`v_${i}`"
-                      cols="8"
-                      md="9"
+                            :key="`v_${i}`"
+                            cols="8"
+                            md="9"
                     >
                       <v-skeleton-loader
-                        v-show="loadingData"
-                        max-width="300"
-                        type="text"
+                              v-show="loadingData"
+                              max-width="300"
+                              type="text"
                       />
                       <div
-                        v-show="!loadingData"
-                        class="black--text"
+                              v-show="!loadingData"
+                              class="black--text"
                       >
                         {{ d }}
                       </div>
@@ -78,23 +78,23 @@
                 </template>
                 <template v-else>
                   <v-col
-                    cols="4"
-                    md="3"
+                          cols="4"
+                          md="3"
                   >
                     <strong class="text-capitalize">{{ key.replace('_',' ').toLowerCase() }}</strong>
                   </v-col>
                   <v-col
-                    cols="8"
-                    md="9"
+                          cols="8"
+                          md="9"
                   >
                     <v-skeleton-loader
-                      v-show="loadingData"
-                      max-width="300"
-                      type="text"
+                            v-show="loadingData"
+                            max-width="300"
+                            type="text"
                     />
                     <div
-                      v-show="!loadingData"
-                      class="black--text"
+                            v-show="!loadingData"
+                            class="black--text"
                     >
                       {{ data }}
                     </div>
@@ -110,47 +110,47 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
 
-export default {
-  props: {
-    id: { type: [String, Number], required: true }
-  },
-  data () {
-    return {
-      loadingData: true,
-      datas: {},
-      errorResponse: false
-    }
-  },
-  computed: {
-    disableActions () {
-      return this.loadingData || this.errorResponse
-    }
-  },
-  created () {
-    this._loadData()
-  },
-  methods: {
-    ...mapActions(['getBusById']),
-    backButton () {
-      this.$router.push({ name: 'bus' })
+  export default {
+    props: {
+      id: { type: [String, Number], required: true }
     },
-    _loadData () {
-      this.loadingData = true
-      this.getBusById({ id: this.id })
-        .then(data => {
-          this.datas = data || {}
-          this.loadingData = false
-        })
-        .catch(() => {
-          this.datas = {}
-          this.loadingData = false
-          this.errorResponse = true
-        })
+    data () {
+      return {
+        loadingData: true,
+        datas: {},
+        errorResponse: false
+      }
+    },
+    computed: {
+      disableActions () {
+        return this.loadingData || this.errorResponse
+      }
+    },
+    created () {
+      this._loadData()
+    },
+    methods: {
+      ...mapActions(['getSatuanById']),
+      backButton () {
+        this.$router.push({ name: 'bus' })
+      },
+      _loadData () {
+        this.loadingData = true
+        this.getSatuanById({ id: this.id })
+                .then(data => {
+                  this.datas = data || {}
+                  this.loadingData = false
+                })
+                .catch(() => {
+                  this.datas = {}
+                  this.loadingData = false
+                  this.errorResponse = true
+                })
+      }
     }
   }
-}
 </script>
 
 <style scoped>

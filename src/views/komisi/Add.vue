@@ -171,8 +171,8 @@
           type:'string',
           nominal:'double',
           persen:'string',
-          pegawai:'string',
-          produk:'string',
+          pegawai:'json',
+          produk:'json',
         },
 
         schema: {
@@ -266,7 +266,6 @@
         this.dcdisabledPositiveBtn = true
         this.dcMessages = 'Tunggu Sebentar, Sedang Menyimpan Data Pegawai...'
 
-        console.log(this.datas.pencatat)
         this.addKomisi(formData).then((res) => {
           this.dcProgress = false
           this.dcMessages = res.msg

@@ -1,5 +1,5 @@
 const path = '/kategori-produk'
-const permission = 'kategori-pegawai-'
+const permission = 'kategori-produk-'
 const routeName = 'kategori-produk'
 const folder = 'kategori-produk'
 const title = 'Kategori Produk'

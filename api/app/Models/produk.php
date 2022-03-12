@@ -48,11 +48,11 @@ class produk extends SelfModel
     public $searchable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','type_bisnis', 'created_at', 'updated_at'];
 
     public $appends = [
-        'satuan_barang','kategori_produk'
+        'satuan_barang','kategori_produk','bisnis'
     ];
 
     public function getSatuanBarangAttribute(){
-        return $this->belongsTo(satuan_barang::class,
+        return $this->belongsTo(Satuan::class,
         'satuan',
             'id')->first();
     }
@@ -61,4 +61,12 @@ class produk extends SelfModel
             'id_kategori_produk',
             'id_kategori_produk')->first();
     }
+
+    public function getBisnisAttribute(){
+        return $this->belongsTo(Bisnis::class,
+            'type_bisnis',
+            'id')->first();
+    }
+
+
 }

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
 
+use App\Models\Base\KeyGen;
 use App\Models\kategori_produk;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,10 @@ class KategoriProdukController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:kategori-pegawai-list|kategori-pegawai-create|kategori-pegawai-edit|kategori-pegawai-delete', ['only' => 'index', 'show']);
-        $this->middleware('permission:kategori-pegawai-create', ['only' => 'create', 'store']);
-        $this->middleware('permission:kategori-pegawai-edit', ['only' => 'edit', 'update']);
-        $this->middleware('permission:kategori-pegawai-delete', ['only' => 'destroy']);
+        $this->middleware('permission:kategori-produk-list|kategori-produk-create|kategori-produk-edit|kategori-produk-delete', ['only' => 'index', 'show']);
+        $this->middleware('permission:kategori-produk-create', ['only' => 'create', 'store']);
+        $this->middleware('permission:kategori-produk-edit', ['only' => 'edit', 'update']);
+        $this->middleware('permission:kategori-produk-delete', ['only' => 'destroy']);
     }
 
     /**
@@ -61,7 +62,13 @@ class KategoriProdukController extends Controller
      */
     public function store(Request $request)
     {
+        /**
+         * @param kategori_produk $data
+         */
+
         $data = new kategori_produk();
+        $data->id_kategori_produk = KeyGen::randomKey("KP","","true",2);
+        $data->nama_kategori_produk =  $request->input("nama_kategori_produk");
 
 
 

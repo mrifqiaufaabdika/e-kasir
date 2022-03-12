@@ -23,7 +23,7 @@ class CreateProdukTable extends Migration
             $table->string('deskripsi');
             $table->string('status');
             $table->string('stok');
-            $table->string('type_bisnis');
+            $table->integer('type_bisnis');
             $table->timestamps();
         });
     }

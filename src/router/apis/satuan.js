@@ -1,8 +1,8 @@
 import $axios from '@/router/server'
 
-const SatuanBarang = {
+const Satuan = {
   // START Pramudi API
-  getSatuanBarang ({ commit }, payload) {
+  getSatuan ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       const { page, itemsPerPage, sortBy, sortDesc } = payload
       let query = {
@@ -29,7 +29,7 @@ const SatuanBarang = {
         })
     })
   },
-  getSatuanBarangById ({ commit }, payload) {
+  getSatuanById ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       $axios.get(`/satuan-barang/detail/${payload.id}`)
         .then((response) => {
@@ -45,7 +45,7 @@ const SatuanBarang = {
         })
     })
   },
-  createSatuanBarang ({ commit }) {
+  createSatuan ({ commit }) {
     return new Promise((resolve, reject) => {
       $axios.get('/satuan-barang/create')
         .then((response) => {
@@ -61,7 +61,7 @@ const SatuanBarang = {
         })
     })
   },
-  addSatuanBarang ({ commit }, payload) {
+  addSatuan ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       $axios.post('/satuan-barang/baru', payload, {
         headers: {
@@ -81,7 +81,7 @@ const SatuanBarang = {
         })
     })
   },
-  editSatuanBarang ({ commit }, payload) {
+  editSatuan ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       $axios.get(`/satuan-barang/edit/${payload.id}`)
         .then((response) => {
@@ -97,7 +97,7 @@ const SatuanBarang = {
         })
     })
   },
-  updateSatuanBarang ({ commit }, payload) {
+  updateSatuan ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       $axios.post('/satuan-barang/update', payload, {
         headers: {
@@ -116,7 +116,7 @@ const SatuanBarang = {
         })
     })
   },
-  deleteSatuanBarang ({ commit }, payload) {
+  deleteSatuan ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       $axios.delete(`/satuan-barang/delete/${payload}`)
         .then((response) => {
@@ -134,4 +134,4 @@ const SatuanBarang = {
   // END Pramudi API
 }
 
-export default SatuanBarang
+export default Satuan

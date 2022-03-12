@@ -16,14 +16,14 @@ class CreateTableTransaksi extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->bigInteger('nomor_faktur')->primary();
             $table->bigInteger('kasir');
-            $table->bigInteger('member');
+            $table->bigInteger('member')->nullable();
             $table->string('nama',200)->nullable();
             $table->string('nomor_hp',200)->nullable();
             $table->enum('jenis_kelamin',['pria','wanita'])->nullable();
-            $table->double('total');
-            $table->double('bayar');
-            $table->double('kembalian');
-            $table->enum('status',['Hold','Lunas']);
+            $table->double('total')->nullable();
+            $table->double('bayar')->nullable();
+            $table->double('kembalian')->nullable();
+            $table->enum('status',['Hold','Lunas','Batal']);
             $table->timestamps();
         });
     }

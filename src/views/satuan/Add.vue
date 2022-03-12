@@ -3,49 +3,43 @@
   - Lisensi ini hanya diberikan dan tidak dapat di perjual belikan kembali tanpa izin pembuat
   -->
 
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
     <v-app-bar flat>
       <v-btn
-        icon
-        dark
-        @click="backButton"
+              icon
+              light
+              @click="backButton"
       >
         <v-icon color="#00a3ff">
           mdi-arrow-left
         </v-icon>
       </v-btn>
-      <v-toolbar-title class="ml-md-2">
-        Tambah Daftar Satuan Barang
+      <v-toolbar-title style="line-height: 1.3">
+        Tambah Satuan
       </v-toolbar-title>
     </v-app-bar>
     <v-container
-      fluid
-      style="padding: 0 1.5rem 0 1.5rem;"
+            fluid
+            style="padding: 0 1.5rem 0 1.5rem;"
     >
       <v-row>
         <v-col
-          cols="12"
-          md="6"
+                cols="12"
+                md="6"
         >
           <v-card
-            class="py-4 px-4 rounded-lg"
-            elevation="3"
+                  class="py-4 px-4 rounded-lg"
+                  elevation="3"
           >
             <div>
-              <v-text-field v-model="datas.nomor_polisi" label="Format Satuan" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.merek" label="Merek" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.jumlah_roda" label="Jumlah Roda" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.warna" label="Warna" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.kapasitas_duduk" label="Kapasitas Duduk" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.kapasitas_berdiri" label="Kapasitas Berdiri" outlined :rules="[rules.required]" />
-          <v-text-field v-model="datas.status" label="Status" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.nama_satuan" label="Nama Satuan" outlined :rules="[rules.required]" />
               <v-btn
-                color="green"
-                large
-                :dark="!dataValidation"
-                :disabled="dataValidation"
-                @click="showDC = true"
+                      color="green"
+                      large
+                      :dark="!dataValidation"
+                      :disabled="dataValidation"
+                      @click="showDC = true"
               >
                 <v-icon color="white">
                   mdi-check
@@ -58,128 +52,120 @@
       </v-row>
     </v-container>
     <dialog-confirm
-      :show-dialog="showDC"
-      :negative-button="dcNegativeBtn"
-      :positive-button="dcPositiveBtn"
-      :disabled-negative-btn="dcdisabledNegativeBtn"
-      :disabled-positive-btn="dcdisabledPositiveBtn"
-      :progress="dcProgress"
-      :title="'Simpan'"
-      :message="dcMessages"
+            :show-dialog="showDC"
+            :negative-button="dcNegativeBtn"
+            :positive-button="dcPositiveBtn"
+            :disabled-negative-btn="dcdisabledNegativeBtn"
+            :disabled-positive-btn="dcdisabledPositiveBtn"
+            :title="'Simpan'"
+            :message="dcMessages"
+            :progress="dcProgress"
     />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import Dialog from '@/components/Dialog'
-import { inputValidator, isEmpty } from '@/plugins/supports'
+  import { mapActions, mapState } from 'vuex'
+  import Dialog from '@/components/Dialog'
+  import { inputValidator, isEmpty } from '@/plugins/supports'
+  import moment from 'moment'
 
-export default {
-  components: {
-    'dialog-confirm': Dialog
-  },
-  data () {
-    return {
-      datas: {
-        nomor_polisi: null,
-        merek: null,
-        jumlah_roda: null,
-        warna: null,
-        kapasitas_duduk: null,
-        kapasitas_berdiri: null,
-        status: null
-      },
-      items: {
-        // {{item_cols}}
-      },
-      dataTypes: {
-        nomor_polisi: 'string',
-        merek: 'string',
-        jumlah_roda: 'string',
-        warna: 'string',
-        kapasitas_duduk: 'string',
-        kapasitas_berdiri: 'string',
-        status: 'string'
-      },
-      schema: {
-        nomor_polisi: 'required',
-        merek: 'required',
-        jumlah_roda: 'required',
-        warna: 'required',
-        kapasitas_duduk: 'required',
-        kapasitas_berdiri: 'required',
-        status: 'required'
-      },
-      rules: {
-        required: v => {
-          v = isEmpty(v)
-          return !v || 'Tidak Boleh Kosong'
-        }
-      },
+  export default {
+    components: {
+      'dialog-confirm': Dialog
+    },
+    data () {
+      return {
+        loadingData: true,
+        showPassword: false,
+        showConfirmPassword: false,
+        datas: {
+          nama_satuan:null,
+        },
+        items: {
+          // {{item_cols}}
+        },
+        dataTypes: {
+          nama_satuan:'string',
+        },
 
-      showDC: false,
-      dcMessages: 'Simpan Bus Sekarang?',
-      dcProgress: false,
-      dcdisabledNegativeBtn: false,
-      dcdisabledPositiveBtn: false,
-      dcNegativeBtn: () => { this.showDC = false },
-      dcPositiveBtn: () => this.postAdd()
-    }
-  },
-  computed: {
-    dataValidation () {
-      return inputValidator(this.schema, this.rules, this.datas)
-    }
-  },
-  created () {
-    this.createBus().then(data => {
-      // this.items = isEmpty(data.items, {})
-    })
-  },
-  methods: {
-    ...mapActions(['addBus', 'createBus']),
-    backButton () { this.$router.push({ name: 'satuan' }) },
-    postAdd () {
-      /* Initialize the form data */
-      const formData = new FormData()
+        schema: {
+          nama_satuan:'required',
+        },
+        rules: {
+          required: v => {
+            v = isEmpty(v)
+            return !v || 'Tidak Boleh Kosong'
+          },
+          email: v => {
+            v = /.+@.+\..+/.test(v)
+            return v || 'E-mail tidak valid'
+          },
+        },
 
-      /* Add the form data we need to submit */
-      Object.keys(this.datas).forEach(d => {
-        const tmp = this.datas[d]
-        if (this.dataTypes[d] !== 'json') {
-          formData.append(d, tmp)
-        } else {
-          formData.append(d,
-            new Blob([JSON.stringify(tmp)],
-              { type: 'application/json' })
-          )
-        }
-      })
-
-      this.dcProgress = true
-      this.dcdisabledNegativeBtn = true
-      this.dcdisabledPositiveBtn = true
-      this.dcMessages = 'Tunggu Sebentar, Sedang Menyimpan Bus...'
-      this.addBus(formData).then((res) => {
-        this.dcProgress = false
-        this.dcMessages = res.msg
-        setTimeout(() => {
+        showDC: false,
+        dcMessages: 'Simpan Perubahan Sekarang?',
+        dcProgress: false,
+        dcdisabledNegativeBtn: false,
+        dcdisabledPositiveBtn: false,
+        dcNegativeBtn: () => {
           this.showDC = false
-          this.$router.push({ name: 'satuan' })
-          this.dcMessages = 'Simpan Bus Sekarang?'
-        }, 2000)
-      })
+        },
+        dcPositiveBtn: () => this.postSave(),
+
+      }
+    },
+    computed: {
+      ...mapState(['user']),
+      dataValidation () {
+        return inputValidator(this.schema, this.rules, this.datas)
+      }
+    },
+    methods: {
+      ...mapActions(['addSatuan']),
+      backButton () {
+        this.$router.push({ name: 'satuan' })
+      },
+      postSave () {
+
+
+
+        /* Initialize the form data */
+        const formData = new FormData()
+
+        /* Add the form data we need to submit */
+        Object.keys(this.datas).forEach(d => {
+          const tmp = this.datas[d]
+          if (this.dataTypes[d] !== 'json') {
+            formData.append(d, tmp)
+          } else {
+            formData.append(d,
+                    new Blob([JSON.stringify(tmp)],
+                            { type: 'application/json' })
+            )
+          }
+        })
+
+        this.dcProgress = true
+        this.dcdisabledNegativeBtn = true
+        this.dcdisabledPositiveBtn = true
+        this.dcMessages = 'Tunggu Sebentar, Sedang Menyimpan Data Satuan...'
+
+        console.log(this.datas.pencatat)
+        this.addSatuan(formData).then((res) => {
+          this.dcProgress = false
+          this.dcMessages = res.msg
+          setTimeout(() => {
+            this.showDC = false
+            this.$router.push({ name: 'satuan' })
+            this.dcMessages = 'Simpan Catatan Baru Sekarang?'
+          }, 2000)
+        })
+      }
     }
   }
-}
 </script>
 
-<style>
-.fs-14 > label{
-    font-size: 14px !important;
-}
-.theme--light.v-data-table.v-data-table--fixed-header thead th {
-    background-color: #eee !important;
-}
+<style scoped>
+
 </style>
