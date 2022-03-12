@@ -30,6 +30,17 @@ const Komisi = [
           requirePermission: permission + 'list'
         }
       },
+      {
+        path: 'baru',
+        name: routeName + '_add',
+        component: () => import(/* webpackChunkName: "[request].baru.chunk" */ `@/views/${folder}/Add`),
+        meta: {
+          title: 'Tambah' + title,
+          // icon: 'mdi-minus',
+          requiresAuth: true,
+          requirePermission: permission + 'create'
+        }
+      },
 
       {
         path: 'hitung',

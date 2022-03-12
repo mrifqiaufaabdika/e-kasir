@@ -2,7 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
+use App\Models\Base\KeyGen;
 use App\Models\Komisi;
+use App\Models\pegawai;
+use App\Models\produk;
 use Illuminate\Http\Request;
 
 class KomisiController extends Controller {
@@ -47,9 +50,26 @@ class KomisiController extends Controller {
      */
     public function create()
     {
+        $produk = produk::select(['id_produk as value', 'nama_produk as text'])
+            ->where("status",'=','Aktif')
+            ->orderBy('id_produk')
+            ->get();
+
+        $pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama','email', 'telepon']))->where('status','=','aktif')->get();
+
+        if ($produk && $pegawai) {
+            return [
+                'value' => compact(
+                    'produk',
+                    'pegawai'
+                ),
+                'msg' => "data produk dan pegawai ditemukan"
+            ];
+        }
+
         return [
             'value' => [],
-            'msg' => "Data for create {$this->title}"
+            'msg' => "Roles tidak ditemukan"
         ];
     }
 
@@ -60,7 +80,31 @@ class KomisiController extends Controller {
      */
     public function store(Request $request)
     {
+        /**
+         * @params Komisi $data
+         */
         $data = new Komisi();
+        $data->id_komisi =  KeyGen::randomKey("KM","",true,5);
+        $data->nama_grup =  $request->input("nama_grup");
+        $data->type =  $request->input("type");
+        $data->pegawai =  $request->input("pegawai");
+        $data->status =  "Aktif";
+
+        if ($data->type == "Transaksi"){
+            $data->produk =  null;
+        }else{
+            $data->produk =  $request->input("produk");
+        }
+
+        if ($request->input("tipe_nilai")=="Nominal"){
+            $data->nominal_komisi =  $request->input("nominal");
+            $data->persen =  null;
+        }else{
+            $data->persen =  $request->input("persen");
+            $data->nominal_komisi = null;
+
+        }
+
 
         
 
