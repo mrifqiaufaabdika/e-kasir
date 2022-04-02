@@ -62,6 +62,23 @@
         @page-count="config.table.pageCount = $event"
         @pagination="pagination=$event"
       >
+        <template #item.nama="{item}">
+
+          <v-avatar
+              class="ms-3 me-3"
+              size="48"
+              >
+
+            <img
+                    v-bind:src="'http://localhost:7001/storage/avatar/'+item.foto"
+                    alt="avatar"
+
+
+            >
+
+          </v-avatar>
+          <strong>{{ item.nama }}</strong>
+        </template>
         <template #item.aksi="{item}">
           <v-tooltip bottom>
             <template #activator="{ on, attrs }">

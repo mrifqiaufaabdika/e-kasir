@@ -71,6 +71,9 @@
         "serve": [
             "@php artisan serve --port=7001"
         ],
+        "servehost": [
+            "@php artisan serve --host=192.168.43.34 --port=7002"
+        ],
         "dbwipe": [
             "composer dump-autoload && php artisan migrate:fresh && php artisan db:seed"
         ]

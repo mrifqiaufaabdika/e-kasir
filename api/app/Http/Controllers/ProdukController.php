@@ -7,6 +7,7 @@ use App\Models\kategori_produk;
 use App\Models\produk;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
@@ -88,7 +89,23 @@ class ProdukController extends Controller
         $data->type_bisnis =  $request->input("type_bisnis");
 
 
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $original_filename = $image->getClientOriginalName();
+            $split_filename = explode('.', $original_filename);
+            $file_ext = end($split_filename);
+            $image_name = 'produk-' . Str::uuid() . '.' . $file_ext;
 
+
+            $image->move(storage_path('app/public/produk'), $image_name);
+            $current_image_path = storage_path('app/public/image_profile');
+            if (file_exists($current_image_path)) {
+                unlink($current_image_path);
+            }
+
+
+            $data->foto = $image_name;
+        }
 
         if ($data->save()) {
             return [
