@@ -4,7 +4,7 @@ use App\Http\Controllers\Base\Controller;
 use App\Models\Base\KeyGen;
 use App\Models\Bisnis;
 use App\Models\kategori_produk;
-use App\Models\produk;
+use App\Models\Produk;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -30,7 +30,7 @@ class ProdukController extends Controller
 
     public function index(Request $request)
     {
-        $data = produk::search($request, new produk());
+        $data = Produk::search($request, new Produk());
 
         if ($data){
             return [
@@ -75,8 +75,8 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        /** @var produk $data */
-        $data = new produk();
+        /** @var Produk $data */
+        $data = new Produk();
         $data->id_produk =  KeyGen::randomKey("P","",false,"4");
         $data->nama_produk =  $request->input("nama_produk");
         $data->id_kategori_produk =  $request->input("id_kategori_produk");
@@ -128,8 +128,8 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        /** @var produk $data */
-        $data = produk::find($id);
+        /** @var Produk $data */
+        $data = Produk::find($id);
 
         if ($data) {
             return [
@@ -152,8 +152,8 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        /** @var produk $data */
-        $data = produk::find($id);
+        /** @var Produk $data */
+        $data = Produk::find($id);
 
         if ($data) {
             return [
@@ -177,8 +177,8 @@ class ProdukController extends Controller
     public function update(Request $request)
     {
         $id = $request->input('_id');
-        /** @var produk $data */
-        $data = produk::find($id);
+        /** @var Produk $data */
+        $data = Produk::find($id);
 
 
 
@@ -203,8 +203,8 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        /** @var produk $data */
-        $data = produk::find($id);
+        /** @var Produk $data */
+        $data = Produk::find($id);
 
         if ($data->delete()) {
             return [

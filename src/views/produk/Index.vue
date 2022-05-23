@@ -80,8 +80,6 @@
             <img
                     v-bind:src="'http://localhost:7001/storage/produk/'+item.foto"
                     alt="no image"
-
-
             >
 
           </v-avatar>

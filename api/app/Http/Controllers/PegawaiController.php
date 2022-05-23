@@ -78,7 +78,7 @@ class PegawaiController extends Controller {
         $data->nama = $request->input("nama");
         $data->jenis_kelamin = $request->input("jenis_kelamin");
         $data->tempat_lahir = $request->input("tempat_lahir");
-        $data->telpon = $request->input("telpon");
+        $data->telepon = $request->input("telepon");
         $data->agama = $request->input("agama");
         $data->alamat = $request->input("alamat");
         $data->email = $request->input("email");
@@ -188,7 +188,7 @@ class PegawaiController extends Controller {
         /** @var pegawai $data */
         $data = pegawai::find($id);
 
-        
+
 
         if ($data->save()) {
             return [

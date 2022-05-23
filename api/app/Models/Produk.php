@@ -19,7 +19,7 @@ use App\Traits\Searchable;
  * @property string $created_at
  * @property string $updated_at
  */
-class produk extends SelfModel
+class Produk extends SelfModel
 {
     use Searchable;
 

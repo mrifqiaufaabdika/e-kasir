@@ -19,7 +19,7 @@ class CreatePegawai extends Migration
             $table->string("nama",200);
             $table->enum("jenis_kelamin",['pria','wanita']);
             $table->string("tempat_lahir",200);
-            $table->string("telpon",50);
+            $table->string("telepon",50);
             $table->string("agama",50);
             $table->enum("status_nikah",['menikah','belum menikah']);
             $table->text("alamat");

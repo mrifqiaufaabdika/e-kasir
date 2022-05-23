@@ -15,7 +15,7 @@ use App\Traits\Searchable;
  * @property string $digunakan_oleh
  * @property string $updated_at
  */
-class voucher extends SelfModel
+class Voucher extends SelfModel
 {
     use Searchable;
 

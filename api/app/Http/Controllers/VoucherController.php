@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
-use App\Models\voucher;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class VoucherController extends Controller
@@ -25,7 +25,7 @@ class VoucherController extends Controller
 
     public function index(Request $request)
     {
-        $data = voucher::search($request, new voucher());
+        $data = Voucher::search($request, new Voucher());
 
         if ($data){
             return [
@@ -60,7 +60,7 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new voucher();
+        $data = new Voucher();
 
 
 
@@ -85,8 +85,8 @@ class VoucherController extends Controller
      */
     public function show($id)
     {
-        /** @var voucher $data */
-        $data = voucher::find($id);
+        /** @var Voucher $data */
+        $data = Voucher::find($id);
 
         if ($data) {
             return [
@@ -109,8 +109,8 @@ class VoucherController extends Controller
      */
     public function edit($id)
     {
-        /** @var voucher $data */
-        $data = voucher::find($id);
+        /** @var Voucher $data */
+        $data = Voucher::find($id);
 
         if ($data) {
             return [
@@ -134,8 +134,8 @@ class VoucherController extends Controller
     public function update(Request $request)
     {
         $id = $request->input('_id');
-        /** @var voucher $data */
-        $data = voucher::find($id);
+        /** @var Voucher $data */
+        $data = Voucher::find($id);
 
 
 
@@ -160,8 +160,8 @@ class VoucherController extends Controller
      */
     public function destroy($id)
     {
-        /** @var voucher $data */
-        $data = voucher::find($id);
+        /** @var Voucher $data */
+        $data = Voucher::find($id);
 
         if ($data->delete()) {
             return [

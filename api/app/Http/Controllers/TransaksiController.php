@@ -5,7 +5,7 @@ use App\Http\Controllers\Base\Controller;
 use App\Models\Base\KeyGen;
 use App\Models\Bisnis;
 use App\Models\pegawai;
-use App\Models\produk;
+use App\Models\Produk;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
@@ -53,7 +53,7 @@ class TransaksiController extends Controller {
     {
 
         $type_bisnis = Bisnis::selectRaw(implode(',',["id as value", "nama as text"]))->get();
-        $produk = produk::selectRaw(implode(',',["id_produk as value", "nama_produk as text", "harga","kesediaan","satuan","deskripsi","stok","type_bisnis","id_kategori_produk"]))->where("status","=","Aktif")->get();
+        $produk = Produk::selectRaw(implode(',',["id_produk as value", "nama_produk as text", "harga","kesediaan","satuan","deskripsi","stok","type_bisnis","id_kategori_produk"]))->where("status","=","Aktif")->get();
         $pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama']))->where('status','=','aktif')->get();
 
         return [
@@ -83,7 +83,7 @@ class TransaksiController extends Controller {
         $data->kembalian = $request->input("kembalian");
         $data->status = $request->input("status");
 
-        
+
 
         if ($data->save()) {
             return [
@@ -158,7 +158,7 @@ class TransaksiController extends Controller {
         /** @var Transaksi $data */
         $data = Transaksi::find($id);
 
-        
+
 
         if ($data->save()) {
             return [

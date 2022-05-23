@@ -6,7 +6,7 @@
 
 namespace App\Models\Base;
 
-use App\Models\pegawai;
+use App\Models\Pegawai;
 use App\Traits\Searchable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;

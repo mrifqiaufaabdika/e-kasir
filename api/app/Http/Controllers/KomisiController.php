@@ -5,7 +5,7 @@ use App\Http\Controllers\Base\Controller;
 use App\Models\Base\KeyGen;
 use App\Models\Komisi;
 use App\Models\pegawai;
-use App\Models\produk;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use function React\Promise\all;
 
@@ -52,7 +52,7 @@ class KomisiController extends Controller {
      */
     public function create()
     {
-        $produk = produk::select(['id_produk as value', 'nama_produk as text'])
+        $produk = Produk::select(['id_produk as value', 'nama_produk as text'])
             ->where("status",'=','Aktif')
             ->orderBy('id_produk')
             ->get();
@@ -107,7 +107,7 @@ class KomisiController extends Controller {
 
         }
 
-        
+
 
         if ($data->save()) {
             return [
@@ -182,7 +182,7 @@ class KomisiController extends Controller {
         /** @var Komisi $data */
         $data = Komisi::find($id);
 
-        
+
 
         if ($data->save()) {
             return [
