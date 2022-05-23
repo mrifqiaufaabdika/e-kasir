@@ -37,7 +37,7 @@
               <v-text-field v-model="datas.nama" label="Nama" outlined :rules="[rules.required]" />
               <v-select v-model="datas.jenis_kelamin" label="Jenis Kelamin" :items="items.jenis_kelamin" outlined :rules="[rules.required]" />
               <v-text-field v-model="datas.tempat_lahir" label="Tempat Lahir" outlined :rules="[rules.required]" />
-              <v-text-field v-model="datas.telpon" label="Telepon" outlined :rules="[rules.required]" />
+              <v-text-field v-model="datas.telpon" label="Telpon" outlined :rules="[rules.required]" />
               <v-select v-model="datas.agama" label="Agama" outlined :items="items.agama" :rules="[rules.required]" type="number" min="0"/>
               <v-select v-model="datas.status_nikah" label="Status Nikah" :items="items.status_nikah" outlined :rules="[rules.required]" />
               <v-textarea v-model="datas.alamat" label="Alamat" outlined  :rules="[rules.required]"/>
@@ -100,7 +100,6 @@
                         @input="model_tgl_terima = false"
                 />
               </v-menu>
-              <v-text-field v-model="datas.tanggal_keluar" label="Tanggal Keluar" outlined  :rules="[rules.required]"/>
               <v-file-input accept="image/*" counter show-size v-model="datas.foto" label="Foto" outlined :rules="[rules.required]"></v-file-input>
               <v-select v-model="datas.status" label="Status" outlined :items="items.status" :rules="[rules.required]"/>
               <v-btn
@@ -162,7 +161,6 @@ export default {
         gaji_pokok:null,
         tanggal_lahir:null,
         tanggal_terima:null,
-        tanggal_keluar:null,
         foto:null,
         status:null
       },
@@ -188,7 +186,6 @@ export default {
         gaji_pokok:'double',
         tanggal_lahir:'string',
         tanggal_terima:'string',
-        tanggal_keluar:'string',
         foto:'string',
         status:'string'
       },
@@ -207,7 +204,6 @@ export default {
         gaji_pokok:'required',
         tanggal_lahir:'required',
         tanggal_terima:'required',
-        tanggal_keluar:'required',
         foto:'required',
         status:'required'
       },
@@ -279,7 +275,7 @@ export default {
       this.dcdisabledNegativeBtn = true
       this.dcdisabledPositiveBtn = true
       this.dcMessages = 'Tunggu Sebentar, Sedang Menyimpan Data Pegawai...'
-      this.addPerjalanan(formData).then((res) => {
+      this.addPegawai(formData).then((res) => {
         this.dcProgress = false
         this.dcMessages = res.msg
         setTimeout(() => {

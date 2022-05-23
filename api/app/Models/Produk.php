@@ -19,7 +19,7 @@ use App\Traits\Searchable;
  * @property string $created_at
  * @property string $updated_at
  */
-class produk extends SelfModel
+class Produk extends SelfModel
 {
     use Searchable;
 
@@ -38,14 +38,14 @@ class produk extends SelfModel
      *
      * @var array
      */
-    protected $fillable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','type_bisnis', 'created_at', 'updated_at'];
+    protected $fillable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      *
      * @var array
      */
-    public $searchable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','type_bisnis', 'created_at', 'updated_at'];
+    public $searchable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
 
     public $appends = [
         'satuan_barang','kategori_produk','bisnis'

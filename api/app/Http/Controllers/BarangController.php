@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
 use App\Models\barang;
+use http\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -30,6 +32,7 @@ class BarangController extends Controller
         if ($data){
             return [
                 'value' => $data,
+
                 'msg' => "Data {$this->title} Ditemukan"
             ];
         }

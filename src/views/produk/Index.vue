@@ -61,6 +61,37 @@
         @page-count="config.table.pageCount = $event"
         @pagination="pagination=$event"
       >
+        <template #item.nama_produk="{item}">
+
+          <v-row
+                  align="center"
+                  class="spacer"
+                  no-gutters
+          >
+          <v-col>
+          <v-avatar
+                  class="ms-3 me-3 mt-2 mb-2"
+                  size="48"
+                  tile
+                  color="grey"
+          >
+
+
+            <img
+                    v-bind:src="'http://localhost:7001/storage/produk/'+item.foto"
+                    alt="no image"
+            >
+
+          </v-avatar>
+          </v-col>
+          <v-col>
+          <strong>{{ item.nama_produk }}</strong>
+          </v-col>
+          </v-row>
+        </template>
+        <template #item.harga="{item}">
+          {{ item.harga }}
+        </template>
         <template #item.updated_at="{item}">
           {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
         </template>
@@ -231,7 +262,7 @@ import { can, isEmpty } from '@/plugins/supports'
 export default {
   name: 'Barang',
   components: {
-    'delete-dialog': Dialog
+    'delete-dialog': Dialog,
   },
   data () {
     return {
@@ -275,16 +306,17 @@ export default {
       return [
         /*{ text: 'ID', align: 'left', value: 'id_barang' },*/
         { text: 'Nama Produk', value: 'nama_produk' },
-        { text: 'Kategori', value: 'kategori_produk.nama_kategori_produk' },
         { text: 'Harga', value: 'harga' },
-        { text: 'kesediaan', value: 'kesediaan' },
+        { text: 'Kategori', value: 'kategori_produk.nama_kategori_produk' },
+
         { text: 'Satuan', value: 'satuan_barang.nama_satuan' },
-        { text: 'Deskripsi', value: 'deskripsi' },
-        { text: 'Status', value: 'status' },
+        // { text: 'Deskripsi', value: 'deskripsi' },
+        // { text: 'Status', value: 'status' },
         { text: 'Stok', value: 'stok' },
         { text: 'Tipe Bisnis', value: 'bisnis.nama' },
-        { text: 'Created At', value: 'created_at' },
-        { text: 'Updated At', value: 'updated_at' },
+        { text: 'kesediaan', value: 'kesediaan' },
+        // { text: 'Created At', value: 'created_at' },
+         { text: 'Updated At', value: 'updated_at' },
         { text: '', value: 'aksi' }
       ]
     },

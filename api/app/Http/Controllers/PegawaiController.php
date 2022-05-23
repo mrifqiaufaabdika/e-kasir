@@ -2,9 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
+use App\Models\Base\KeyGen;
 use App\Models\kategori_pegawai;
 use App\Models\pegawai;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PegawaiController extends Controller {
 
@@ -27,6 +30,8 @@ class PegawaiController extends Controller {
     public function index(Request $request)
     {
         $data = pegawai::search($request,new pegawai());
+
+
 
         if ($data) {
             return [
@@ -63,9 +68,52 @@ class PegawaiController extends Controller {
      */
     public function store(Request $request)
     {
+        /**
+         * @param Pegawai $data
+         */
         $data = new pegawai();
+        $data->nip = KeyGen::randomKey("","","true",3);
+        $data->nik = $request->input("nik");
+        $data->nama = $request->input("nama");
+        $data->nama = $request->input("nama");
+        $data->jenis_kelamin = $request->input("jenis_kelamin");
+        $data->tempat_lahir = $request->input("tempat_lahir");
+        $data->telepon = $request->input("telepon");
+        $data->agama = $request->input("agama");
+        $data->alamat = $request->input("alamat");
+        $data->email = $request->input("email");
+        $data->id_kategori_pegawai = $request->input("id_kategori_pegawai");
+        $data->gaji_pokok = $request->input("gaji_pokok");
+        $data->tanggal_lahir = $request->input("tanggal_lahir");
+        $data->tanggal_terima = $request->input("tanggal_terima");
 
-        
+        $data->status_nikah = $request->input("status_nikah");
+        $data->status = $request->input("status");
+
+        if ($request->input("status") == 'Nonaktif'){
+            $today = Carbon::now();
+            $data->tanggal_keluar = $today->toDateTimeString();
+        }
+
+
+
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $original_filename = $image->getClientOriginalName();
+            $split_filename = explode('.', $original_filename);
+            $file_ext = end($split_filename);
+            $image_name = 'avatar-' . Str::uuid() . '.' . $file_ext;
+
+
+            $image->move(storage_path('app/public/avatar'), $image_name);
+            $current_image_path = storage_path('app/public/image_profile');
+            if (file_exists($current_image_path)) {
+                unlink($current_image_path);
+            }
+
+
+            $data->foto = $image_name;
+        }
 
         if ($data->save()) {
             return [
@@ -140,7 +188,7 @@ class PegawaiController extends Controller {
         /** @var pegawai $data */
         $data = pegawai::find($id);
 
-        
+
 
         if ($data->save()) {
             return [

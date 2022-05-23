@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\produk;
-use App\Models\voucher;
+use App\Models\Produk;
+use App\Models\Voucher;
 use Illuminate\Database\Seeder;
 
 class VoucherSeeder extends Seeder
@@ -22,7 +22,7 @@ class VoucherSeeder extends Seeder
         ];
 
         foreach($voucher_collection as $item){
-            voucher::create($item);
+            Voucher::create($item);
         }
     }
 }
