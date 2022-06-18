@@ -6,7 +6,7 @@ use App\Models\Base\SelfModel;
 use App\Traits\Searchable;
 
 /**
- * @property string $id_produk
+ * @property string $id
  * @property string $nama_produk
  * @property string $id_kategori_produk
  * @property string $harga
@@ -29,7 +29,7 @@ class Produk extends SelfModel
      * @var string
      */
     protected $table = 'produk';
-    protected $primaryKey = 'id_produk';
+    protected $primaryKey = 'id';
     public $incrementing = false;
 
 
@@ -38,14 +38,14 @@ class Produk extends SelfModel
      *
      * @var array
      */
-    protected $fillable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
+    protected $fillable = ['id','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      *
      * @var array
      */
-    public $searchable = ['id_produk','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
+    public $searchable = ['id','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
 
     public $appends = [
         'satuan_barang','kategori_produk','bisnis'
@@ -67,6 +67,11 @@ class Produk extends SelfModel
             'type_bisnis',
             'id')->first();
     }
+
+    public function komisis(){
+        return $this->belongsToMany(Komisi::class);
+    }
+
 
 
 }

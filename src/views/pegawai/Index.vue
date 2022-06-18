@@ -274,9 +274,10 @@ export default {
           value: 'nip'
         },
         { text: 'Nama', value: 'nama' },
+        { text: 'Jabatan', value: 'kategori_pegawai.nama_kategori' },
          { text: 'Kontak', value: 'email' },
         { text: 'JK', value: 'jenis_kelamin' },
-        { text: 'Jabatan', value: 'kategori_pegawai.nama_kategori' },
+
         { text: 'status', value: 'status' },
         { text: '', value: 'aksi' }
       ]

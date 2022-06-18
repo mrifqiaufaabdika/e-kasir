@@ -9,10 +9,9 @@ import user from './apis/base/user'
 import app from './apis/base/app'
 import Permissions from './apis/permissions.js'
 import pegawai from './apis/pegawai'
-import barang from './apis/barang'
 import kategori_pegawai from './apis/kategori_pegawai'
 import satuan from '@/router/apis/satuan'
-import barangv1 from '@/router/apis/barangv1'
+import barang from '@/router/apis/barang'
 import inventaris from '@/router/apis/inventaris'
 import kategori_produk from '@/router/apis/kategori-produk'
 import produk from '@/router/apis/produk'
@@ -26,11 +25,10 @@ import komisi from "./apis/komisi";
 const $api = {
   ...auth,
   ...pegawai,
-  ...barang,
   ...kategori_pegawai,
   ...satuan,
   ...produk,
-  ...barangv1,
+  ...barang,
   ...kategori_produk,
   ...transaksi,
   ...voucher,

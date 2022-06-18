@@ -14,13 +14,11 @@ class CreateTableKomisi extends Migration
     public function up()
     {
         Schema::create('komisi', function (Blueprint $table) {
-            $table->string('id_komisi',120);
+            $table->string('id',120)->primary();
             $table->string('nama_grup',200);
             $table->enum('type',['Transaksi','Produk']);
             $table->double('nominal_komisi')->nullable();
             $table->double('persen')->nullable();
-            $table->json('pegawai'); //value array of id pegawai
-            $table->json('produk')->nullable(); //value array of id produk
             $table->enum("status",["Aktif","Nonaktif"]);
             $table->timestamps();
         });
@@ -33,6 +31,6 @@ class CreateTableKomisi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_komisi');
+        Schema::dropIfExists('komisi');
     }
 }

@@ -256,7 +256,7 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['id_komisi'],
+          sortBy: ['id'],
           sortDesc: [true],
           itemsPerPage: 10,
           itemKey: 'id'

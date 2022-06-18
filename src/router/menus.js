@@ -9,8 +9,7 @@ import Keuangan from '@/router/menus/keuangan.js'
 import Kasbon from '@/router/menus/kasbon.js'
 import Inventaris from '@/router/menus/database/inventaris.js'
 import Laporan from '@/router/menus/Laporan/Laporan.js'
-import Barang from '@/router/menus/database/barang.js'
-import Barangv1 from '@/router/menus/barangv1.js'
+import Barang from '@/router/menus/barang.js'
 import Satuan from './menus/satuan.js'
 import Permissions from '@/router/menus/permissions.js'
 import SatuanBarang from '@/router/menus/database/satuan-barang';
@@ -57,7 +56,7 @@ export const routes = baseMenu.concat(
     Permissions,
    // SatuanBarang,
     Satuan,
-    Barangv1,
+    Barang,
     Produk,
     Pelanggan,
     Transaksi,
@@ -78,10 +77,10 @@ export default baseMenu.concat(
   Permissions,
   //Barang,
   Satuan,
-  Barangv1,
   Produk,
   Pelanggan,
   Voucher,
+  Barang,
   //SatuanBarang,
   [{ subheader: 'Pengelolaan' }],
   Transaksi,

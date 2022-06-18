@@ -32,6 +32,6 @@ class CreateTableKasbon extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_kasbon');
+        Schema::dropIfExists('kasbon');
     }
 }

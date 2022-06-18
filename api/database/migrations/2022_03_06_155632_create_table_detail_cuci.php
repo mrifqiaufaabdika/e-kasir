@@ -30,6 +30,6 @@ class CreateTableDetailCuci extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_detail_cuci');
+        Schema::dropIfExists('detail_cuci');
     }
 }
