@@ -63,4 +63,12 @@ class Pegawai extends SelfModel
             'id_kategori_pegawai',
             'id')->first();
     }
+
+
+    public function komisis(){
+        return $this->belongsToMany(Komisi::class);
+    }
+
+
+
 }

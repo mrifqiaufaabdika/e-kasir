@@ -33,6 +33,6 @@ class CreateTablePelanggan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_pelanggan');
+        Schema::dropIfExists('pelanggan');
     }
 }

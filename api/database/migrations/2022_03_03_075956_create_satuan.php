@@ -27,6 +27,6 @@ class CreateSatuan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('satuan_barang');
+        Schema::dropIfExists('satuan');
     }
 }

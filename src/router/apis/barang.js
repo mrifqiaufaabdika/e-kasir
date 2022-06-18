@@ -1,16 +1,16 @@
 import $axios from '@/router/server'
 
-const Barang = {
-  // START Pramudi API
-  getBarang ({ commit }, payload) {
+export default {
+  // START Roles API
+  getBarangv1 ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      const { page, itemsPerPage, sortBy, sortDesc } = payload
+      const { page, itemsPerPage, sortBy, sortDesc, search } = payload
       let query = {
+        search: search || '',
         page: page || 1,
         per_page: itemsPerPage || 5,
         sortBy: sortBy.length ? JSON.stringify(sortBy) : '',
-        sortDesc: sortDesc.length ? JSON.stringify(sortDesc) : '',
-        ...payload.add
+        sortDesc: sortDesc.length ? JSON.stringify(sortDesc) : ''
       }
       query = new URLSearchParams(query).toString()
       $axios.get(`/barang/all?${query}`)
@@ -29,25 +29,41 @@ const Barang = {
         })
     })
   },
-  getBarangById ({ commit }, payload) {
+  getBarangv1Create ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      $axios.get(`/barang/create`)
+          .then((response) => {
+            if (response.status === 200) {
+              resolve(response.data.value)
+            } else {
+              resolve({})
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+            resolve([])
+          })
+    })
+  },
+  getBarangv1ById ({ commit }, payload) {
     return new Promise((resolve, reject) => {
       $axios.get(`/barang/detail/${payload.id}`)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
           } else {
-            resolve(response.data.value)
+            resolve({})
           }
         })
         .catch((error) => {
-          console.error(error)
-          reject(error)
+          console.log(error)
+          resolve([])
         })
     })
   },
-  createBarang ({ commit }) {
+  deleteBarangv1 ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.get('/barang/create')
+      $axios.delete(`/barang/delete/${payload}`)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -61,29 +77,9 @@ const Barang = {
         })
     })
   },
-  addBarang ({ commit }, payload) {
+  addBarangv1 ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.post('/barang/baru', payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            resolve(response.data)
-          } else {
-            resolve({ msg: 'Sepertinya ada masalah, silahkan coba lagi' })
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-          resolve({ msg: error })
-        })
-    })
-  },
-  editBarang ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      $axios.get(`/barang/edit/${payload.id}`)
+      $axios.post('/barang/baru', payload)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data.value)
@@ -92,46 +88,27 @@ const Barang = {
           }
         })
         .catch((error) => {
-          console.error(error)
-          reject(error)
+          console.log(error)
+          resolve([])
         })
     })
   },
-  updateBarang ({ commit }, payload) {
+  updateBarangv1 ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.post('/barang/update', payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      $axios.put(`/barang/update/${payload.id}`, payload)
         .then((response) => {
           if (response.status === 200) {
             resolve(response.data)
-          }
-          resolve({ msg: 'Sepertinya ada masalah, silahkan coba lagi' })
-        })
-        .catch((error) => {
-          console.log(error)
-          resolve({ msg: error })
-        })
-    })
-  },
-  deleteBarang ({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      $axios.delete(`/barang/delete/${payload}`)
-        .then((response) => {
-          if (response.status === 200) {
+          } else {
             resolve(response.data)
           }
-          resolve({ msg: 'Sepertinya ada masalah, silahkan coba lagi' })
+          resolve(response.data)
         })
         .catch((error) => {
           console.log(error)
-          resolve({ msg: error })
+          resolve([])
         })
     })
   }
-  // END Pramudi API
+  // END Roles API
 }
-
-export default Barang

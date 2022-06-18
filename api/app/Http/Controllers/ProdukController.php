@@ -77,7 +77,7 @@ class ProdukController extends Controller
     {
         /** @var Produk $data */
         $data = new Produk();
-        $data->id_produk =  KeyGen::randomKey("P","",false,"4");
+        $data->id =  KeyGen::randomKey("P","",false,"4");
         $data->nama_produk =  $request->input("nama_produk");
         $data->id_kategori_produk =  $request->input("id_kategori_produk");
         $data->harga =  $request->input("harga");

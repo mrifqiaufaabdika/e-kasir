@@ -38,15 +38,6 @@ class CreateAdminUserSeeder extends Seeder
         // berikan akses ke user
         $user->assignRole([$superadmin->id]);
 
-        //create role supervisior
-        /** @var Role $supervisior */
-        $supervisior = Role::create(['name' => 'Supervisior']);
-
-        $permissions_supervisior = Permission::whereIn('name',[
-                "home"
-            ]
-        )->pluck('id','id')->all();
-        $supervisior->syncPermissions($permissions_supervisior);
 
 
 
@@ -57,7 +48,14 @@ class CreateAdminUserSeeder extends Seeder
         $kasir = Role::create(['name' => 'Kasir']);
 
         $permissions_kasir = Permission::whereIn('name',[
-                "home"
+                "pegawai-list",
+                "produk-list",
+                "produk-edit",
+                "pelanggan-create",
+                "pelanggan-edit",
+                "transaksi-list",
+                "transaksi-edit",
+                "transaksi-delete",
             ]
         )->pluck('id','id')->all();
         $kasir->syncPermissions($permissions_kasir);

@@ -28,6 +28,6 @@ class CreateTableKendaraan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_kendaraan');
+        Schema::dropIfExists('kendaraan');
     }
 }

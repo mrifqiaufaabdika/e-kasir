@@ -1,9 +1,9 @@
-const path = '/barangv1'
+const path = '/barang'
 const permission = 'kasbon-'
-const routeName = 'barangv1'
-const folder = 'barangv1'
+const routeName = 'barang'
+const folder = 'barang'
 const title = 'Barang'
-const Barangv1 = [
+const Barang = [
   {
     path: path,
     name: routeName,
@@ -50,4 +50,4 @@ const Barangv1 = [
   }
 ]
 
-export default Barangv1
+export default Barang

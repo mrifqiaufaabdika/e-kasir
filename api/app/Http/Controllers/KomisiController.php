@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
@@ -9,7 +10,8 @@ use App\Models\Produk;
 use Illuminate\Http\Request;
 use function React\Promise\all;
 
-class KomisiController extends Controller {
+class KomisiController extends Controller
+{
 
     public $title = 'Komisi';
 
@@ -29,7 +31,7 @@ class KomisiController extends Controller {
      */
     public function index(Request $request)
     {
-        $data = Komisi::search($request,new Komisi());
+        $data = Komisi::search($request, new Komisi());
 
 
         if ($data) {
@@ -52,12 +54,12 @@ class KomisiController extends Controller {
      */
     public function create()
     {
-        $produk = Produk::select(['id_produk as value', 'nama_produk as text'])
-            ->where("status",'=','Aktif')
-            ->orderBy('id_produk')
+        $produk = Produk::select(['id as value', 'nama_produk as text'])
+            ->where("status", '=', 'Aktif')
+            ->orderBy('id')
             ->get();
 
-        $pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama','email', 'telepon']))->where('status','=','aktif')->get();
+        $pegawai = Pegawai::selectRaw(implode(',', ["nip as value", "CONCAT('(',nama_kategori,') ',nama) as text", 'nama', 'email', 'telepon']))->join('kategori_pegawai', 'pegawai.id_kategori_pegawai', '=', 'kategori_pegawai.id')->where('status', '=', 'aktif')->get();
 
         if ($produk && $pegawai) {
             return [
@@ -82,34 +84,47 @@ class KomisiController extends Controller {
      */
     public function store(Request $request)
     {
+
+        $id = KeyGen::randomKey("KM", "", true, 5);
         /**
          * @params Komisi $data
          */
         $data = new Komisi();
-        $data->id_komisi =  KeyGen::randomKey("KM","",true,5);
-        $data->nama_grup =  $request->input("nama_grup");
-        $data->type =  $request->input("type");
-        $data->pegawai = json_decode($request->file('pegawai')->get(),true);
-        $data->status =  "Aktif";
+        $data->id = $id;
+        $data->nama_grup = $request->input("nama_grup");
+        $data->type = $request->input("type");
 
-        if ($data->type == "Transaksi"){
-            $data->produk =  null;
-        }else{
-            $data->produk =  json_decode($request->file('produk')->get(),true);
-        }
+        $data->status = "Aktif";
 
-        if ($request->input("tipe_nilai")=="Nominal"){
-            $data->nominal_komisi =  $request->input("nominal");
-            $data->persen =  null;
-        }else{
-            $data->persen =  $request->input("persen");
+
+        if ($request->input("tipe_nilai") == "Nominal") {
+            $data->nominal_komisi = $request->input("nominal");
+            $data->persen = null;
+        } else {
+            $data->persen = $request->input("persen");
             $data->nominal_komisi = null;
 
         }
 
 
-
         if ($data->save()) {
+
+
+            $pegawais = Pegawai::find(json_decode($request->file('pegawai')->get(), true));
+            $produks = Produk::find(json_decode($request->file('produk')->get(), true));
+
+
+            if ($request->input("type") == "Produk") {
+                foreach ($pegawais as $pegawai){
+                    foreach ($produks as $produk){
+                        $data->pegawais()->attach($pegawai->nip, ['komisi_id' => $id,'produk_id'=>$produk->id]);
+                    }
+                }
+            } else {
+                        $data->pegawais()->attach($pegawais, ['komisi_id' => $id]);
+            }
+
+
             return [
                 'value' => $data,
                 'msg' => "{$this->title} baru berhasil disimpan"
@@ -181,7 +196,6 @@ class KomisiController extends Controller {
         $id = $request->input('_id');
         /** @var Komisi $data */
         $data = Komisi::find($id);
-
 
 
         if ($data->save()) {

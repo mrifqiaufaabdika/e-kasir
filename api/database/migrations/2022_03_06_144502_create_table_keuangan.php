@@ -32,6 +32,6 @@ class CreateTableKeuangan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_keuangan');
+        Schema::dropIfExists('keuangan');
     }
 }
