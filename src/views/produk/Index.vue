@@ -284,7 +284,7 @@ export default {
         table: {
           page: 1,
           pageCount: 0,
-          sortBy: ['id_produk'],
+          sortBy: ['id'],
           sortDesc: [true],
           itemsPerPage: 10,
           itemKey: 'id_produk'

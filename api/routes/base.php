@@ -50,6 +50,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
         $router->get('auth/refresh', [AuthController::class, 'refresh']);
         include "fitures.php";
+        include "app.php";
     });
 });
 
