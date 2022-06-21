@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Base\Controller;
 use App\Models\Base\KeyGen;
 use App\Models\Bisnis;
+use App\Models\kategori_produk;
 use App\Models\pegawai;
 use App\Models\Produk;
 use App\Models\Transaksi;
@@ -53,11 +54,13 @@ class TransaksiController extends Controller {
     {
 
         $type_bisnis = Bisnis::selectRaw(implode(',',["id as value", "nama as text"]))->get();
-        $produk = Produk::selectRaw(implode(',',["id_produk as value", "nama_produk as text", "harga","kesediaan","satuan","deskripsi","stok","type_bisnis","id_kategori_produk"]))->where("status","=","Aktif")->get();
-        $pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama']))->where('status','=','aktif')->get();
+
+        $produk = Produk::selectRaw(implode(',',["id as value", "nama_produk as text", "harga","kesediaan","satuan","deskripsi","stok","type_bisnis","id_kategori_produk"]))->where("status","=","Aktif")->get();
+        //$pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama']))->where('status','=','aktif')->get();
+        $kategori =  kategori_produk::selectRaw(implode(',',["id_kategori_produk as value", "nama_kategori_produk as text"]))->get();
 
         return [
-            'value' => compact('type_bisnis','produk','pegawai'),
+            'value' => compact('type_bisnis','kategori','produk'),
             'msg' => "Data for create {$this->title}"
         ];
     }

@@ -52,20 +52,24 @@ class Produk extends SelfModel
     ];
 
     public function getSatuanBarangAttribute(){
-        return $this->belongsTo(Satuan::class,
+        $satuan =  $this->belongsTo(Satuan::class,
         'satuan',
             'id')->first();
+        return $satuan['nama_satuan'];
     }
     public function getKategoriProdukAttribute(){
-        return $this->belongsTo(kategori_produk::class,
+        $nama= $this->belongsTo(kategori_produk::class,
             'id_kategori_produk',
             'id_kategori_produk')->first();
+
+        return $nama['nama_kategori_produk'];
     }
 
     public function getBisnisAttribute(){
-        return $this->belongsTo(Bisnis::class,
+        $bisnis =  $this->belongsTo(Bisnis::class,
             'type_bisnis',
             'id')->first();
+        return $bisnis['nama'];
     }
 
     public function komisis(){
