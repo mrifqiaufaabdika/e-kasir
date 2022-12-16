@@ -20,6 +20,7 @@ class CreateTableDetailTransaksi extends Migration
             $table->integer('bisnis');
             $table->double('harga');
             $table->double('qty');
+            $table->bigInteger('satuan');
             $table->double('potongan');
             $table->double('total');
             $table->text('catatan');

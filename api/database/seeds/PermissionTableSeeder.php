@@ -39,8 +39,8 @@ class PermissionTableSeeder extends Seeder
             'delete',
         ];
 
-        $permissions = [];
-        $permissions[] = 'home';
+//        $permissions = [];
+        $permissions= ['home','kasir'];
 
         foreach ($models as $model) {
             foreach ($actions as $action) {

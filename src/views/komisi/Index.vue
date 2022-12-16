@@ -67,15 +67,16 @@
         </template>
         <template #item.nominal="{item}">
           <template v-if="item.nominal_komisi ===null">
-            {{item.persen}}
+            {{item.persen}} %
           </template>
           <template v-else>
-            {{item.nominal_komisi}}
+           Rp {{item.nominal_komisi.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")}}
           </template>
         </template>
-        <template #item.role="{item}">
+        <template #item.keterangan="{item}">
+          Daftar Pegawai :<br>
           <span
-            v-for="(role,i) in item.role"
+            v-for="(pegawai,i) in item.pegawai"
             :key="i"
             class="d-inline-block"
             style="margin-right: 3px;margin-top: 3px"
@@ -83,7 +84,22 @@
             <v-chip
               color="green"
               outlined
-              v-text="role"
+              v-text="pegawai.nama"
+            />
+          </span>
+          <br>
+          Daftar Produk :
+          <br>
+          <span
+            v-for="(produk,i) in item.produk"
+            :key="i"
+            class="d-inline-block"
+            style="margin-right: 3px;margin-top: 3px"
+          >
+            <v-chip
+              color="green"
+              outlined
+              v-text="produk.nama_produk"
             />
           </span>
         </template>

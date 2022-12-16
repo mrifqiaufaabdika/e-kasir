@@ -31,15 +31,24 @@ class kategori_produk extends SelfModel
      *
      * @var array
      */
-    protected $fillable = ['id_kategori_produk','nama_kategori','id_satuan_produk', 'created_at', 'updated_at'];
+    protected $fillable = ['id_kategori_produk','nama_kategori', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      *
      * @var array
      */
-    public $searchable = ['id_kategori_produk','nama_kategori','id_satuan_produk', 'created_at', 'updated_at'];
+    public $searchable = ['id_kategori_produk','nama_kategori', 'created_at', 'updated_at'];
 
+
+    public $appends = [
+        'jumlah_produk',
+
+    ];
+
+    public function getJumlahProdukAttribute(){
+        return $this->hasMany(Produk::class,'id_kategori_produk','id_kategori_produk')->get()->count();
+    }
 
 
 }

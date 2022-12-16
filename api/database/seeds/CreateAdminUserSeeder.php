@@ -56,6 +56,8 @@ class CreateAdminUserSeeder extends Seeder
                 "transaksi-list",
                 "transaksi-edit",
                 "transaksi-delete",
+                "kasir",
+                "home"
             ]
         )->pluck('id','id')->all();
         $kasir->syncPermissions($permissions_kasir);

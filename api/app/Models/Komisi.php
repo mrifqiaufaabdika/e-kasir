@@ -28,6 +28,8 @@ class Komisi extends SelfModel
     protected $table = 'komisi';
     protected $primaryKey = 'id';
 
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -51,7 +53,7 @@ class Komisi extends SelfModel
 
     public function getPegawaiAttribute()
     {
-        return $this->pegawais()->first();
+        return $this->pegawais()->get()->unique();
     }
 
     public function pegawais(){
@@ -60,7 +62,7 @@ class Komisi extends SelfModel
 
     public function getProdukAttribute()
     {
-        return $this->produks()->get();
+        return $this->produks()->get()->unique();
     }
 
     public function produks(){

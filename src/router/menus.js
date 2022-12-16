@@ -18,6 +18,7 @@ import Voucher from '@/router/menus/voucher.js';
 import Komisi from "./menus/komisi";
 import Pelanggan from "./menus/pelanggan";
 import KategoriProduk from "./menus/kategori-produk";
+import Kasir from './menus/kasir.js'
 // {{next_import}}
 
 const baseMenu = [
@@ -67,27 +68,26 @@ export const routes = baseMenu.concat(
     Inventaris,
     Barang,
     // KategoriProduk,
-    Laporan// {{next_use}}
+    Laporan,
+  Kasir// {{next_use}}
 )
 
 export default baseMenu.concat(
-  [{ subheader: 'Data Master' }],
-  User,
-  Pegawai,
-  Permissions,
-  //Barang,
-  Satuan,
-  Produk,
-  Pelanggan,
-  Voucher,
-  Barang,
-  //SatuanBarang,
-  [{ subheader: 'Pengelolaan' }],
-  Transaksi,
-  Keuangan,
-  Komisi,
-  Kasbon,
-  Inventaris,
-  Laporan
-  // {{next_use}}
+    [{ subheader: 'Pengelolaan' }],
+    Transaksi,
+    Keuangan,
+    Komisi,
+    Kasbon,
+    Inventaris,
+    Laporan,
+    [{ subheader: 'Data Master' }],
+    User,
+    Pegawai,
+    Permissions,
+    //Barang,
+    // Satuan,
+    Produk,
+    Pelanggan,
+    Voucher,
+    Barang// {{next_use}}
 )

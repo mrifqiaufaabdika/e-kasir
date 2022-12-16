@@ -15,15 +15,15 @@ class KategoriProdukSeeder extends Seeder
     public function run()
     {
         $kategori_produk_collection = [
-            ['id_kategori_produk'=>'KP01','nama_kategori_produk'=>'Kopi Aceh Gayo'],
-            ['id_kategori_produk'=>'KP02','nama_kategori_produk'=>'Kopi Ule Kareng Robusta'],
+            ['id_kategori_produk'=>'KP01','nama_kategori_produk'=>'Cucian Mobil'],
+            ['id_kategori_produk'=>'KP02','nama_kategori_produk'=>'Cucian Karpet'],
+            ['id_kategori_produk'=>'KP03','nama_kategori_produk'=>'Salon Mobil'],
+            ['id_kategori_produk'=>'KP04','nama_kategori_produk'=>'Coating'],
 
-
-
-            ['id_kategori_produk'=>'KP03','nama_kategori_produk'=>'Cucian Mobil'],
-            ['id_kategori_produk'=>'KP04','nama_kategori_produk'=>'Cucian Karpet'],
-            ['id_kategori_produk'=>'KP05','nama_kategori_produk'=>'Salon Mobil'],
-            ['id_kategori_produk'=>'KP06','nama_kategori_produk'=>'Coating'],
+            ['id_kategori_produk'=>'KP05','nama_kategori_produk'=>'Kopi'],
+            ['id_kategori_produk'=>'KP06','nama_kategori_produk'=>'Minuman'],
+            ['id_kategori_produk'=>'KP07','nama_kategori_produk'=>'Makanan'],
+            ['id_kategori_produk'=>'KP08','nama_kategori_produk'=>'Disert'],
         ];
         foreach($kategori_produk_collection as $item){
             kategori_produk::create($item);

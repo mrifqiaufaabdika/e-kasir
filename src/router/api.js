@@ -20,6 +20,7 @@ import transaksi from '@/router/apis/transaksi'
 import bisnis from "./apis/bisnis";
 import Keuangan from "./apis/keuangan";
 import komisi from "./apis/komisi";
+import Kasir from './apis/kasir.js'
 // {{next_import}}
 
 const $api = {
@@ -40,7 +41,8 @@ const $api = {
   ...bisnis,
   ...Keuangan,
   ...komisi
-  // {{next_use}}
+  ,
+  ...Kasir// {{next_use}}
 }
 
 export default $api

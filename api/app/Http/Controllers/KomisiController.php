@@ -34,6 +34,7 @@ class KomisiController extends Controller
         $data = Komisi::search($request, new Komisi());
 
 
+
         if ($data) {
             return [
                 'value' => $data,
@@ -54,9 +55,10 @@ class KomisiController extends Controller
      */
     public function create()
     {
-        $produk = Produk::select(['id as value', 'nama_produk as text'])
+        $produk = Produk::selectRaw(implode(',',['produk.id as value', "CONCAT('(',bisnis.nama,') ',nama_produk) as text",'satuan','type_bisnis','id_kategori_produk']))
+            ->join('bisnis', 'produk.type_bisnis', '=', 'bisnis.id')
             ->where("status", '=', 'Aktif')
-            ->orderBy('id')
+            ->orderBy('produk.id')
             ->get();
 
         $pegawai = Pegawai::selectRaw(implode(',', ["nip as value", "CONCAT('(',nama_kategori,') ',nama) as text", 'nama', 'email', 'telepon']))->join('kategori_pegawai', 'pegawai.id_kategori_pegawai', '=', 'kategori_pegawai.id')->where('status', '=', 'aktif')->get();
@@ -85,7 +87,7 @@ class KomisiController extends Controller
     public function store(Request $request)
     {
 
-        $id = KeyGen::randomKey("KM", "", true, 5);
+        $id = KeyGen::randomKey("KM", "", false, 5);
         /**
          * @params Komisi $data
          */
@@ -115,11 +117,10 @@ class KomisiController extends Controller
 
 
             if ($request->input("type") == "Produk") {
-                foreach ($pegawais as $pegawai){
-                    foreach ($produks as $produk){
-                        $data->pegawais()->attach($pegawai->nip, ['komisi_id' => $id,'produk_id'=>$produk->id]);
-                    }
+                foreach ($produks as $produk) {
+                    $data->pegawais()->attach($pegawais, ['komisi_id' => $id, 'produk_id' => $produk->id]);
                 }
+
             } else {
                         $data->pegawais()->attach($pegawais, ['komisi_id' => $id]);
             }

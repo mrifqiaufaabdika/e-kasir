@@ -90,72 +90,110 @@
           </v-row>
         </template>
         <template #item.harga="{item}">
-          {{ item.harga }}
+          Rp {{item.harga.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")}}
         </template>
         <template #item.updated_at="{item}">
           {{ item.updated_at | moment('DD MMMM YYYY HH:mm') }}
         </template>
         <template #item.aksi="{item}">
-          <v-tooltip
-            v-if="can(['produk-edit'])"
-            bottom
-          >
-            <template #activator="{ on, attrs }">
+          <v-menu left>
+            <template v-slot:activator="{ attrs, on }">
               <v-btn
                 icon
                 v-bind="attrs"
-                @click="_edit(item)"
                 v-on="on"
               >
-                <v-icon
-                        small
-                  color="blue"
-                >
-                  mdi-circle-edit-outline
-                </v-icon>
+                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
-            <span>Ubah</span>
-          </v-tooltip>
-          <v-tooltip
-            v-if="can(['produk-delete'])"
-            bottom
-          >
-            <template #activator="{ on, attrs }">
-              <v-btn
-                v-bind="attrs"
-                icon
-                @click="_delete(item)"
-                v-on="on"
-              >
-                <v-icon
-                        small
-                        color="pink">
-                  mdi-delete
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>Hapus</span>
-          </v-tooltip>
-          <v-tooltip
-            v-if="can(['produk-list'])"
-            bottom
-          >
-            <template #activator="{ on, attrs }">
-              <v-icon
-                small
-                color="green"
-                v-bind="attrs"
-                @click="_detail(item)"
 
-                v-on="on"
+            <v-list>
+              <v-list-item
+                v-if="can(['produk-edit'])"
+                @click="_edit(item)"
+                link
               >
-                mdi-eye
-              </v-icon>
-            </template>
-            <span>Detail</span>
-          </v-tooltip>
+                <v-list-item-title>Edit</v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                v-if="can(['produk-list'])"
+                @click="_detail(item)"
+                link
+              >
+                <v-list-item-title>Detail</v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                v-if="can(['produk-delete'])"
+                link
+                @click="_delete(item)"
+              >
+                <v-list-item-title>Hapus</v-list-item-title>
+              </v-list-item>
+            </v-list>
+
+          </v-menu>
         </template>
+<!--        <template #item.aksi="{item}">-->
+<!--          <v-tooltip-->
+<!--            v-if="can(['produk-edit'])"-->
+<!--            bottom-->
+<!--          >-->
+<!--            <template #activator="{ on, attrs }">-->
+<!--              <v-btn-->
+<!--                icon-->
+<!--                v-bind="attrs"-->
+<!--                @click="_edit(item)"-->
+<!--                v-on="on"-->
+<!--              >-->
+<!--                <v-icon-->
+<!--                        small-->
+<!--                  color="blue"-->
+<!--                >-->
+<!--                  mdi-circle-edit-outline-->
+<!--                </v-icon>-->
+<!--              </v-btn>-->
+<!--            </template>-->
+<!--            <span>Ubah</span>-->
+<!--          </v-tooltip>-->
+<!--          <v-tooltip-->
+<!--            v-if="can(['produk-delete'])"-->
+<!--            bottom-->
+<!--          >-->
+<!--            <template #activator="{ on, attrs }">-->
+<!--              <v-btn-->
+<!--                v-bind="attrs"-->
+<!--                icon-->
+<!--                @click="_delete(item)"-->
+<!--                v-on="on"-->
+<!--              >-->
+<!--                <v-icon-->
+<!--                        small-->
+<!--                        color="pink">-->
+<!--                  mdi-delete-->
+<!--                </v-icon>-->
+<!--              </v-btn>-->
+<!--            </template>-->
+<!--            <span>Hapus</span>-->
+<!--          </v-tooltip>-->
+<!--          <v-tooltip-->
+<!--            v-if="can(['produk-list'])"-->
+<!--            bottom-->
+<!--          >-->
+<!--            <template #activator="{ on, attrs }">-->
+<!--              <v-icon-->
+<!--                small-->
+<!--                color="green"-->
+<!--                v-bind="attrs"-->
+<!--                @click="_detail(item)"-->
+
+<!--                v-on="on"-->
+<!--              >-->
+<!--                mdi-eye-->
+<!--              </v-icon>-->
+<!--            </template>-->
+<!--            <span>Detail</span>-->
+<!--          </v-tooltip>-->
+<!--        </template>-->
       </v-data-table>
       <div
         class="row align-center pb-3"
@@ -307,13 +345,14 @@ export default {
         /*{ text: 'ID', align: 'left', value: 'id_barang' },*/
         { text: 'Nama Produk', value: 'nama_produk' },
         { text: 'Harga', value: 'harga' },
-        { text: 'Kategori', value: 'kategori_produk.nama_kategori_produk' },
+        { text: 'Tipe Bisnis', value: 'bisnis' },
+        { text: 'Kategori', value: 'kategori_produk' },
 
-        { text: 'Satuan', value: 'satuan_barang.nama_satuan' },
+        { text: 'Satuan', value: 'satuan_barang' },
         // { text: 'Deskripsi', value: 'deskripsi' },
         // { text: 'Status', value: 'status' },
         { text: 'Stok', value: 'stok' },
-        { text: 'Tipe Bisnis', value: 'bisnis.nama' },
+
         { text: 'kesediaan', value: 'kesediaan' },
         // { text: 'Created At', value: 'created_at' },
          { text: 'Updated At', value: 'updated_at' },

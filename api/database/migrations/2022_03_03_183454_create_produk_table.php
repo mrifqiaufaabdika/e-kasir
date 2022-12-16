@@ -19,7 +19,7 @@ class CreateProdukTable extends Migration
             $table->string('id_kategori_produk');
             $table->string('harga');
             $table->string('kesediaan');
-            $table->string('satuan');
+            $table->bigInteger('satuan');
             $table->string('deskripsi');
             $table->string('status');
             $table->string('stok');

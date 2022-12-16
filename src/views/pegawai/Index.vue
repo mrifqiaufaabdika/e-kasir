@@ -79,6 +79,9 @@
           </v-avatar>
           <strong>{{ item.nama }}</strong>
         </template>
+        <template #item.gaji="{item}">
+          Rp {{item.gaji_pokok.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")}}
+        </template>
         <template #item.aksi="{item}">
           <v-tooltip bottom>
             <template #activator="{ on, attrs }">
@@ -277,6 +280,7 @@ export default {
         { text: 'Jabatan', value: 'kategori_pegawai.nama_kategori' },
          { text: 'Kontak', value: 'email' },
         { text: 'JK', value: 'jenis_kelamin' },
+        { text: 'Gaji Pokok', value: 'gaji' },
 
         { text: 'status', value: 'status' },
         { text: '', value: 'aksi' }

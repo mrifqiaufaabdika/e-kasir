@@ -18,7 +18,7 @@ class CreateTableKasbon extends Migration
             $table->bigInteger('pencatat');
             $table->bigInteger('peminjam');
             $table->double('total');
-            $table->enum("Status",["Lunas","Belum"]);
+            $table->enum("status",["Lunas","Belum"]);
             $table->date("tempo");
             $table->json("riyawat_bayar");
             $table->timestamps();
