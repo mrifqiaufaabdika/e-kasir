@@ -16,8 +16,11 @@ class CreateTableDetailCuci extends Migration
         Schema::create('detail_cuci', function (Blueprint $table) {
             $table->bigInteger('id_detail_cuci');
             $table->bigInteger('id_detail_faktur');
+            $table->bigInteger('id_pegawai');
+            $table->string('nama_komisi');
             $table->bigInteger('id_kendaraan')->nullable();
-            $table->json('dilayani');  //value array of id pegawai
+            $table->double('nominal_komisi')->nullable();
+//            $table->json('dilayani');  //value array of id pegawai
 
             $table->timestamps();
         });

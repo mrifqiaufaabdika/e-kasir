@@ -21,6 +21,8 @@ import bisnis from "./apis/bisnis";
 import Keuangan from "./apis/keuangan";
 import komisi from "./apis/komisi";
 import Kasir from './apis/kasir.js'
+import Pelanggan from './apis/pelanggan.js'
+import Dashboard from './apis/dashboard.js'
 // {{next_import}}
 
 const $api = {
@@ -42,7 +44,9 @@ const $api = {
   ...Keuangan,
   ...komisi
   ,
-  ...Kasir// {{next_use}}
+  ...Kasir,
+  ...Pelanggan,
+  ...Dashboard// {{next_use}}
 }
 
 export default $api

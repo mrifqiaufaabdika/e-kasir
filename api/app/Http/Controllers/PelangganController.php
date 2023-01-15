@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
+use App\Models\Base\KeyGen;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
@@ -61,17 +62,25 @@ class PelangganController extends Controller {
     public function store(Request $request)
     {
         $data = new Pelanggan();
+        $data->id_member =  KeyGen::randomKey("","",true,8);
+        $data->nama = $request->nama;
+        $data->nomor_hp  = $request->nomor_hp;
+        $data->jenis_kelamin = $request->jenis_kelamin;
+        $data->alamat = $request->alamat;
+        $data->status = "Aktif";
 
-        
+
 
         if ($data->save()) {
             return [
+                'code' => 1,
                 'value' => $data,
                 'msg' => "{$this->title} baru berhasil disimpan"
             ];
         }
 
         return [
+            'code' => 0,
             'value' => [],
             'msg' => "{$this->title} baru gagal disimpan"
         ];
@@ -137,7 +146,7 @@ class PelangganController extends Controller {
         /** @var Pelanggan $data */
         $data = Pelanggan::find($id);
 
-        
+
 
         if ($data->save()) {
             return [
@@ -175,4 +184,33 @@ class PelangganController extends Controller {
             'msg' => "{$this->title} #{$id} gagal dihapus"
         ];
     }
+
+    /**
+     * Display the specified resource.
+     *
+     *
+     * @return \Illuminate\Http\Response|array
+     */
+    public function getByPhone(Request $request)
+    {
+
+        /** @var Pelanggan $data */
+
+        $data = Pelanggan::where('nomor_hp','=',$request->nomor_hp)->first();
+
+        if ($data) {
+            return [
+                'code' => 1,
+                'value' => $data,
+                'msg' => "{$this->title} # ditemukan"
+            ];
+        }
+
+        return [
+            'code' => 0,
+            'value' => [],
+            'msg' => "{$this->title} # tidak ditemukan"
+        ];
+    }
+
 }

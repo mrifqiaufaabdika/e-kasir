@@ -25,6 +25,7 @@ class CreateProdukTable extends Migration
             $table->string('stok');
             $table->string('foto',200)->nullable();
             $table->integer('type_bisnis');
+            $table->tinyInteger('detail_kendaraan')->default(0);
             $table->timestamps();
         });
     }

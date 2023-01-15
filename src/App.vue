@@ -5,19 +5,17 @@
 
 <template>
   <v-app>
-    <div
-      @mouseover="mouseNow = true"
-      @mouseleave="mouseNow = false"
-    >
+<!--    <div-->
+<!--      @mouseover="mouseNow = true"-->
+<!--      @mouseleave="mouseNow = false"-->
+<!--    >-->
       <v-navigation-drawer
         v-if="isAuth"
         v-model="openNav"
-        app
-        floating
-        mini-variant-width="68"
+        permanent
         :mini-variant.sync="minivar"
-        :expand-on-hover="$vuetify.breakpoint.smAndUp?drawer:false"
-        :class="mouseNow?'nav-mouse-enter':''"
+        mini-variant-width="65"
+        app
       >
         <v-list-item
           class="pr-0 vertical-nav-menu-list"
@@ -159,8 +157,8 @@
 
 
       </v-navigation-drawer>
-    </div>
-    <v-main :class="'pt-1 '+($vuetify.breakpoint.smAndUp ? (drawer?'nav-mini':'') : '')">
+<!--    </div>-->
+    <v-main >
       <router-view @toggle-drawer="toggleDrawer" />
       <dialog-logout
         :show-dialog="showDialogLogout"
@@ -201,8 +199,7 @@ export default {
     ...mapGetters(['isAuth']),
     ...mapState(['user']),
     mainClass () {
-      return 'pt-1 ' +
-              (this.$vuetify.breakpoint.smAndUp ? (this.drawer ? 'nav-mini' : '') : '')
+      return 'pt-1'
     }
   },
   watch: {
@@ -283,11 +280,11 @@ export default {
     },
     toggleDrawer () {
       if (this.isAuth) {
-        if (this.$vuetify.breakpoint.smAndUp) {
-          this.drawer = !this.drawer
-        } else {
-          this.openNav = !this.openNav
-        }
+        // if (this.$vuetify.breakpoint.smAndUp) {
+        //   this.drawer = !this.drawer
+        // } else {
+          this.minivar = !this.minivar
+        // }
       }
     }
   }

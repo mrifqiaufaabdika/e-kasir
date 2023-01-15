@@ -38,14 +38,14 @@ class Produk extends SelfModel
      *
      * @var array
      */
-    protected $fillable = ['id','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
+    protected $fillable = ['id','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis','detail_kendaraan', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
      *
      * @var array
      */
-    public $searchable = ['id','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis', 'created_at', 'updated_at'];
+    public $searchable = ['id','nama_produk','id_kategori_produk','harga','kesediaan','satuan','deskripsi','status','stok','foto','type_bisnis','detail_kendaraan', 'created_at', 'updated_at'];
 
     public $appends = [
         'satuan_barang','kategori_produk','bisnis','pegawai_komisi'
@@ -73,10 +73,10 @@ class Produk extends SelfModel
     }
 
     public function getPegawaiKomisiAttribute(){
-        return $this->komisis()->get();
+        return $this->komisis()->where('status','=','aktif')->where('type','=','Produk')->get()->makeHidden(['produk'])->unique();
     }
     public function komisis(){
-        return $this->belongsToMany(Pegawai::class,"komisi_detail","produk_id","pegawai_nip");
+        return $this->belongsToMany(Komisi::class,"komisi_detail","produk_id","komisi_id");
     }
 
 

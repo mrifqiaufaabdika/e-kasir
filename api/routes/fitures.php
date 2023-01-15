@@ -27,6 +27,7 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\KasobController;
 use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\BisnisController;
+use App\Http\Controllers\DashboardController;
 #next_use
 
 $router->group(['prefix' => 'permissions'], function () use ($router) {
@@ -119,7 +120,7 @@ $router->group(['prefix' => 'transaksi'], function () use ($router) {
     $router->get('all', [TransaksiController::class, 'index']);
     $router->get('detail/{id}', [TransaksiController::class, 'show']);
     $router->get('edit/{id}', [TransaksiController::class, 'edit']);
-    $router->get('create', [TransaksiController::class, 'create']);
+    $router->get('create/{id}', [TransaksiController::class, 'create']);
     $router->post('baru', [TransaksiController::class, 'store']);
     $router->post('update', [TransaksiController::class, 'update']);
     $router->delete('delete/{id}', [TransaksiController::class, 'destroy']);
@@ -139,6 +140,7 @@ $router->group(['prefix' => 'pelanggan'], function () use ($router) {
     $router->get('all', [PelangganController::class, 'index']);
     $router->get('detail/{id}', [PelangganController::class, 'show']);
     $router->get('edit/{id}', [PelangganController::class, 'edit']);
+    $router->post('getByPhone', [PelangganController::class, 'getByPhone']);
     $router->get('create', [PelangganController::class, 'create']);
     $router->post('baru', [PelangganController::class, 'store']);
     $router->post('update', [PelangganController::class, 'update']);
@@ -214,5 +216,8 @@ $router->group(['prefix' => 'bisnis'], function () use ($router) {
     $router->post('baru', [BisnisController::class, 'store']);
     $router->post('update', [BisnisController::class, 'update']);
     $router->delete('delete/{id}', [BisnisController::class, 'destroy']);
+});
+$router->group(['prefix' => 'dashboard'], function () use ($router) {
+    $router->get('index', [DashboardController::class, 'index']);
 });
 #next_route

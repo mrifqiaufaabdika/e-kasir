@@ -19,23 +19,23 @@ class DetailCuci extends SelfModel
 
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'detail_cuci';
 
     /**
      * The attributes that are mass assignable.
-     * 
+     *
      * @var array
      */
-    protected $fillable = ['id_detail_cuci', 'id_detail_faktur', 'id_kendaraan', 'dilayani', 'created_at', 'updated_at'];
+    protected $fillable = ['id_detail_cuci', 'id_detail_faktur', 'id_kendaraan','id_pegawai','nama_komisi','nominal_komisi', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
-     * 
+     *
      * @var array
      */
-    public $searchable = ['id_detail_cuci', 'id_detail_faktur', 'id_kendaraan', 'dilayani', 'created_at', 'updated_at'];
+    public $searchable = ['id_detail_cuci', 'id_detail_faktur', 'id_kendaraan','id_pegawai','nama_komisi','nominal_komisi', 'created_at', 'updated_at'];
 
 }

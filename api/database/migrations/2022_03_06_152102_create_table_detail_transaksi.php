@@ -21,6 +21,8 @@ class CreateTableDetailTransaksi extends Migration
             $table->double('harga');
             $table->double('qty');
             $table->bigInteger('satuan');
+            $table->string('kd_vocher');
+            $table->string('sub_total');
             $table->double('potongan');
             $table->double('total');
             $table->text('catatan');

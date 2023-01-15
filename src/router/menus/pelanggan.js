@@ -7,7 +7,6 @@ const title = 'Pelanggan'
 const Pelanggan = [
   {
     path: path,
-    name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Main`),
     meta: {
       title: title,
@@ -25,6 +24,19 @@ const Pelanggan = [
         component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
         meta: {
           title: 'Data Pelanggan',
+          icon: 'mdi-minus',
+          // subheader: '-',
+          requiresAuth: true,
+          requirePermission: permission + 'list'
+        }
+      },
+
+      {
+        path: 'baru',
+        name: routeName+'_add',
+        component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Add`),
+        meta: {
+          title: 'Tambah' + title,
           icon: 'mdi-minus',
           // subheader: '-',
           requiresAuth: true,

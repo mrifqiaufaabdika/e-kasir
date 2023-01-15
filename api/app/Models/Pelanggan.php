@@ -11,7 +11,6 @@ use App\Traits\Searchable;
  * @property string $nomor_hp
  * @property string $jenis_kelamin
  * @property string $alamat
- * @property string $tanggal_lahir
  * @property int $jumlah_transaksi
  * @property string $status
  * @property string $created_at
@@ -23,23 +22,23 @@ class Pelanggan extends SelfModel
 
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'pelanggan';
 
     /**
      * The attributes that are mass assignable.
-     * 
+     *
      * @var array
      */
-    protected $fillable = ['nama', 'nomor_hp', 'jenis_kelamin', 'alamat', 'tanggal_lahir', 'jumlah_transaksi', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['nama', 'nomor_hp', 'jenis_kelamin', 'alamat', 'jumlah_transaksi', 'status', 'created_at', 'updated_at'];
 
     /**
      * The attributes that are searchable.
-     * 
+     *
      * @var array
      */
-    public $searchable = ['nama', 'nomor_hp', 'jenis_kelamin', 'alamat', 'tanggal_lahir', 'jumlah_transaksi', 'status', 'created_at', 'updated_at'];
+    public $searchable = ['nama', 'nomor_hp', 'jenis_kelamin', 'alamat', 'jumlah_transaksi', 'status', 'created_at', 'updated_at'];
 
 }

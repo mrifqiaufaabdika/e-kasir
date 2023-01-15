@@ -24,6 +24,7 @@ class KategoriProdukSeeder extends Seeder
             ['id_kategori_produk'=>'KP06','nama_kategori_produk'=>'Minuman'],
             ['id_kategori_produk'=>'KP07','nama_kategori_produk'=>'Makanan'],
             ['id_kategori_produk'=>'KP08','nama_kategori_produk'=>'Disert'],
+            ['id_kategori_produk'=>'KP08','nama_kategori_produk'=>'Voucher'],
         ];
         foreach($kategori_produk_collection as $item){
             kategori_produk::create($item);

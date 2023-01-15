@@ -53,7 +53,7 @@ class Komisi extends SelfModel
 
     public function getPegawaiAttribute()
     {
-        return $this->pegawais()->get()->unique();
+        return $this->pegawais()->where('status','=','aktif')->get(['nip','nama','id_kategori_pegawai'])->unique()->makeHidden(['pivot']);
     }
 
     public function pegawais(){

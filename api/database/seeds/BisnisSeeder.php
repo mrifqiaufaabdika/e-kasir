@@ -15,8 +15,8 @@ class BisnisSeeder extends Seeder
     public function run()
     {
         $bisnis_coll = [
-            ['nama'=>'Car Wash','saldo'=>'0','keterangan'=>'Usaha Pencucian dan Salon Mobil'],
-            ['nama'=>'Coffe Shop','saldo'=>'0','keterangan'=>'Usaha Cafe Penyedia Kopi, Minuman dan Disert'],
+            ['nama'=>'Tanara','saldo'=>'0','keterangan'=>'Usaha Pencucian dan Salon Mobil','alamat'=>'Kulim','nomor_hp'=>'08xxxxxx','website'=>'www.moulaatanara.com'],
+            ['nama'=>'Muolaa','saldo'=>'0','keterangan'=>'Usaha Cafe Penyedia Kopi, Minuman dan Disert','alamat'=>'Kulim','nomor_hp'=>'08xxxxxx','website'=>'www.moulaatanara.com'],
         ];
         foreach($bisnis_coll as $item){
             Bisnis::create($item);

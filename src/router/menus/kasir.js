@@ -5,9 +5,10 @@ const folder = 'kasir'
 const title = 'Kasir'
 const Kasir = [
   {
-    path: path,
+    path: path+'/bisnis/:id',
     name: routeName,
     component: () => import(/* webpackChunkName: "[request].chunk" */ `@/views/${folder}/Index`),
+    props: true,
     meta: {
       title: title,
       icon: 'mdi-calendar-month-outline',

@@ -31,7 +31,7 @@ export default {
   },
   getTransaksiCreate ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      $axios.get(`/transaksi/create`)
+      $axios.get(`/transaksi/create/${payload.id}`, payload)
           .then((response) => {
             if (response.status === 200) {
               resolve(response.data.value)
@@ -82,9 +82,9 @@ export default {
       $axios.post('/transaksi/baru', payload)
         .then((response) => {
           if (response.status === 200) {
-            resolve(response.data.value)
+            resolve(response.data)
           } else {
-            resolve(response.data.value)
+            resolve(response.data)
           }
         })
         .catch((error) => {

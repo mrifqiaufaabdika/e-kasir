@@ -18,6 +18,10 @@ class CreateTableBisnis extends Migration
             $table->string("nama",200);
             $table->double("saldo");
             $table->string("keterangan",200);
+            $table->string("logo",200)->nullable();
+            $table->string("alamat");
+            $table->string("nomor_hp");
+            $table->string("website");
             $table->timestamps();
         });
     }

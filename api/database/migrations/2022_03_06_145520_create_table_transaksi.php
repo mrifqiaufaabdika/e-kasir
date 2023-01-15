@@ -17,13 +17,13 @@ class CreateTableTransaksi extends Migration
             $table->bigInteger('nomor_faktur')->primary();
             $table->bigInteger('kasir');
             $table->bigInteger('member')->nullable();
-            $table->string('nama',200)->nullable();
-            $table->string('nomor_hp',200)->nullable();
-            $table->enum('jenis_kelamin',['pria','wanita'])->nullable();
             $table->double('total')->nullable();
             $table->double('bayar')->nullable();
             $table->double('kembalian')->nullable();
-            $table->enum('status',['Hold','Lunas','Batal']);
+            $table->string('metode_pembayaran')->nullable();
+            $table->string('no_faktur_transfer')->nullable();
+            $table->integer('bisnis');
+            $table->enum('status',['Belum Lunas','Lunas','Batal']);
             $table->timestamps();
         });
     }

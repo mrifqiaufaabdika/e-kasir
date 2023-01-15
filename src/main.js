@@ -13,11 +13,13 @@ import vuetify from './plugins/vuetify'
 import VueMoment from 'vue-moment'
 import LoadScript from 'vue-plugin-load-script'
 import Viewer from 'v-viewer'
+import VuetifyMoney from 'vuetify-money';
 
 import 'viewerjs/dist/viewer.css'
 import '@/assets/cui.css'
 import '@mdi/font/css/materialdesignicons.min.css'
 import { isEmpty } from '@/plugins/supports'
+import VueApexCharts from 'vue-apexcharts'
 
 const moment = require('moment')
 require('moment/locale/id')
@@ -25,6 +27,8 @@ Vue.config.productionTip = false
 
 Vue.use(LoadScript)
 Vue.use(Viewer)
+Vue.use(VueApexCharts)
+Vue.use(VuetifyMoney)
 
 Vue.use(VueMoment, {
   moment

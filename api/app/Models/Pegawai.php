@@ -59,9 +59,11 @@ class Pegawai extends SelfModel
     ];
 
     public function getKategoriPegawaiAttribute(){
-        return $this->belongsTo(kategori_pegawai::class,
+        $kategori= $this->belongsTo(kategori_pegawai::class,
             'id_kategori_pegawai',
             'id')->first();
+
+        return $kategori;
     }
 
 

@@ -51,17 +51,17 @@ class TransaksiController extends Controller {
      *
      * @return \Illuminate\Http\Response|array
      */
-    public function create()
+    public function create($id)
     {
 
-        $type_bisnis = Bisnis::selectRaw(implode(',',["id as value", "nama as text"]))->get();
+        $type_bisnis = Bisnis::findOrFail($id,['id','nama']);
 
         //$produk = Produk::selectRaw(implode(',',["id", "nama_produk", "harga","kesediaan","satuan","deskripsi","stok","type_bisnis","id_kategori_produk"]))->where("status","=","Aktif")->get();
         //$pegawai = Pegawai::selectRaw(implode(',',["nip as value", "CONCAT('(',nip,') ',nama) as text", 'nama']))->where('status','=','aktif')->get();
         $kategori =  kategori_produk::selectRaw(implode(',',["id_kategori_produk as value", "nama_kategori_produk as text"]))->get();
         $satuan =  Satuan::selectRaw(implode(',',["id as value", "nama_satuan as text"]))->orderBy('id')->get();
 
-        $produk = Produk::get();
+        $produk = Produk::where('type_bisnis','=',$id)->get();
         return [
             'value' => compact('type_bisnis','kategori','produk','satuan'),
             'msg' => "Data for create {$this->title}"
@@ -76,20 +76,21 @@ class TransaksiController extends Controller {
     public function store(Request $request)
     {
 
+
         /** @var Transaksi $data */
         $data = new Transaksi();
-        $data->nomor_faktur =  KeyGen::randomKey("F","",false,8);
-        $data->kasir = $request->input("kasir");
-        $data->member = $request->input("member");
-        $data->nama = $request->input("nama");
-        $data->nomor_hp = $request->input("nomor_hp");
-        $data->jenis_kelamin = $request->input("jenis_kelamin");
+        $data->nomor_faktur =  KeyGen::randomKey("","",false,8);
+        $data->kasir = $request->input("kasir")['id'];
+        $data->member = $request->input("member")['id'];
         $data->total = $request->input("total");
         $data->bayar = $request->input("bayar");
         $data->kembalian = $request->input("kembalian");
+        $data->metode_pembayaran = $request->input("metode_pembayaran");
+        $data->bisnis = $request->input("bisnis");
         $data->status = $request->input("status");
 
 
+        return $data;
 
         if ($data->save()) {
             return [

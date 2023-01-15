@@ -4,8 +4,6 @@ export default {
   // START Roles API
   getBisnis ({ commit }, payload) {
     return new Promise((resolve, reject) => {
-
-
       $axios.get(`/bisnis/all`)
         .then((response) => {
           if (response.status === 200) {
